@@ -1,0 +1,13 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+/addons
+/Ignored
+/ImageEditor
+/Build
+
+icon.svg*
+*.tmp
+*.import
+export_presets.cfg
