@@ -12,8 +12,14 @@ config_version=5
 
 config/name="automata"
 config/features=PackedStringArray("4.4", "Forward Plus")
+run/max_fps=30
 config/icon="res://icon.svg"
 
 [autoload]
 
 AcerolaShaderCompiler="*res://Ignored/Acerola-Compute/acerola_shader_compiler.gd"
+
+[display]
+
+window/size/viewport_width=1024
+window/size/viewport_height=1024

@@ -8,18 +8,45 @@ class_name AutomataCompositorEffect
 var rd : RenderingDevice
 var exposure_compute : ACompute
 
+var automaton_texture1 : RID
+var automaton_texture2 : RID
+
+var previous_generation : RID
+var next_generation : RID
+
+var needs_seeding = true
+
 func _init():
 	effect_callback_type = EFFECT_CALLBACK_TYPE_POST_TRANSPARENT
 	rd = RenderingServer.get_rendering_device()
 
 	# To make use of an existing ACompute shader we use its filename to access it, in this case, the example compute shader file is 'exposure_example.acompute'
-	exposure_compute = ACompute.new('exposure_example')
+	exposure_compute = ACompute.new('automata')
+
+	var automaton_resolution = 512
+
+	var automaton_format : RDTextureFormat = RDTextureFormat.new()
+
+	automaton_format.height = automaton_resolution
+	automaton_format.width = automaton_resolution
+	automaton_format.format = RenderingDevice.DATA_FORMAT_R16_UNORM
+	automaton_format.usage_bits = RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT | RenderingDevice.TEXTURE_USAGE_STORAGE_BIT | RenderingDevice.TEXTURE_USAGE_CAN_COPY_FROM_BIT | RenderingDevice.TEXTURE_USAGE_CAN_COPY_TO_BIT 
+
+	automaton_texture1 = rd.texture_create(automaton_format, RDTextureView.new(), [])
+	automaton_texture2 = rd.texture_create(automaton_format, RDTextureView.new(), [])
+
+	previous_generation = automaton_texture1
+	next_generation = automaton_texture2
+	
+
 
 
 func _notification(what):
 	if what == NOTIFICATION_PREDELETE:
 		# ACompute will handle the freeing of any resources attached to it
 		exposure_compute.free()
+		rd.free_rid(automaton_texture1)
+		rd.free_rid(automaton_texture2)
 
 
 func _render_callback(p_effect_callback_type, p_render_data):
@@ -45,7 +72,9 @@ func _render_callback(p_effect_callback_type, p_render_data):
 	var x_groups = (size.x - 1) / 8 + 1
 	var y_groups = (size.y - 1) / 8 + 1
 	var z_groups = 1
-	
+
+
+
 	# Vulkan has a feature known as push constants which are like uniform sets but for very small amounts of data
 	var push_constant : PackedFloat32Array = PackedFloat32Array([size.x, size.y, 0.0, 0.0])
 	
@@ -57,8 +86,19 @@ func _render_callback(p_effect_callback_type, p_render_data):
 
 		# ACompute handles uniform caching under the hood, as long as the exposure value doesn't change or the render target doesn't change, these functions will only do work once
 		exposure_compute.set_texture(0, input_image)
+		exposure_compute.set_texture(2, previous_generation)
+		exposure_compute.set_texture(3, next_generation)
 		exposure_compute.set_uniform_buffer(1, uniform_array)
 		exposure_compute.set_push_constant(push_constant.to_byte_array())
 
 		# Dispatch the compute kernel
-		exposure_compute.dispatch(0, x_groups, y_groups, z_groups)
+		if (needs_seeding):
+			exposure_compute.dispatch(0, 512 / 8, 512 / 8, 1)
+			needs_seeding = false
+		
+		exposure_compute.dispatch(1, 512 / 8, 512 / 8, 1)
+		exposure_compute.dispatch(2, x_groups, y_groups, z_groups)
+
+		var temp : RID = previous_generation
+		previous_generation = next_generation
+		next_generation = temp

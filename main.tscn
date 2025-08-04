@@ -1,3 +1,27 @@
-[gd_scene format=3 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=5 format=3 uid="uid://cfsgy7huubpok"]
+
+[ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://automata_compositor_effect.gd" id="1_ig7tw"]
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_ig7tw"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("1_ig7tw")
+exposure = Vector4(2, 1, 1, 1)
+metadata/_custom_type_script = "uid://drfxlavovcgta"
+
+[sub_resource type="Compositor" id="Compositor_1bvp3"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_ig7tw")])
 
 [node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Camera3D"]
+environment = SubResource("Environment_0xm2m")
+compositor = SubResource("Compositor_1bvp3")

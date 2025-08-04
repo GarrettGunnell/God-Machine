@@ -1,0 +1,71 @@
+#kernel Seed
+#kernel Automaton
+#kernel Blit
+
+
+layout(rgba16f, set = 0, binding = 0) uniform image2D _RenderTarget;
+layout(r16f, set = 0, binding = 2) uniform image2D _AutomatonFrom;
+layout(r16f, set = 0, binding = 3) uniform image2D _AutomatonTo;
+
+layout(binding = 1) uniform UniformBufferObject {
+	vec4 _Exposure;
+};
+
+layout(push_constant, std430) uniform Params {
+	vec2 raster_size;
+};
+
+float pseudo(vec2 v) {
+	v = fract(v/128.)*128. + vec2(-64.340622, -72.465622);
+	return fract(dot(v.xyx * v.xyy, vec3(20.390625, 60.703125, 2.4281209)));
+}
+
+[numthreads(8, 8, 1)]
+void Seed() {
+	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
+	ivec2 size = ivec2(raster_size);
+	if (uv.x >= size.x || uv.y >= size.y) return;
+
+	float seed = pseudo(vec2(uv.x * 117 + 5, uv.y * 23 + 123));
+
+	if (seed < 0.8) seed = 0.0;
+	else seed = 1.0;
+	
+	imageStore(_AutomatonFrom, uv, vec4(seed));
+}
+
+[numthreads(8, 8, 1)]
+void Automaton() {
+	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
+	ivec2 size = ivec2(raster_size);
+	if (uv.x >= size.x || uv.y >= size.y) return;
+
+	int cell = int(imageLoad(_AutomatonFrom, uv).r);;
+
+	int neighbor_count = 0;
+	for (int x = -1; x <= 1; ++x) {
+		for (int y = -1; y <= 1; ++y) {
+			if (x == 0 && y == 0) continue;
+
+			neighbor_count += int(imageLoad(_AutomatonFrom, uv + ivec2(x, y)).r);
+		}
+	}
+
+	if (neighbor_count < 2) cell = 0;
+	if (neighbor_count > 3) cell = 0;
+	if (neighbor_count == 3) cell = 1;
+	
+	imageStore(_AutomatonTo, uv, vec4(cell));
+}
+
+[numthreads(8, 8, 1)]
+void Blit() {
+	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
+	ivec2 size = ivec2(raster_size);
+	
+	if (uv.x >= size.x || uv.y >= size.y) return;
+
+	float automata = imageLoad(_AutomatonTo, uv / 2).r;
+	
+	imageStore(_RenderTarget, uv, vec4(automata, automata, automata, 1.0));
+}
