@@ -2,6 +2,12 @@
 extends CompositorEffect
 class_name AutomataCompositorEffect
 
+@export var pause = false
+@export_range(0.001, 0.5) var update_speed = 0.05
+@export var current_seed : int = 0
+@export var random_seed = false
+@export var reseed = true
+
 @export_group("Shader Settings")
 @export var exposure = Vector4(2, 1, 1, 1)
 
@@ -14,6 +20,7 @@ var automaton_texture2 : RID
 var previous_generation : RID
 var next_generation : RID
 
+var timer = 0.0
 var needs_seeding = true
 
 func _init():
@@ -37,8 +44,9 @@ func _init():
 
 	previous_generation = automaton_texture1
 	next_generation = automaton_texture2
-	
 
+	needs_seeding = true
+	
 
 
 func _notification(what):
@@ -73,10 +81,15 @@ func _render_callback(p_effect_callback_type, p_render_data):
 	var y_groups = (size.y - 1) / 8 + 1
 	var z_groups = 1
 
+	if (reseed):
+		if (random_seed): current_seed = randi() % 10000
+		print(current_seed)
 
+		needs_seeding = true
+		reseed = false
 
 	# Vulkan has a feature known as push constants which are like uniform sets but for very small amounts of data
-	var push_constant : PackedFloat32Array = PackedFloat32Array([size.x, size.y, 0.0, 0.0])
+	var push_constant : PackedFloat32Array = PackedFloat32Array([size.x, size.y, current_seed, 0.0])
 	
 	for view in range(render_scene_buffers.get_view_count()):
 		var input_image = render_scene_buffers.get_color_layer(view)
@@ -95,10 +108,16 @@ func _render_callback(p_effect_callback_type, p_render_data):
 		if (needs_seeding):
 			exposure_compute.dispatch(0, 512 / 8, 512 / 8, 1)
 			needs_seeding = false
-		
-		exposure_compute.dispatch(1, 512 / 8, 512 / 8, 1)
-		exposure_compute.dispatch(2, x_groups, y_groups, z_groups)
 
-		var temp : RID = previous_generation
-		previous_generation = next_generation
-		next_generation = temp
+		exposure_compute.dispatch(2, x_groups, y_groups, z_groups)
+		if (pause): return
+
+		if (timer > update_speed):
+			timer = 0.0
+			exposure_compute.dispatch(1, 512 / 8, 512 / 8, 1)
+
+			var temp : RID = previous_generation
+			previous_generation = next_generation
+			next_generation = temp
+
+		timer += Engine.get_main_loop().root.get_process_delta_time()
