@@ -1,43 +1,45 @@
 [gd_scene load_steps=7 format=3 uid="uid://cfsgy7huubpok"]
 
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://automata_compositor_effect.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://bjuwof03jt0ds" path="res://draw_world_compositor_effect.gd" id="2_0xm2m"]
 
 [sub_resource type="Environment" id="Environment_0xm2m"]
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_ig7tw"]
 resource_local_to_scene = false
 resource_name = ""
-enabled = false
+enabled = true
 effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("1_ig7tw")
 pause = false
-update_speed = 0.046
-current_seed = 5822
-random_seed = true
-reseed = false
+update_speed = 0.05
+current_seed = 0
+random_seed = false
+reseed = true
 exposure = Vector4(2, 1, 1, 1)
 metadata/_custom_type_script = "uid://drfxlavovcgta"
 
+[sub_resource type="CompositorEffect" id="CompositorEffect_h2yge"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("2_0xm2m")
+metadata/_custom_type_script = "uid://bjuwof03jt0ds"
+
 [sub_resource type="Compositor" id="Compositor_1bvp3"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_ig7tw")])
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
-shading_mode = 0
-
-[sub_resource type="QuadMesh" id="QuadMesh_0xm2m"]
-material = SubResource("StandardMaterial3D_ig7tw")
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_ig7tw"), SubResource("CompositorEffect_h2yge")])
 
 [node name="Node3D" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.485)
 projection = 1
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Camera3D"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0xm2m")
 compositor = SubResource("Compositor_1bvp3")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.845244)
-mesh = SubResource("QuadMesh_0xm2m")

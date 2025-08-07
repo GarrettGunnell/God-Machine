@@ -17,8 +17,12 @@ var exposure_compute : ACompute
 var automaton_texture1 : RID
 var automaton_texture2 : RID
 
+var world_texture : RID
+
 var previous_generation : RID
 var next_generation : RID
+
+var world_image_texture : ImageTexture
 
 var timer = 0.0
 var needs_seeding = true
@@ -46,6 +50,15 @@ func _init():
 	next_generation = automaton_texture2
 
 	needs_seeding = true
+
+	var world_format : RDTextureFormat = RDTextureFormat.new()
+
+	world_format.height = 1024
+	world_format.width = 1024
+	world_format.format = RenderingDevice.DATA_FORMAT_R8G8B8A8_UNORM
+	world_format.usage_bits = RenderingDevice.TEXTURE_USAGE_SAMPLING_BIT | RenderingDevice.TEXTURE_USAGE_STORAGE_BIT | RenderingDevice.TEXTURE_USAGE_CAN_COPY_FROM_BIT | RenderingDevice.TEXTURE_USAGE_CAN_COPY_TO_BIT 
+
+	world_texture = rd.texture_create(world_format, RDTextureView.new(), [])
 	
 
 
@@ -55,6 +68,7 @@ func _notification(what):
 		exposure_compute.free()
 		rd.free_rid(automaton_texture1)
 		rd.free_rid(automaton_texture2)
+		rd.free_rid(world_texture)
 
 
 func _render_callback(p_effect_callback_type, p_render_data):
@@ -98,7 +112,7 @@ func _render_callback(p_effect_callback_type, p_render_data):
 		var uniform_array = PackedFloat32Array([exposure.x, exposure.y, exposure.z, exposure.w]).to_byte_array()
 
 		# ACompute handles uniform caching under the hood, as long as the exposure value doesn't change or the render target doesn't change, these functions will only do work once
-		exposure_compute.set_texture(0, input_image)
+		exposure_compute.set_texture(0, world_texture)
 		exposure_compute.set_texture(2, previous_generation)
 		exposure_compute.set_texture(3, next_generation)
 		exposure_compute.set_uniform_buffer(1, uniform_array)
@@ -121,3 +135,6 @@ func _render_callback(p_effect_callback_type, p_render_data):
 			next_generation = temp
 
 		timer += Engine.get_main_loop().root.get_process_delta_time()
+
+func get_world_texture() -> RID:
+	return world_texture;
