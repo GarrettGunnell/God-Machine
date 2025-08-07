@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=8 format=3 uid="uid://cfsgy7huubpok"]
 
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://automata_compositor_effect.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bjuwof03jt0ds" path="res://draw_world_compositor_effect.gd" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://blyf4v5v8ognm" path="res://Assets/Textures/UI/frame.png" id="3_h2yge"]
 
 [sub_resource type="Environment" id="Environment_0xm2m"]
 
@@ -14,10 +15,10 @@ needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("1_ig7tw")
 pause = false
-update_speed = 0.05
+update_speed = 0.025
 current_seed = 0
 random_seed = false
-reseed = true
+reseed = false
 exposure = Vector4(2, 1, 1, 1)
 metadata/_custom_type_script = "uid://drfxlavovcgta"
 
@@ -29,6 +30,7 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("2_0xm2m")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 metadata/_custom_type_script = "uid://bjuwof03jt0ds"
 
 [sub_resource type="Compositor" id="Compositor_1bvp3"]
@@ -43,3 +45,9 @@ projection = 1
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0xm2m")
 compositor = SubResource("Compositor_1bvp3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(960, 540)
+texture = ExtResource("3_h2yge")

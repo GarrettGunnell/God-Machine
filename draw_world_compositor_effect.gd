@@ -5,7 +5,7 @@ class_name DrawWorldEffect
 
 var rd : RenderingDevice
 
-var transform : Transform3D
+@export var transform : Transform3D
 var light : DirectionalLight3D
 
 var p_framebuffer : RID
@@ -299,6 +299,7 @@ const source_vertex = "
 			v_uv = a_Color.rgb;
 
 			vec3 pos = a_Position;
+			pos.x += 0.35;
 			
 			gl_Position = MVP * vec4(pos, 1);
 		}
