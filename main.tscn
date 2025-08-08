@@ -1,8 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=16 format=3 uid="uid://cfsgy7huubpok"]
 
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://automata_compositor_effect.gd" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://bjuwof03jt0ds" path="res://draw_world_compositor_effect.gd" id="2_0xm2m"]
 [ext_resource type="Texture2D" uid="uid://blyf4v5v8ognm" path="res://Assets/Textures/UI/frame.png" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://dwhdeqegqlx5l" path="res://Assets/Textures/UI/placeholder grid.png" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://clb61tv54etb8" path="res://Assets/Textures/UI/rules placeholder.png" id="5_lquwl"]
+[ext_resource type="Texture2D" uid="uid://dlkctimw3ymb" path="res://Assets/Textures/UI/up button.png" id="6_kek77"]
+[ext_resource type="Texture2D" uid="uid://8shsachlxop4" path="res://Assets/Textures/UI/left button.png" id="7_4c57u"]
+[ext_resource type="Texture2D" uid="uid://clajws0yfjfvu" path="res://Assets/Textures/UI/right button.png" id="8_efxa6"]
+[ext_resource type="Texture2D" uid="uid://c3tiv6p5trq6x" path="res://Assets/Textures/UI/down button.png" id="9_dg77c"]
+[ext_resource type="Texture2D" uid="uid://dbpoq5q68nyav" path="res://Assets/Textures/UI/zoom button.png" id="10_4c57u"]
+[ext_resource type="Texture2D" uid="uid://bq5kp2dk1xacv" path="res://Assets/Textures/UI/play button.png" id="11_efxa6"]
 
 [sub_resource type="Environment" id="Environment_0xm2m"]
 
@@ -16,8 +24,8 @@ needs_normal_roughness = false
 script = ExtResource("1_ig7tw")
 pause = false
 update_speed = 0.025
-current_seed = 0
-random_seed = false
+current_seed = 3009
+random_seed = true
 reseed = false
 exposure = Vector4(2, 1, 1, 1)
 metadata/_custom_type_script = "uid://drfxlavovcgta"
@@ -30,7 +38,7 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("2_0xm2m")
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.085, -0.474, 0)
 metadata/_custom_type_script = "uid://bjuwof03jt0ds"
 
 [sub_resource type="Compositor" id="Compositor_1bvp3"]
@@ -46,8 +54,76 @@ projection = 1
 environment = SubResource("Environment_0xm2m")
 compositor = SubResource("Compositor_1bvp3")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="UI" type="Node" parent="."]
+
+[node name="Frame" type="Sprite2D" parent="UI"]
 texture_filter = 1
 texture_repeat = 1
 position = Vector2(960, 540)
 texture = ExtResource("3_h2yge")
+
+[node name="Grid Placeholder" type="Sprite2D" parent="UI"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(224, 242)
+texture = ExtResource("4_1bvp3")
+
+[node name="Grid Placeholder2" type="Sprite2D" parent="UI"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(644, 839)
+texture = ExtResource("4_1bvp3")
+
+[node name="Grid Placeholder3" type="Sprite2D" parent="UI"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(224, 839)
+texture = ExtResource("4_1bvp3")
+
+[node name="Grid Placeholder4" type="Sprite2D" parent="UI"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(644, 242)
+texture = ExtResource("4_1bvp3")
+
+[node name="Rules Placeholder" type="Sprite2D" parent="UI"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(224, 540.5)
+texture = ExtResource("5_lquwl")
+
+[node name="Up Button" type="Sprite2D" parent="UI"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(881.5, 468)
+texture = ExtResource("6_kek77")
+
+[node name="Left Button" type="Sprite2D" parent="UI"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(881.5, 497)
+texture = ExtResource("7_4c57u")
+
+[node name="Right Button" type="Sprite2D" parent="UI"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(881.5, 584)
+texture = ExtResource("8_efxa6")
+
+[node name="Down Button" type="Sprite2D" parent="UI"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(881.5, 613)
+texture = ExtResource("9_dg77c")
+
+[node name="Zoom Button" type="Sprite2D" parent="UI"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(881.5, 526)
+texture = ExtResource("10_4c57u")
+
+[node name="Play Button" type="Sprite2D" parent="UI"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(881.5, 555)
+texture = ExtResource("11_efxa6")

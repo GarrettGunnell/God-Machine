@@ -56,12 +56,11 @@ func initialize_render(framebuffer_format : int):
 	p_shader = compile_shader(source_vertex, source_fragment)
 
 	var vertex_buffer := PackedFloat32Array([])
-	var half_length = (side_length - 1) / 2.0
 
 	# Generate plane vertices on the xz plane
 	for x in side_length:
 		for z in side_length:
-			var xz : Vector2 = Vector2(x - half_length, z - half_length)
+			var xz : Vector2 = Vector2(x, z) * Vector2(0.9481, 0.9481)
 
 			var pos : Vector3 = Vector3(xz.x, xz.y, 0)
 
@@ -73,29 +72,8 @@ func initialize_render(framebuffer_format : int):
 			for i in 4: vertex_buffer.push_back(color[i])
 
 
+
 	var vertex_count = vertex_buffer.size() / 7
-	print("Vertex Count: " + str(vertex_count))
-
-	# Dump vertex data, I would delete this but it's probably helpful definitely do not uncomment this if your mesh has more than a couple vertices
-	# for i in vertex_count:
-	#     var j = i * 7
-	#     var pos = Vector3()
-
-	#     pos.x = vertex_buffer[j]
-	#     pos.y = vertex_buffer[j + 1]
-	#     pos.z = vertex_buffer[j + 2]
-
-	#     var color = Vector4()
-
-	#     color.x = vertex_buffer[j + 3]
-	#     color.y = vertex_buffer[j + 4]
-	#     color.z = vertex_buffer[j + 5]
-	#     color.w = vertex_buffer[j + 6]
-
-	#     print("Vertex " + str(i) + " ---")
-	#     print("Position: " + str(pos))
-	#     print("Color: " + str(color))
-
 
 
 	var index_buffer := PackedInt32Array([])
@@ -111,8 +89,6 @@ func initialize_render(framebuffer_format : int):
 			var v3 = v + 1
 
 			index_buffer.append_array([v0, v1, v3, v1, v2, v3])
-
-	print("Triangle Count: " + str(index_buffer.size() / 3))
 
 	
 	var vertex_buffer_bytes : PackedByteArray = vertex_buffer.to_byte_array()
@@ -299,7 +275,6 @@ const source_vertex = "
 			v_uv = a_Color.rgb;
 
 			vec3 pos = a_Position;
-			pos.x += 0.35;
 			
 			gl_Position = MVP * vec4(pos, 1);
 		}
@@ -323,6 +298,6 @@ const source_fragment = "
 		void main() {
 			float cell = texture(_WorldTexture, v_uv.xy).r;
 
-			frag_color = vec4(cell, 0.0, 0.0, 1.0);
+			frag_color = vec4(cell, cell, cell, 1.0);
 		}
 		"
