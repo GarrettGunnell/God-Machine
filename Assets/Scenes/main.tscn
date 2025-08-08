@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=18 format=3 uid="uid://cfsgy7huubpok"]
 
 [ext_resource type="Script" uid="uid://djni3vb2o3xa1" path="res://Assets/Scripts/game_master.gd" id="1_ttgh6"]
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_vlji8"]
@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c3tiv6p5trq6x" path="res://Assets/Textures/UI/down button.png" id="9_ccmul"]
 [ext_resource type="Texture2D" uid="uid://dbpoq5q68nyav" path="res://Assets/Textures/UI/zoom button.png" id="10_cun2r"]
 [ext_resource type="Texture2D" uid="uid://bq5kp2dk1xacv" path="res://Assets/Textures/UI/play button.png" id="11_nb11o"]
-[ext_resource type="Script" uid="uid://n1c7utg00au7" path="res://Assets/Scenes/reseed_button.gd" id="13_4qkp8"]
+[ext_resource type="Script" uid="uid://n1c7utg00au7" path="res://Assets/Scripts/UI/reseed_button.gd" id="13_4qkp8"]
 
 [sub_resource type="Environment" id="Environment_0xm2m"]
 
@@ -45,13 +45,6 @@ metadata/_custom_type_script = "uid://bjuwof03jt0ds"
 
 [sub_resource type="Compositor" id="Compositor_1bvp3"]
 compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_ig7tw"), SubResource("CompositorEffect_h2yge")])
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ttgh6"]
-blend_mode = 1
-light_mode = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttgh6"]
-bg_color = Color(0.174028, 0.174028, 0.174028, 1)
 
 [node name="Node3D" type="Node3D"]
 
@@ -141,13 +134,11 @@ position = Vector2(881.5, 555)
 texture = ExtResource("11_nb11o")
 
 [node name="Reseed Button" type="Panel" parent="UI"]
-material = SubResource("CanvasItemMaterial_ttgh6")
 offset_left = 223.0
 offset_top = 583.0
 offset_right = 268.0
 offset_bottom = 624.0
 mouse_default_cursor_shape = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ttgh6")
 script = ExtResource("13_4qkp8")
 
 [connection signal="gui_input" from="UI/Reseed Button" to="UI/Reseed Button" method="_on_gui_input"]
