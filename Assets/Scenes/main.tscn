@@ -1,18 +1,21 @@
-[gd_scene load_steps=18 format=3 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=26 format=4 uid="uid://cfsgy7huubpok"]
 
 [ext_resource type="Script" uid="uid://djni3vb2o3xa1" path="res://Assets/Scripts/game_master.gd" id="1_ttgh6"]
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_vlji8"]
 [ext_resource type="Script" uid="uid://bjuwof03jt0ds" path="res://Assets/Scripts/draw_world_compositor_effect.gd" id="2_ttgh6"]
 [ext_resource type="Texture2D" uid="uid://blyf4v5v8ognm" path="res://Assets/Textures/UI/frame.png" id="3_4qkp8"]
-[ext_resource type="Texture2D" uid="uid://dwhdeqegqlx5l" path="res://Assets/Textures/UI/placeholder grid.png" id="4_uop3n"]
 [ext_resource type="Texture2D" uid="uid://clb61tv54etb8" path="res://Assets/Textures/UI/rules placeholder.png" id="5_uq7jr"]
 [ext_resource type="Texture2D" uid="uid://dlkctimw3ymb" path="res://Assets/Textures/UI/up button.png" id="6_ltoj3"]
+[ext_resource type="Texture2D" uid="uid://tn8tv5giqmf8" path="res://Assets/Textures/UI/tile atlas.png" id="6_uop3n"]
 [ext_resource type="Texture2D" uid="uid://8shsachlxop4" path="res://Assets/Textures/UI/left button.png" id="7_tm25p"]
+[ext_resource type="Script" uid="uid://bjbolncishmo2" path="res://Assets/Scenes/grid_panel.gd" id="7_uq7jr"]
+[ext_resource type="Texture2D" uid="uid://u7cmfxq60fu4" path="res://Assets/Textures/UI/grid.png" id="8_ltoj3"]
 [ext_resource type="Texture2D" uid="uid://clajws0yfjfvu" path="res://Assets/Textures/UI/right button.png" id="8_qscjt"]
 [ext_resource type="Texture2D" uid="uid://c3tiv6p5trq6x" path="res://Assets/Textures/UI/down button.png" id="9_ccmul"]
 [ext_resource type="Texture2D" uid="uid://dbpoq5q68nyav" path="res://Assets/Textures/UI/zoom button.png" id="10_cun2r"]
 [ext_resource type="Texture2D" uid="uid://bq5kp2dk1xacv" path="res://Assets/Textures/UI/play button.png" id="11_nb11o"]
 [ext_resource type="Script" uid="uid://n1c7utg00au7" path="res://Assets/Scripts/UI/reseed_button.gd" id="13_4qkp8"]
+[ext_resource type="Texture2D" uid="uid://c6gbyodrab0sa" path="res://Assets/Textures/UI/toolbar.png" id="16_ltoj3"]
 
 [sub_resource type="Environment" id="Environment_0xm2m"]
 
@@ -46,6 +49,31 @@ metadata/_custom_type_script = "uid://bjuwof03jt0ds"
 [sub_resource type="Compositor" id="Compositor_1bvp3"]
 compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_ig7tw"), SubResource("CompositorEffect_h2yge")])
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uop3n"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uq7jr"]
+texture = ExtResource("6_uop3n")
+margins = Vector2i(4, 2)
+separation = Vector2i(4, 0)
+texture_region_size = Vector2i(26, 26)
+1:0/0 = 0
+0:0/0 = 0
+2:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ltoj3"]
+tile_size = Vector2i(26, 26)
+uv_clipping = true
+sources/1 = SubResource("TileSetAtlasSource_uq7jr")
+
+[sub_resource type="SystemFont" id="SystemFont_ltoj3"]
+font_names = PackedStringArray("rainyhearts")
+subpixel_positioning = 0
+keep_rounding_remainders = false
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4qkp8"]
+blend_mode = 2
+
 [node name="Node3D" type="Node3D"]
 
 [node name="Game Master" type="Node" parent="."]
@@ -61,35 +89,176 @@ compositor = SubResource("Compositor_1bvp3")
 
 [node name="UI" type="Node" parent="."]
 
+[node name="Neighborhood 1" type="Node" parent="UI"]
+
+[node name="Grid" type="Panel" parent="UI/Neighborhood 1"]
+offset_left = 28.0
+offset_top = 27.0
+offset_right = 420.0
+offset_bottom = 419.0
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uop3n")
+script = ExtResource("7_uq7jr")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="UI/Neighborhood 1/Grid"]
+z_index = -1
+position = Vector2(182, 183)
+tile_map_data = PackedByteArray("AAD+/wEAAQABAAAAAAAAAAAAAQACAAAAAAD+/wAAAQABAAAAAAD9/wEAAQAAAAAAAAACAAEAAQABAAAAAAACAAAAAQABAAAAAAD9/wAAAQAAAAAAAAD8/wAAAQAAAAAAAAD9/wIAAQAAAAAAAAD8/wIAAQAAAAAAAAD8/wEAAQAAAAAAAAD7/wAAAQAAAAAAAAD6/wAAAQAAAAAAAAD5/wAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAFAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAD//wEAAQAAAAAAAAD//wAAAQAAAAAAAAAAAAEAAQAAAAAAAAABAAEAAQAAAAAAAAABAAAAAQAAAAAAAAAAAP//AQAAAAAAAAD/////AQAAAAAAAAD+////AQABAAAAAAABAP//AQAAAAAAAAD9////AQAAAAAAAAD8////AQAAAAAAAAD7////AQAAAAAAAAD6////AQAAAAAAAAD5////AQAAAAAAAAD5//7/AQAAAAAAAAD6//7/AQAAAAAAAAD7//7/AQAAAAAAAAD8//7/AQAAAAAAAAD9//7/AQAAAAAAAAD+//7/AQABAAAAAAD///7/AQABAAAAAAAAAP7/AQABAAAAAAABAP7/AQABAAAAAAACAP7/AQABAAAAAAADAP7/AQAAAAAAAAAEAP7/AQAAAAAAAAAFAP7/AQAAAAAAAAAGAP7/AQAAAAAAAAAHAP7/AQAAAAAAAAAHAP//AQAAAAAAAAAGAP//AQAAAAAAAAAFAP//AQAAAAAAAAAEAP//AQAAAAAAAAADAP//AQAAAAAAAAACAP//AQABAAAAAAD5//3/AQAAAAAAAAD6//3/AQAAAAAAAAD7//3/AQAAAAAAAAD8//3/AQAAAAAAAAD9//3/AQAAAAAAAAD+//3/AQAAAAAAAAD///3/AQAAAAAAAAAAAP3/AQAAAAAAAAABAP3/AQAAAAAAAAACAP3/AQAAAAAAAAADAP3/AQAAAAAAAAAEAP3/AQAAAAAAAAAFAP3/AQAAAAAAAAAGAP3/AQAAAAAAAAAHAP3/AQAAAAAAAAAHAPz/AQAAAAAAAAAGAPz/AQAAAAAAAAAFAPz/AQAAAAAAAAAEAPz/AQAAAAAAAAADAPz/AQAAAAAAAAACAPz/AQAAAAAAAAABAPz/AQAAAAAAAAAAAPz/AQAAAAAAAAD///z/AQAAAAAAAAD+//z/AQAAAAAAAAD9//z/AQAAAAAAAAD8//z/AQAAAAAAAAD7//z/AQAAAAAAAAD6//z/AQAAAAAAAAD5//z/AQAAAAAAAAD5//v/AQAAAAAAAAD6//v/AQAAAAAAAAD7//v/AQAAAAAAAAD8//v/AQAAAAAAAAD9//v/AQAAAAAAAAD+//v/AQAAAAAAAAD///v/AQAAAAAAAAAAAPv/AQAAAAAAAAABAPv/AQAAAAAAAAACAPv/AQAAAAAAAAADAPv/AQAAAAAAAAAEAPv/AQAAAAAAAAAFAPv/AQAAAAAAAAAGAPv/AQAAAAAAAAAHAPv/AQAAAAAAAAAHAPr/AQAAAAAAAAAGAPr/AQAAAAAAAAAFAPr/AQAAAAAAAAAEAPr/AQAAAAAAAAADAPr/AQAAAAAAAAACAPr/AQAAAAAAAAABAPr/AQAAAAAAAAAAAPr/AQAAAAAAAAD///r/AQAAAAAAAAD+//r/AQAAAAAAAAD9//r/AQAAAAAAAAD8//r/AQAAAAAAAAD7//r/AQAAAAAAAAD6//r/AQAAAAAAAAD5//r/AQAAAAAAAAD5//n/AQAAAAAAAAD6//n/AQAAAAAAAAD7//n/AQAAAAAAAAD8//n/AQAAAAAAAAD9//n/AQAAAAAAAAD+//n/AQAAAAAAAAD///n/AQAAAAAAAAAAAPn/AQAAAAAAAAABAPn/AQAAAAAAAAACAPn/AQAAAAAAAAADAPn/AQAAAAAAAAAEAPn/AQAAAAAAAAAFAPn/AQAAAAAAAAAGAPn/AQAAAAAAAAAHAPn/AQAAAAAAAAAHAAEAAQAAAAAAAAAGAAEAAQAAAAAAAAAFAAEAAQAAAAAAAAAEAAEAAQAAAAAAAAADAAEAAQAAAAAAAAD7/wEAAQAAAAAAAAD6/wEAAQAAAAAAAAD5/wEAAQAAAAAAAAD5/wIAAQAAAAAAAAD6/wIAAQAAAAAAAAD7/wIAAQAAAAAAAAADAAIAAQAAAAAAAAAEAAIAAQAAAAAAAAAFAAIAAQAAAAAAAAAGAAIAAQAAAAAAAAAHAAIAAQAAAAAAAAAHAAMAAQAAAAAAAAAGAAMAAQAAAAAAAAAFAAMAAQAAAAAAAAAEAAMAAQAAAAAAAAADAAMAAQAAAAAAAAACAAMAAQAAAAAAAAABAAMAAQAAAAAAAAAAAAMAAQAAAAAAAAD//wMAAQAAAAAAAAD+/wMAAQAAAAAAAAD9/wMAAQAAAAAAAAD8/wMAAQAAAAAAAAD7/wMAAQAAAAAAAAD6/wMAAQAAAAAAAAD5/wMAAQAAAAAAAAD5/wQAAQAAAAAAAAD6/wQAAQAAAAAAAAD7/wQAAQAAAAAAAAD8/wQAAQAAAAAAAAD9/wQAAQAAAAAAAAD+/wQAAQAAAAAAAAD//wQAAQAAAAAAAAAAAAQAAQAAAAAAAAABAAQAAQAAAAAAAAACAAQAAQAAAAAAAAADAAQAAQAAAAAAAAAEAAQAAQAAAAAAAAAFAAQAAQAAAAAAAAAGAAQAAQAAAAAAAAAHAAQAAQAAAAAAAAAHAAUAAQAAAAAAAAAGAAUAAQAAAAAAAAAFAAUAAQAAAAAAAAAEAAUAAQAAAAAAAAADAAUAAQAAAAAAAAACAAUAAQAAAAAAAAABAAUAAQAAAAAAAAAAAAUAAQAAAAAAAAD//wUAAQAAAAAAAAD+/wUAAQAAAAAAAAD9/wUAAQAAAAAAAAD8/wUAAQAAAAAAAAD7/wUAAQAAAAAAAAD6/wUAAQAAAAAAAAD5/wUAAQAAAAAAAAD5/wYAAQAAAAAAAAD6/wYAAQAAAAAAAAD7/wYAAQAAAAAAAAD8/wYAAQAAAAAAAAD9/wYAAQAAAAAAAAD+/wYAAQAAAAAAAAD//wYAAQAAAAAAAAAAAAYAAQAAAAAAAAABAAYAAQAAAAAAAAACAAYAAQAAAAAAAAADAAYAAQAAAAAAAAAEAAYAAQAAAAAAAAAFAAYAAQAAAAAAAAAGAAYAAQAAAAAAAAAHAAYAAQAAAAAAAAAHAAcAAQAAAAAAAAAGAAcAAQAAAAAAAAAFAAcAAQAAAAAAAAAEAAcAAQAAAAAAAAADAAcAAQAAAAAAAAACAAcAAQAAAAAAAAABAAcAAQAAAAAAAAAAAAcAAQAAAAAAAAD//wcAAQAAAAAAAAD+/wcAAQAAAAAAAAD9/wcAAQAAAAAAAAD8/wcAAQAAAAAAAAD7/wcAAQAAAAAAAAD6/wcAAQAAAAAAAAD5/wcAAQAAAAAAAAD+/wIAAQABAAAAAAD//wIAAQABAAAAAAAAAAIAAQABAAAAAAABAAIAAQABAAAAAAACAAIAAQABAAAAAAA=")
+tile_set = SubResource("TileSet_ltoj3")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="UI/Neighborhood 1/Grid"]
+z_index = -1
+position = Vector2(182, 183)
+tile_set = SubResource("TileSet_ltoj3")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/Neighborhood 1/Grid"]
+self_modulate = Color(0.125911, 0.125911, 0.125911, 1)
+z_index = -1
+texture_filter = 1
+position = Vector2(196, 215)
+texture = ExtResource("8_ltoj3")
+
+[node name="Tool Bar" type="Node" parent="UI/Neighborhood 1"]
+
+[node name="Power Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
+offset_left = 29.0
+offset_top = 418.0
+offset_right = 57.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
+[node name="Clear Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
+offset_left = 57.0
+offset_top = 418.0
+offset_right = 82.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
+[node name="Keyb Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
+offset_left = 82.0
+offset_top = 418.0
+offset_right = 108.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
+[node name="Circle Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
+offset_left = 108.0
+offset_top = 418.0
+offset_right = 134.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
+[node name="Randomize Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
+offset_left = 134.0
+offset_top = 418.0
+offset_right = 160.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
+[node name="Tool Bar Sprite" type="Sprite2D" parent="UI/Neighborhood 1/Tool Bar"]
+z_index = -1
+texture_filter = 1
+position = Vector2(224, 437)
+texture = ExtResource("16_ltoj3")
+
+[node name="Spawn Lower Bound" type="RichTextLabel" parent="UI/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 188.0
+offset_top = 425.0
+offset_right = 230.0
+offset_bottom = 455.0
+theme_override_fonts/normal_font = SubResource("SystemFont_ltoj3")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Spawn Lower Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
+offset_left = 182.0
+offset_top = 418.0
+offset_right = 236.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
+[node name="Spawn Upper Bound" type="RichTextLabel" parent="UI/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 241.0
+offset_top = 418.0
+offset_right = 283.0
+offset_bottom = 448.0
+theme_override_fonts/normal_font = SubResource("SystemFont_ltoj3")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Spawn Upper Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
+offset_left = 236.0
+offset_top = 418.0
+offset_right = 290.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
+[node name="Stable Lower Bound" type="RichTextLabel" parent="UI/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 316.0
+offset_top = 425.0
+offset_right = 358.0
+offset_bottom = 455.0
+theme_override_fonts/normal_font = SubResource("SystemFont_ltoj3")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Stable Lower Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
+offset_left = 311.0
+offset_top = 418.0
+offset_right = 365.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
+[node name="Stable Upper Bound" type="RichTextLabel" parent="UI/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 369.0
+offset_top = 418.0
+offset_right = 411.0
+offset_bottom = 448.0
+theme_override_fonts/normal_font = SubResource("SystemFont_ltoj3")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Stable Upper Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
+offset_left = 365.0
+offset_top = 418.0
+offset_right = 419.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
 [node name="Frame" type="Sprite2D" parent="UI"]
 texture_filter = 1
 texture_repeat = 1
 position = Vector2(960, 540)
 texture = ExtResource("3_4qkp8")
-
-[node name="Grid Placeholder" type="Sprite2D" parent="UI"]
-texture_filter = 1
-texture_repeat = 1
-position = Vector2(224, 242)
-texture = ExtResource("4_uop3n")
-
-[node name="Grid Placeholder2" type="Sprite2D" parent="UI"]
-texture_filter = 1
-texture_repeat = 1
-position = Vector2(644, 839)
-texture = ExtResource("4_uop3n")
-
-[node name="Grid Placeholder3" type="Sprite2D" parent="UI"]
-texture_filter = 1
-texture_repeat = 1
-position = Vector2(224, 839)
-texture = ExtResource("4_uop3n")
-
-[node name="Grid Placeholder4" type="Sprite2D" parent="UI"]
-texture_filter = 1
-texture_repeat = 1
-position = Vector2(644, 242)
-texture = ExtResource("4_uop3n")
 
 [node name="Rules Placeholder" type="Sprite2D" parent="UI"]
 texture_filter = 1
@@ -97,41 +266,95 @@ texture_repeat = 1
 position = Vector2(224, 540.5)
 texture = ExtResource("5_uq7jr")
 
-[node name="Up Button" type="Sprite2D" parent="UI"]
-texture_filter = 1
-texture_repeat = 1
-position = Vector2(881.5, 468)
-texture = ExtResource("6_ltoj3")
-
-[node name="Left Button" type="Sprite2D" parent="UI"]
-texture_filter = 1
-texture_repeat = 1
-position = Vector2(881.5, 497)
-texture = ExtResource("7_tm25p")
-
-[node name="Right Button" type="Sprite2D" parent="UI"]
+[node name="Right Button Sprite" type="Sprite2D" parent="UI"]
 texture_filter = 1
 texture_repeat = 1
 position = Vector2(881.5, 584)
 texture = ExtResource("8_qscjt")
 
-[node name="Down Button" type="Sprite2D" parent="UI"]
+[node name="Right Button" type="Panel" parent="UI/Right Button Sprite"]
+material = SubResource("CanvasItemMaterial_4qkp8")
+offset_left = -13.5
+offset_top = -14.0
+offset_right = 13.5
+offset_bottom = 14.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
+[node name="Down Button Sprite" type="Sprite2D" parent="UI"]
 texture_filter = 1
 texture_repeat = 1
 position = Vector2(881.5, 613)
 texture = ExtResource("9_ccmul")
 
-[node name="Zoom Button" type="Sprite2D" parent="UI"]
+[node name="Down Button" type="Panel" parent="UI/Down Button Sprite"]
+material = SubResource("CanvasItemMaterial_4qkp8")
+offset_left = -13.5
+offset_top = -14.0
+offset_right = 13.5
+offset_bottom = 13.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
+[node name="Play Button Sprite" type="Sprite2D" parent="UI"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(881.5, 555)
+texture = ExtResource("11_nb11o")
+
+[node name="Play Button" type="Panel" parent="UI/Play Button Sprite"]
+material = SubResource("CanvasItemMaterial_4qkp8")
+offset_left = -13.5
+offset_top = -14.0
+offset_right = 13.5
+offset_bottom = 14.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
+[node name="Zoom Button Sprite" type="Sprite2D" parent="UI"]
 texture_filter = 1
 texture_repeat = 1
 position = Vector2(881.5, 526)
 texture = ExtResource("10_cun2r")
 
-[node name="Play Button" type="Sprite2D" parent="UI"]
+[node name="Zoom Button" type="Panel" parent="UI/Zoom Button Sprite"]
+material = SubResource("CanvasItemMaterial_4qkp8")
+offset_left = -13.5
+offset_top = -14.0
+offset_right = 13.5
+offset_bottom = 14.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
+[node name="Left Button Sprite" type="Sprite2D" parent="UI"]
 texture_filter = 1
 texture_repeat = 1
-position = Vector2(881.5, 555)
-texture = ExtResource("11_nb11o")
+position = Vector2(881.5, 497)
+texture = ExtResource("7_tm25p")
+
+[node name="Left Button" type="Panel" parent="UI/Left Button Sprite"]
+material = SubResource("CanvasItemMaterial_4qkp8")
+offset_left = -13.5
+offset_top = -14.0
+offset_right = 13.5
+offset_bottom = 14.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
+[node name="Up Button Sprite" type="Sprite2D" parent="UI"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(881.5, 468)
+texture = ExtResource("6_ltoj3")
+
+[node name="Up Button" type="Panel" parent="UI/Up Button Sprite"]
+material = SubResource("CanvasItemMaterial_4qkp8")
+offset_left = -13.5
+offset_top = -14.0
+offset_right = 13.5
+offset_bottom = 14.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
 
 [node name="Reseed Button" type="Panel" parent="UI"]
 offset_left = 223.0
@@ -141,6 +364,109 @@ offset_bottom = 624.0
 mouse_default_cursor_shape = 2
 script = ExtResource("13_4qkp8")
 
+[node name="Save Button" type="Panel" parent="UI"]
+offset_left = 160.0
+offset_top = 462.0
+offset_right = 205.0
+offset_bottom = 503.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
+[node name="Load Button" type="Panel" parent="UI"]
+offset_left = 230.0
+offset_top = 462.0
+offset_right = 273.0
+offset_bottom = 503.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
+[node name="Left Preset Button" type="Panel" parent="UI"]
+offset_left = 41.0
+offset_top = 505.0
+offset_right = 77.0
+offset_bottom = 546.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
+[node name="Right Preset Button" type="Panel" parent="UI"]
+offset_left = 359.0
+offset_top = 505.0
+offset_right = 395.0
+offset_bottom = 546.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
+[node name="New Seed Button" type="Panel" parent="UI"]
+offset_left = 168.0
+offset_top = 583.0
+offset_right = 213.0
+offset_bottom = 624.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_4qkp8")
+
+[connection signal="gui_input" from="UI/Neighborhood 1/Grid" to="UI/Neighborhood 1/Grid" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhood 1/Grid" to="UI/Neighborhood 1/Grid" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhood 1/Grid" to="UI/Neighborhood 1/Grid" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhood 1/Tool Bar/Power Button" to="UI/Neighborhood 1/Tool Bar/Power Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhood 1/Tool Bar/Power Button" to="UI/Neighborhood 1/Tool Bar/Power Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhood 1/Tool Bar/Power Button" to="UI/Neighborhood 1/Tool Bar/Power Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhood 1/Tool Bar/Clear Button" to="UI/Neighborhood 1/Tool Bar/Clear Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhood 1/Tool Bar/Clear Button" to="UI/Neighborhood 1/Tool Bar/Clear Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhood 1/Tool Bar/Clear Button" to="UI/Neighborhood 1/Tool Bar/Clear Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhood 1/Tool Bar/Keyb Button" to="UI/Neighborhood 1/Tool Bar/Keyb Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhood 1/Tool Bar/Keyb Button" to="UI/Neighborhood 1/Tool Bar/Keyb Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhood 1/Tool Bar/Keyb Button" to="UI/Neighborhood 1/Tool Bar/Keyb Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhood 1/Tool Bar/Circle Button" to="UI/Neighborhood 1/Tool Bar/Circle Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhood 1/Tool Bar/Circle Button" to="UI/Neighborhood 1/Tool Bar/Circle Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhood 1/Tool Bar/Circle Button" to="UI/Neighborhood 1/Tool Bar/Circle Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhood 1/Tool Bar/Randomize Button" to="UI/Neighborhood 1/Tool Bar/Randomize Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhood 1/Tool Bar/Randomize Button" to="UI/Neighborhood 1/Tool Bar/Randomize Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhood 1/Tool Bar/Randomize Button" to="UI/Neighborhood 1/Tool Bar/Randomize Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhood 1/Tool Bar/Spawn Lower Button" to="UI/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhood 1/Tool Bar/Spawn Lower Button" to="UI/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhood 1/Tool Bar/Spawn Lower Button" to="UI/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhood 1/Tool Bar/Spawn Upper Button" to="UI/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhood 1/Tool Bar/Spawn Upper Button" to="UI/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhood 1/Tool Bar/Spawn Upper Button" to="UI/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhood 1/Tool Bar/Stable Lower Button" to="UI/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhood 1/Tool Bar/Stable Lower Button" to="UI/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhood 1/Tool Bar/Stable Lower Button" to="UI/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhood 1/Tool Bar/Stable Upper Button" to="UI/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhood 1/Tool Bar/Stable Upper Button" to="UI/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhood 1/Tool Bar/Stable Upper Button" to="UI/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Right Button Sprite/Right Button" to="UI/Right Button Sprite/Right Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Right Button Sprite/Right Button" to="UI/Right Button Sprite/Right Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Right Button Sprite/Right Button" to="UI/Right Button Sprite/Right Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Down Button Sprite/Down Button" to="UI/Down Button Sprite/Down Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Down Button Sprite/Down Button" to="UI/Down Button Sprite/Down Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Down Button Sprite/Down Button" to="UI/Down Button Sprite/Down Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Play Button Sprite/Play Button" to="UI/Play Button Sprite/Play Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Play Button Sprite/Play Button" to="UI/Play Button Sprite/Play Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Play Button Sprite/Play Button" to="UI/Play Button Sprite/Play Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Zoom Button Sprite/Zoom Button" to="UI/Zoom Button Sprite/Zoom Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Zoom Button Sprite/Zoom Button" to="UI/Zoom Button Sprite/Zoom Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Zoom Button Sprite/Zoom Button" to="UI/Zoom Button Sprite/Zoom Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Left Button Sprite/Left Button" to="UI/Left Button Sprite/Left Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Left Button Sprite/Left Button" to="UI/Left Button Sprite/Left Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Left Button Sprite/Left Button" to="UI/Left Button Sprite/Left Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Up Button Sprite/Up Button" to="UI/Up Button Sprite/Up Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Up Button Sprite/Up Button" to="UI/Up Button Sprite/Up Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Up Button Sprite/Up Button" to="UI/Up Button Sprite/Up Button" method="_on_mouse_exited"]
 [connection signal="gui_input" from="UI/Reseed Button" to="UI/Reseed Button" method="_on_gui_input"]
 [connection signal="mouse_entered" from="UI/Reseed Button" to="UI/Reseed Button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Reseed Button" to="UI/Reseed Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Save Button" to="UI/Save Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Save Button" to="UI/Save Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Save Button" to="UI/Save Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Load Button" to="UI/Load Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Load Button" to="UI/Load Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Load Button" to="UI/Load Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Left Preset Button" to="UI/Left Preset Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Left Preset Button" to="UI/Left Preset Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Left Preset Button" to="UI/Left Preset Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Right Preset Button" to="UI/Right Preset Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Right Preset Button" to="UI/Right Preset Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Right Preset Button" to="UI/Right Preset Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/New Seed Button" to="UI/New Seed Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/New Seed Button" to="UI/New Seed Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/New Seed Button" to="UI/New Seed Button" method="_on_mouse_exited"]

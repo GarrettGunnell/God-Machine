@@ -19,7 +19,11 @@ func _on_mouse_exited() -> void:
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			panel_style.bg_color = Color(1.0, 1.0, 1.0, 0.0)
+
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+			panel_style.bg_color = Color(1.0, 1.0, 1.0, 0.2)
 			on_pressed()
 
 
