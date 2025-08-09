@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=30 format=4 uid="uid://cfsgy7huubpok"]
 
 [ext_resource type="Script" uid="uid://djni3vb2o3xa1" path="res://Assets/Scripts/game_master.gd" id="1_ttgh6"]
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_vlji8"]
@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://c3tiv6p5trq6x" path="res://Assets/Textures/UI/down button.png" id="9_ccmul"]
 [ext_resource type="Texture2D" uid="uid://dbpoq5q68nyav" path="res://Assets/Textures/UI/zoom button.png" id="10_cun2r"]
 [ext_resource type="Texture2D" uid="uid://bq5kp2dk1xacv" path="res://Assets/Textures/UI/play button.png" id="11_nb11o"]
+[ext_resource type="Texture2D" uid="uid://jn8k8x7o35sv" path="res://Assets/Textures/UI/seed bar.png" id="11_qscjt"]
+[ext_resource type="Script" uid="uid://gmqxxhb6exfc" path="res://Assets/Scenes/seed_text.gd" id="12_ccmul"]
 [ext_resource type="Script" uid="uid://n1c7utg00au7" path="res://Assets/Scripts/UI/reseed_button.gd" id="13_4qkp8"]
 [ext_resource type="Texture2D" uid="uid://c6gbyodrab0sa" path="res://Assets/Textures/UI/toolbar.png" id="16_ltoj3"]
 [ext_resource type="Script" uid="uid://cbxol4ngxuqsp" path="res://Assets/Scenes/new_seed_button.gd" id="17_tm25p"]
@@ -68,6 +70,15 @@ sources/1 = SubResource("TileSetAtlasSource_uq7jr")
 font_names = PackedStringArray("rainyhearts")
 subpixel_positioning = 0
 keep_rounding_remainders = false
+
+[sub_resource type="SystemFont" id="SystemFont_ccmul"]
+font_names = PackedStringArray("IntelOne Mono")
+font_weight = 100
+hinting = 2
+subpixel_positioning = 0
+multichannel_signed_distance_field = true
+msdf_pixel_range = 0
+msdf_size = 55
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4qkp8"]
 blend_mode = 2
@@ -258,11 +269,35 @@ texture_repeat = 1
 position = Vector2(960, 540)
 texture = ExtResource("3_4qkp8")
 
-[node name="Rules Placeholder" type="Sprite2D" parent="UI"]
+[node name="Node2D" type="Node2D" parent="UI"]
+
+[node name="Rules Placeholder" type="Sprite2D" parent="UI/Node2D"]
 texture_filter = 1
 texture_repeat = 1
 position = Vector2(224, 540.5)
 texture = ExtResource("5_uq7jr")
+
+[node name="Seed Bar" type="Sprite2D" parent="UI/Node2D"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(217.5, 567.5)
+scale = Vector2(1, 1)
+texture = ExtResource("11_qscjt")
+
+[node name="Seed Text" type="RichTextLabel" parent="UI/Node2D/Seed Bar"]
+texture_filter = 1
+offset_left = -81.5
+offset_top = -23.5
+offset_right = 80.5
+offset_bottom = 21.5
+theme_override_fonts/normal_font = SubResource("SystemFont_ccmul")
+theme_override_font_sizes/normal_font_size = 31
+bbcode_enabled = true
+text = "[center]00000000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("12_ccmul")
 
 [node name="Right Button Sprite" type="Sprite2D" parent="UI"]
 texture_filter = 1
