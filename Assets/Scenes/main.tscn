@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=34 format=4 uid="uid://cfsgy7huubpok"]
 
 [ext_resource type="Script" uid="uid://djni3vb2o3xa1" path="res://Assets/Scripts/game_master.gd" id="1_ttgh6"]
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_vlji8"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://c3tiv6p5trq6x" path="res://Assets/Textures/UI/down button.png" id="9_ccmul"]
 [ext_resource type="Texture2D" uid="uid://dbpoq5q68nyav" path="res://Assets/Textures/UI/zoom button.png" id="10_cun2r"]
 [ext_resource type="Script" uid="uid://dgwq34hubjpu7" path="res://Assets/Scenes/circle_button.gd" id="10_xcy2v"]
+[ext_resource type="Script" uid="uid://b6let06siy3ka" path="res://Assets/Scenes/randomize_button.gd" id="11_dxo86"]
 [ext_resource type="Texture2D" uid="uid://bq5kp2dk1xacv" path="res://Assets/Textures/UI/play button.png" id="11_nb11o"]
 [ext_resource type="Texture2D" uid="uid://jn8k8x7o35sv" path="res://Assets/Textures/UI/seed bar.png" id="11_qscjt"]
 [ext_resource type="Script" uid="uid://gmqxxhb6exfc" path="res://Assets/Scenes/seed_text.gd" id="12_ccmul"]
@@ -170,7 +171,7 @@ offset_top = 418.0
 offset_right = 160.0
 offset_bottom = 456.0
 mouse_default_cursor_shape = 2
-script = ExtResource("13_4qkp8")
+script = ExtResource("11_dxo86")
 
 [node name="Tool Bar Sprite" type="Sprite2D" parent="UI/Neighborhood 1/Tool Bar"]
 z_index = -1
