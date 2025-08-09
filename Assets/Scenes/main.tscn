@@ -1,9 +1,10 @@
-[gd_scene load_steps=34 format=4 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=35 format=4 uid="uid://cfsgy7huubpok"]
 
 [ext_resource type="Script" uid="uid://djni3vb2o3xa1" path="res://Assets/Scripts/game_master.gd" id="1_ttgh6"]
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_vlji8"]
 [ext_resource type="Script" uid="uid://bjuwof03jt0ds" path="res://Assets/Scripts/draw_world_compositor_effect.gd" id="2_ttgh6"]
 [ext_resource type="Texture2D" uid="uid://blyf4v5v8ognm" path="res://Assets/Textures/UI/frame.png" id="3_4qkp8"]
+[ext_resource type="Script" uid="uid://g076xf3kaaym" path="res://Assets/Scripts/neighborhood_wizard.gd" id="4_a8up6"]
 [ext_resource type="Texture2D" uid="uid://clb61tv54etb8" path="res://Assets/Textures/UI/rules placeholder.png" id="5_uq7jr"]
 [ext_resource type="Texture2D" uid="uid://dlkctimw3ymb" path="res://Assets/Textures/UI/up button.png" id="6_ltoj3"]
 [ext_resource type="Texture2D" uid="uid://tn8tv5giqmf8" path="res://Assets/Textures/UI/tile atlas.png" id="6_uop3n"]
@@ -102,9 +103,12 @@ compositor = SubResource("Compositor_1bvp3")
 
 [node name="UI" type="Node" parent="."]
 
-[node name="Neighborhood 1" type="Node" parent="UI"]
+[node name="Neighborhoods" type="Node" parent="UI"]
 
-[node name="Grid" type="Panel" parent="UI/Neighborhood 1"]
+[node name="Neighborhood 1" type="Node" parent="UI/Neighborhoods"]
+script = ExtResource("4_a8up6")
+
+[node name="Grid" type="Panel" parent="UI/Neighborhoods/Neighborhood 1"]
 offset_left = 28.0
 offset_top = 27.0
 offset_right = 420.0
@@ -113,27 +117,27 @@ mouse_default_cursor_shape = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_uop3n")
 script = ExtResource("7_uq7jr")
 
-[node name="Actual Grid" type="TileMapLayer" parent="UI/Neighborhood 1/Grid"]
+[node name="Actual Grid" type="TileMapLayer" parent="UI/Neighborhoods/Neighborhood 1/Grid"]
 z_index = -1
 position = Vector2(182, 183)
 tile_map_data = PackedByteArray("AAD+/wEAAQABAAAAAAAAAAAAAQACAAAAAAD+/wAAAQABAAAAAAD9/wEAAQAAAAAAAAACAAEAAQABAAAAAAACAAAAAQABAAAAAAD9/wAAAQAAAAAAAAD8/wAAAQAAAAAAAAD9/wIAAQAAAAAAAAD8/wIAAQAAAAAAAAD8/wEAAQAAAAAAAAD7/wAAAQAAAAAAAAD6/wAAAQAAAAAAAAD5/wAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAFAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAD//wEAAQAAAAAAAAD//wAAAQAAAAAAAAAAAAEAAQAAAAAAAAABAAEAAQAAAAAAAAABAAAAAQAAAAAAAAAAAP//AQAAAAAAAAD/////AQAAAAAAAAD+////AQABAAAAAAABAP//AQAAAAAAAAD9////AQAAAAAAAAD8////AQAAAAAAAAD7////AQAAAAAAAAD6////AQAAAAAAAAD5////AQAAAAAAAAD5//7/AQAAAAAAAAD6//7/AQAAAAAAAAD7//7/AQAAAAAAAAD8//7/AQAAAAAAAAD9//7/AQAAAAAAAAD+//7/AQABAAAAAAD///7/AQABAAAAAAAAAP7/AQABAAAAAAABAP7/AQABAAAAAAACAP7/AQABAAAAAAADAP7/AQAAAAAAAAAEAP7/AQAAAAAAAAAFAP7/AQAAAAAAAAAGAP7/AQAAAAAAAAAHAP7/AQAAAAAAAAAHAP//AQAAAAAAAAAGAP//AQAAAAAAAAAFAP//AQAAAAAAAAAEAP//AQAAAAAAAAADAP//AQAAAAAAAAACAP//AQABAAAAAAD5//3/AQAAAAAAAAD6//3/AQAAAAAAAAD7//3/AQAAAAAAAAD8//3/AQAAAAAAAAD9//3/AQAAAAAAAAD+//3/AQAAAAAAAAD///3/AQAAAAAAAAAAAP3/AQAAAAAAAAABAP3/AQAAAAAAAAACAP3/AQAAAAAAAAADAP3/AQAAAAAAAAAEAP3/AQAAAAAAAAAFAP3/AQAAAAAAAAAGAP3/AQAAAAAAAAAHAP3/AQAAAAAAAAAHAPz/AQAAAAAAAAAGAPz/AQAAAAAAAAAFAPz/AQAAAAAAAAAEAPz/AQAAAAAAAAADAPz/AQAAAAAAAAACAPz/AQAAAAAAAAABAPz/AQAAAAAAAAAAAPz/AQAAAAAAAAD///z/AQAAAAAAAAD+//z/AQAAAAAAAAD9//z/AQAAAAAAAAD8//z/AQAAAAAAAAD7//z/AQAAAAAAAAD6//z/AQAAAAAAAAD5//z/AQAAAAAAAAD5//v/AQAAAAAAAAD6//v/AQAAAAAAAAD7//v/AQAAAAAAAAD8//v/AQAAAAAAAAD9//v/AQAAAAAAAAD+//v/AQAAAAAAAAD///v/AQAAAAAAAAAAAPv/AQAAAAAAAAABAPv/AQAAAAAAAAACAPv/AQAAAAAAAAADAPv/AQAAAAAAAAAEAPv/AQAAAAAAAAAFAPv/AQAAAAAAAAAGAPv/AQAAAAAAAAAHAPv/AQAAAAAAAAAHAPr/AQAAAAAAAAAGAPr/AQAAAAAAAAAFAPr/AQAAAAAAAAAEAPr/AQAAAAAAAAADAPr/AQAAAAAAAAACAPr/AQAAAAAAAAABAPr/AQAAAAAAAAAAAPr/AQAAAAAAAAD///r/AQAAAAAAAAD+//r/AQAAAAAAAAD9//r/AQAAAAAAAAD8//r/AQAAAAAAAAD7//r/AQAAAAAAAAD6//r/AQAAAAAAAAD5//r/AQAAAAAAAAD5//n/AQAAAAAAAAD6//n/AQAAAAAAAAD7//n/AQAAAAAAAAD8//n/AQAAAAAAAAD9//n/AQAAAAAAAAD+//n/AQAAAAAAAAD///n/AQAAAAAAAAAAAPn/AQAAAAAAAAABAPn/AQAAAAAAAAACAPn/AQAAAAAAAAADAPn/AQAAAAAAAAAEAPn/AQAAAAAAAAAFAPn/AQAAAAAAAAAGAPn/AQAAAAAAAAAHAPn/AQAAAAAAAAAHAAEAAQAAAAAAAAAGAAEAAQAAAAAAAAAFAAEAAQAAAAAAAAAEAAEAAQAAAAAAAAADAAEAAQAAAAAAAAD7/wEAAQAAAAAAAAD6/wEAAQAAAAAAAAD5/wEAAQAAAAAAAAD5/wIAAQAAAAAAAAD6/wIAAQAAAAAAAAD7/wIAAQAAAAAAAAADAAIAAQAAAAAAAAAEAAIAAQAAAAAAAAAFAAIAAQAAAAAAAAAGAAIAAQAAAAAAAAAHAAIAAQAAAAAAAAAHAAMAAQAAAAAAAAAGAAMAAQAAAAAAAAAFAAMAAQAAAAAAAAAEAAMAAQAAAAAAAAADAAMAAQAAAAAAAAACAAMAAQAAAAAAAAABAAMAAQAAAAAAAAAAAAMAAQAAAAAAAAD//wMAAQAAAAAAAAD+/wMAAQAAAAAAAAD9/wMAAQAAAAAAAAD8/wMAAQAAAAAAAAD7/wMAAQAAAAAAAAD6/wMAAQAAAAAAAAD5/wMAAQAAAAAAAAD5/wQAAQAAAAAAAAD6/wQAAQAAAAAAAAD7/wQAAQAAAAAAAAD8/wQAAQAAAAAAAAD9/wQAAQAAAAAAAAD+/wQAAQAAAAAAAAD//wQAAQAAAAAAAAAAAAQAAQAAAAAAAAABAAQAAQAAAAAAAAACAAQAAQAAAAAAAAADAAQAAQAAAAAAAAAEAAQAAQAAAAAAAAAFAAQAAQAAAAAAAAAGAAQAAQAAAAAAAAAHAAQAAQAAAAAAAAAHAAUAAQAAAAAAAAAGAAUAAQAAAAAAAAAFAAUAAQAAAAAAAAAEAAUAAQAAAAAAAAADAAUAAQAAAAAAAAACAAUAAQAAAAAAAAABAAUAAQAAAAAAAAAAAAUAAQAAAAAAAAD//wUAAQAAAAAAAAD+/wUAAQAAAAAAAAD9/wUAAQAAAAAAAAD8/wUAAQAAAAAAAAD7/wUAAQAAAAAAAAD6/wUAAQAAAAAAAAD5/wUAAQAAAAAAAAD5/wYAAQAAAAAAAAD6/wYAAQAAAAAAAAD7/wYAAQAAAAAAAAD8/wYAAQAAAAAAAAD9/wYAAQAAAAAAAAD+/wYAAQAAAAAAAAD//wYAAQAAAAAAAAAAAAYAAQAAAAAAAAABAAYAAQAAAAAAAAACAAYAAQAAAAAAAAADAAYAAQAAAAAAAAAEAAYAAQAAAAAAAAAFAAYAAQAAAAAAAAAGAAYAAQAAAAAAAAAHAAYAAQAAAAAAAAAHAAcAAQAAAAAAAAAGAAcAAQAAAAAAAAAFAAcAAQAAAAAAAAAEAAcAAQAAAAAAAAADAAcAAQAAAAAAAAACAAcAAQAAAAAAAAABAAcAAQAAAAAAAAAAAAcAAQAAAAAAAAD//wcAAQAAAAAAAAD+/wcAAQAAAAAAAAD9/wcAAQAAAAAAAAD8/wcAAQAAAAAAAAD7/wcAAQAAAAAAAAD6/wcAAQAAAAAAAAD5/wcAAQAAAAAAAAD+/wIAAQABAAAAAAD//wIAAQABAAAAAAAAAAIAAQABAAAAAAABAAIAAQABAAAAAAACAAIAAQABAAAAAAA=")
 tile_set = SubResource("TileSet_ltoj3")
 
-[node name="Cursor Grid" type="TileMapLayer" parent="UI/Neighborhood 1/Grid"]
+[node name="Cursor Grid" type="TileMapLayer" parent="UI/Neighborhoods/Neighborhood 1/Grid"]
 z_index = -1
 position = Vector2(182, 183)
 tile_set = SubResource("TileSet_ltoj3")
 
-[node name="Grid Overlay" type="Sprite2D" parent="UI/Neighborhood 1/Grid"]
+[node name="Grid Overlay" type="Sprite2D" parent="UI/Neighborhoods/Neighborhood 1/Grid"]
 self_modulate = Color(0.125911, 0.125911, 0.125911, 1)
 z_index = -1
 texture_filter = 1
 position = Vector2(196, 215)
 texture = ExtResource("8_ltoj3")
 
-[node name="Tool Bar" type="Node" parent="UI/Neighborhood 1"]
+[node name="Tool Bar" type="Node" parent="UI/Neighborhoods/Neighborhood 1"]
 
-[node name="Power Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
+[node name="Power Button" type="Panel" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 offset_left = 29.0
 offset_top = 418.0
 offset_right = 57.0
@@ -141,7 +145,7 @@ offset_bottom = 456.0
 mouse_default_cursor_shape = 2
 script = ExtResource("7_cun2r")
 
-[node name="Clear Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
+[node name="Clear Button" type="Panel" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 offset_left = 57.0
 offset_top = 418.0
 offset_right = 82.0
@@ -149,7 +153,7 @@ offset_bottom = 456.0
 mouse_default_cursor_shape = 2
 script = ExtResource("8_nb11o")
 
-[node name="Keyb Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
+[node name="Keyb Button" type="Panel" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 offset_left = 82.0
 offset_top = 418.0
 offset_right = 108.0
@@ -157,7 +161,7 @@ offset_bottom = 456.0
 mouse_default_cursor_shape = 2
 script = ExtResource("13_4qkp8")
 
-[node name="Circle Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
+[node name="Circle Button" type="Panel" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 offset_left = 108.0
 offset_top = 418.0
 offset_right = 134.0
@@ -165,7 +169,7 @@ offset_bottom = 456.0
 mouse_default_cursor_shape = 2
 script = ExtResource("10_xcy2v")
 
-[node name="Randomize Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
+[node name="Randomize Button" type="Panel" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 offset_left = 134.0
 offset_top = 418.0
 offset_right = 160.0
@@ -173,13 +177,13 @@ offset_bottom = 456.0
 mouse_default_cursor_shape = 2
 script = ExtResource("11_dxo86")
 
-[node name="Tool Bar Sprite" type="Sprite2D" parent="UI/Neighborhood 1/Tool Bar"]
+[node name="Tool Bar Sprite" type="Sprite2D" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 z_index = -1
 texture_filter = 1
 position = Vector2(224, 437)
 texture = ExtResource("16_ltoj3")
 
-[node name="Spawn Lower Bound" type="RichTextLabel" parent="UI/Neighborhood 1/Tool Bar"]
+[node name="Spawn Lower Bound" type="RichTextLabel" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 texture_filter = 1
 offset_left = 188.0
 offset_top = 425.0
@@ -193,7 +197,7 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Spawn Lower Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
+[node name="Spawn Lower Button" type="Panel" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 offset_left = 183.0
 offset_top = 418.0
 offset_right = 235.0
@@ -201,7 +205,7 @@ offset_bottom = 456.0
 mouse_default_cursor_shape = 2
 script = ExtResource("13_4qkp8")
 
-[node name="Spawn Upper Bound" type="RichTextLabel" parent="UI/Neighborhood 1/Tool Bar"]
+[node name="Spawn Upper Bound" type="RichTextLabel" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 texture_filter = 1
 offset_left = 241.0
 offset_top = 418.0
@@ -215,7 +219,7 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Spawn Upper Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
+[node name="Spawn Upper Button" type="Panel" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 offset_left = 236.0
 offset_top = 418.0
 offset_right = 290.0
@@ -223,7 +227,7 @@ offset_bottom = 456.0
 mouse_default_cursor_shape = 2
 script = ExtResource("13_4qkp8")
 
-[node name="Stable Lower Bound" type="RichTextLabel" parent="UI/Neighborhood 1/Tool Bar"]
+[node name="Stable Lower Bound" type="RichTextLabel" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 texture_filter = 1
 offset_left = 316.0
 offset_top = 425.0
@@ -237,7 +241,7 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Stable Lower Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
+[node name="Stable Lower Button" type="Panel" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 offset_left = 311.0
 offset_top = 418.0
 offset_right = 363.0
@@ -245,7 +249,7 @@ offset_bottom = 456.0
 mouse_default_cursor_shape = 2
 script = ExtResource("13_4qkp8")
 
-[node name="Stable Upper Bound" type="RichTextLabel" parent="UI/Neighborhood 1/Tool Bar"]
+[node name="Stable Upper Bound" type="RichTextLabel" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 texture_filter = 1
 offset_left = 369.0
 offset_top = 418.0
@@ -259,7 +263,7 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="Stable Upper Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
+[node name="Stable Upper Button" type="Panel" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 offset_left = 364.0
 offset_top = 418.0
 offset_right = 419.0
@@ -441,36 +445,36 @@ offset_bottom = 624.0
 mouse_default_cursor_shape = 2
 script = ExtResource("17_tm25p")
 
-[connection signal="gui_input" from="UI/Neighborhood 1/Grid" to="UI/Neighborhood 1/Grid" method="_on_gui_input"]
-[connection signal="mouse_entered" from="UI/Neighborhood 1/Grid" to="UI/Neighborhood 1/Grid" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Neighborhood 1/Grid" to="UI/Neighborhood 1/Grid" method="_on_mouse_exited"]
-[connection signal="gui_input" from="UI/Neighborhood 1/Tool Bar/Power Button" to="UI/Neighborhood 1/Tool Bar/Power Button" method="_on_gui_input"]
-[connection signal="mouse_entered" from="UI/Neighborhood 1/Tool Bar/Power Button" to="UI/Neighborhood 1/Tool Bar/Power Button" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Neighborhood 1/Tool Bar/Power Button" to="UI/Neighborhood 1/Tool Bar/Power Button" method="_on_mouse_exited"]
-[connection signal="gui_input" from="UI/Neighborhood 1/Tool Bar/Clear Button" to="UI/Neighborhood 1/Tool Bar/Clear Button" method="_on_gui_input"]
-[connection signal="mouse_entered" from="UI/Neighborhood 1/Tool Bar/Clear Button" to="UI/Neighborhood 1/Tool Bar/Clear Button" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Neighborhood 1/Tool Bar/Clear Button" to="UI/Neighborhood 1/Tool Bar/Clear Button" method="_on_mouse_exited"]
-[connection signal="gui_input" from="UI/Neighborhood 1/Tool Bar/Keyb Button" to="UI/Neighborhood 1/Tool Bar/Keyb Button" method="_on_gui_input"]
-[connection signal="mouse_entered" from="UI/Neighborhood 1/Tool Bar/Keyb Button" to="UI/Neighborhood 1/Tool Bar/Keyb Button" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Neighborhood 1/Tool Bar/Keyb Button" to="UI/Neighborhood 1/Tool Bar/Keyb Button" method="_on_mouse_exited"]
-[connection signal="gui_input" from="UI/Neighborhood 1/Tool Bar/Circle Button" to="UI/Neighborhood 1/Tool Bar/Circle Button" method="_on_gui_input"]
-[connection signal="mouse_entered" from="UI/Neighborhood 1/Tool Bar/Circle Button" to="UI/Neighborhood 1/Tool Bar/Circle Button" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Neighborhood 1/Tool Bar/Circle Button" to="UI/Neighborhood 1/Tool Bar/Circle Button" method="_on_mouse_exited"]
-[connection signal="gui_input" from="UI/Neighborhood 1/Tool Bar/Randomize Button" to="UI/Neighborhood 1/Tool Bar/Randomize Button" method="_on_gui_input"]
-[connection signal="mouse_entered" from="UI/Neighborhood 1/Tool Bar/Randomize Button" to="UI/Neighborhood 1/Tool Bar/Randomize Button" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Neighborhood 1/Tool Bar/Randomize Button" to="UI/Neighborhood 1/Tool Bar/Randomize Button" method="_on_mouse_exited"]
-[connection signal="gui_input" from="UI/Neighborhood 1/Tool Bar/Spawn Lower Button" to="UI/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_gui_input"]
-[connection signal="mouse_entered" from="UI/Neighborhood 1/Tool Bar/Spawn Lower Button" to="UI/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Neighborhood 1/Tool Bar/Spawn Lower Button" to="UI/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_mouse_exited"]
-[connection signal="gui_input" from="UI/Neighborhood 1/Tool Bar/Spawn Upper Button" to="UI/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_gui_input"]
-[connection signal="mouse_entered" from="UI/Neighborhood 1/Tool Bar/Spawn Upper Button" to="UI/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Neighborhood 1/Tool Bar/Spawn Upper Button" to="UI/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_mouse_exited"]
-[connection signal="gui_input" from="UI/Neighborhood 1/Tool Bar/Stable Lower Button" to="UI/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_gui_input"]
-[connection signal="mouse_entered" from="UI/Neighborhood 1/Tool Bar/Stable Lower Button" to="UI/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Neighborhood 1/Tool Bar/Stable Lower Button" to="UI/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_mouse_exited"]
-[connection signal="gui_input" from="UI/Neighborhood 1/Tool Bar/Stable Upper Button" to="UI/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_gui_input"]
-[connection signal="mouse_entered" from="UI/Neighborhood 1/Tool Bar/Stable Upper Button" to="UI/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="UI/Neighborhood 1/Tool Bar/Stable Upper Button" to="UI/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhoods/Neighborhood 1/Grid" to="UI/Neighborhoods/Neighborhood 1/Grid" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhoods/Neighborhood 1/Grid" to="UI/Neighborhoods/Neighborhood 1/Grid" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhoods/Neighborhood 1/Grid" to="UI/Neighborhoods/Neighborhood 1/Grid" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Power Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Power Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Power Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Power Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Power Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Power Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Clear Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Clear Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Clear Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Clear Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Clear Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Clear Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Keyb Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Keyb Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Keyb Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Keyb Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Keyb Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Keyb Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Circle Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Circle Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Circle Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Circle Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Circle Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Circle Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Randomize Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Randomize Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Randomize Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Randomize Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Randomize Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Randomize Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Spawn Lower Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Spawn Lower Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Spawn Lower Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Spawn Upper Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Spawn Upper Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Spawn Upper Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Stable Lower Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Stable Lower Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Stable Lower Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Stable Upper Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Stable Upper Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Neighborhoods/Neighborhood 1/Tool Bar/Stable Upper Button" to="UI/Neighborhoods/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_mouse_exited"]
 [connection signal="gui_input" from="UI/Right Button Sprite/Right Button" to="UI/Right Button Sprite/Right Button" method="_on_gui_input"]
 [connection signal="mouse_entered" from="UI/Right Button Sprite/Right Button" to="UI/Right Button Sprite/Right Button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="UI/Right Button Sprite/Right Button" to="UI/Right Button Sprite/Right Button" method="_on_mouse_exited"]
