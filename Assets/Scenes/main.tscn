@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=27 format=4 uid="uid://cfsgy7huubpok"]
 
 [ext_resource type="Script" uid="uid://djni3vb2o3xa1" path="res://Assets/Scripts/game_master.gd" id="1_ttgh6"]
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_vlji8"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bq5kp2dk1xacv" path="res://Assets/Textures/UI/play button.png" id="11_nb11o"]
 [ext_resource type="Script" uid="uid://n1c7utg00au7" path="res://Assets/Scripts/UI/reseed_button.gd" id="13_4qkp8"]
 [ext_resource type="Texture2D" uid="uid://c6gbyodrab0sa" path="res://Assets/Textures/UI/toolbar.png" id="16_ltoj3"]
+[ext_resource type="Script" uid="uid://cbxol4ngxuqsp" path="res://Assets/Scenes/new_seed_button.gd" id="17_tm25p"]
 
 [sub_resource type="Environment" id="Environment_0xm2m"]
 
@@ -29,9 +30,6 @@ needs_normal_roughness = false
 script = ExtResource("1_vlji8")
 pause = false
 update_speed = 0.05
-current_seed = 3009
-random_seed = true
-reseed = false
 exposure = Vector4(2, 1, 1, 1)
 metadata/_custom_type_script = "uid://drfxlavovcgta"
 
@@ -181,9 +179,9 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="Spawn Lower Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
-offset_left = 182.0
+offset_left = 183.0
 offset_top = 418.0
-offset_right = 236.0
+offset_right = 235.0
 offset_bottom = 456.0
 mouse_default_cursor_shape = 2
 script = ExtResource("13_4qkp8")
@@ -227,7 +225,7 @@ autowrap_mode = 0
 [node name="Stable Lower Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
 offset_left = 311.0
 offset_top = 418.0
-offset_right = 365.0
+offset_right = 363.0
 offset_bottom = 456.0
 mouse_default_cursor_shape = 2
 script = ExtResource("13_4qkp8")
@@ -247,7 +245,7 @@ scroll_active = false
 autowrap_mode = 0
 
 [node name="Stable Upper Button" type="Panel" parent="UI/Neighborhood 1/Tool Bar"]
-offset_left = 365.0
+offset_left = 364.0
 offset_top = 418.0
 offset_right = 419.0
 offset_bottom = 456.0
@@ -402,7 +400,7 @@ offset_top = 583.0
 offset_right = 213.0
 offset_bottom = 624.0
 mouse_default_cursor_shape = 2
-script = ExtResource("13_4qkp8")
+script = ExtResource("17_tm25p")
 
 [connection signal="gui_input" from="UI/Neighborhood 1/Grid" to="UI/Neighborhood 1/Grid" method="_on_gui_input"]
 [connection signal="mouse_entered" from="UI/Neighborhood 1/Grid" to="UI/Neighborhood 1/Grid" method="_on_mouse_entered"]

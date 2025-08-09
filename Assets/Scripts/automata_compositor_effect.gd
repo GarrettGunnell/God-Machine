@@ -4,9 +4,8 @@ class_name AutomataCompositorEffect
 
 @export var pause = false
 @export_range(0.001, 0.5) var update_speed = 0.05
-@export var current_seed : int = 0
-@export var random_seed = false
-@export var reseed = true
+
+var reseed = true
 
 @export_group("Shader Settings")
 @export var exposure = Vector4(2, 1, 1, 1)
@@ -25,6 +24,8 @@ var next_generation : RID
 var world_image_texture : ImageTexture
 
 var timer = 0.0
+
+var current_seed : int = 0
 var needs_seeding = true
 
 func _init():
@@ -96,9 +97,6 @@ func _render_callback(p_effect_callback_type, p_render_data):
 	var z_groups = 1
 
 	if (reseed):
-		if (random_seed): current_seed = randi() % 10000
-		print(current_seed)
-
 		needs_seeding = true
 		reseed = false
 
@@ -135,6 +133,9 @@ func _render_callback(p_effect_callback_type, p_render_data):
 			next_generation = temp
 
 		timer += Engine.get_main_loop().root.get_process_delta_time()
+
+func set_seed(new_seed : int):
+	current_seed = new_seed
 
 func get_world_texture() -> RID:
 	return world_texture;
