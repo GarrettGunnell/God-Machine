@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=4 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=46 format=4 uid="uid://cfsgy7huubpok"]
 
 [ext_resource type="Script" uid="uid://djni3vb2o3xa1" path="res://Assets/Scripts/game_master.gd" id="1_ttgh6"]
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_vlji8"]
@@ -24,7 +24,9 @@
 [ext_resource type="Script" uid="uid://gmqxxhb6exfc" path="res://Assets/Scripts/UI/Labels/seed_text.gd" id="12_ccmul"]
 [ext_resource type="Script" uid="uid://n1c7utg00au7" path="res://Assets/Scripts/UI/reseed_button.gd" id="13_4qkp8"]
 [ext_resource type="Script" uid="uid://ln4bvim1l3tx" path="res://Assets/Scripts/UI/Labels/spawn_lower_text.gd" id="14_e0qyk"]
+[ext_resource type="Texture2D" uid="uid://delx4m5jxlmw4" path="res://Assets/Textures/UI/spawn range frame.png" id="14_hlqjr"]
 [ext_resource type="Script" uid="uid://di6tioiftri6d" path="res://Assets/Scripts/UI/Labels/spawn_upper_text.gd" id="15_747jk"]
+[ext_resource type="Texture2D" uid="uid://xawwlhbs43nj" path="res://Assets/Textures/UI/stable range frame.png" id="15_l2vhu"]
 [ext_resource type="Script" uid="uid://1f3s0dh6gsv7" path="res://Assets/Scripts/UI/Tool Buttons/spawn_lower_button.gd" id="15_shq5y"]
 [ext_resource type="Texture2D" uid="uid://c6gbyodrab0sa" path="res://Assets/Textures/UI/toolbar.png" id="16_ltoj3"]
 [ext_resource type="Script" uid="uid://dw76mnmf76bcs" path="res://Assets/Scripts/UI/Labels/stable_lower_text.gd" id="16_nqgrc"]
@@ -73,7 +75,6 @@ separation = Vector2i(4, 0)
 texture_region_size = Vector2i(26, 26)
 1:0/0 = 0
 0:0/0 = 0
-2:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ltoj3"]
 tile_size = Vector2i(26, 26)
@@ -199,6 +200,20 @@ z_index = -1
 texture_filter = 1
 position = Vector2(224, 437)
 texture = ExtResource("16_ltoj3")
+
+[node name="Spawn Frame" type="Sprite2D" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
+z_index = -1
+texture_filter = 1
+position = Vector2(226, 437)
+texture = ExtResource("14_hlqjr")
+
+[node name="Stable Frame" type="Sprite2D" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
+modulate = Color(0.769432, 0.769432, 0.769432, 1)
+z_index = -1
+texture_filter = 1
+position = Vector2(354.5, 437)
+scale = Vector2(1, 1)
+texture = ExtResource("15_l2vhu")
 
 [node name="Spawn Lower Bound" type="RichTextLabel" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 texture_filter = 1
