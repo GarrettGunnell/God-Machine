@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=40 format=4 uid="uid://cfsgy7huubpok"]
 
 [ext_resource type="Script" uid="uid://djni3vb2o3xa1" path="res://Assets/Scripts/game_master.gd" id="1_ttgh6"]
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_vlji8"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://n1c7utg00au7" path="res://Assets/Scripts/UI/reseed_button.gd" id="13_4qkp8"]
 [ext_resource type="Script" uid="uid://ln4bvim1l3tx" path="res://Assets/Scripts/UI/Labels/spawn_lower_text.gd" id="14_e0qyk"]
 [ext_resource type="Script" uid="uid://di6tioiftri6d" path="res://Assets/Scripts/UI/Labels/spawn_upper_text.gd" id="15_747jk"]
+[ext_resource type="Script" uid="uid://1f3s0dh6gsv7" path="res://Assets/Scripts/UI/Tool Buttons/spawn_lower_button.gd" id="15_shq5y"]
 [ext_resource type="Texture2D" uid="uid://c6gbyodrab0sa" path="res://Assets/Textures/UI/toolbar.png" id="16_ltoj3"]
 [ext_resource type="Script" uid="uid://dw76mnmf76bcs" path="res://Assets/Scripts/UI/Labels/stable_lower_text.gd" id="16_nqgrc"]
 [ext_resource type="Script" uid="uid://b23ox3750gmn5" path="res://Assets/Scripts/UI/Labels/stable_upper_text.gd" id="17_730o7"]
@@ -208,7 +209,7 @@ offset_top = 418.0
 offset_right = 235.0
 offset_bottom = 456.0
 mouse_default_cursor_shape = 2
-script = ExtResource("13_4qkp8")
+script = ExtResource("15_shq5y")
 
 [node name="Spawn Upper Bound" type="RichTextLabel" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 texture_filter = 1
