@@ -8,26 +8,26 @@
 [ext_resource type="Texture2D" uid="uid://clb61tv54etb8" path="res://Assets/Textures/UI/rules placeholder.png" id="5_uq7jr"]
 [ext_resource type="Texture2D" uid="uid://dlkctimw3ymb" path="res://Assets/Textures/UI/up button.png" id="6_ltoj3"]
 [ext_resource type="Texture2D" uid="uid://tn8tv5giqmf8" path="res://Assets/Textures/UI/tile atlas.png" id="6_uop3n"]
-[ext_resource type="Script" uid="uid://bulli3xclj2py" path="res://Assets/Scenes/power_button.gd" id="7_cun2r"]
+[ext_resource type="Script" uid="uid://bulli3xclj2py" path="res://Assets/Scripts/UI/Tool Buttons/power_button.gd" id="7_cun2r"]
 [ext_resource type="Texture2D" uid="uid://8shsachlxop4" path="res://Assets/Textures/UI/left button.png" id="7_tm25p"]
-[ext_resource type="Script" uid="uid://bjbolncishmo2" path="res://Assets/Scenes/grid_panel.gd" id="7_uq7jr"]
+[ext_resource type="Script" uid="uid://bjbolncishmo2" path="res://Assets/Scripts/UI/Panel/grid_panel.gd" id="7_uq7jr"]
 [ext_resource type="Texture2D" uid="uid://u7cmfxq60fu4" path="res://Assets/Textures/UI/grid.png" id="8_ltoj3"]
-[ext_resource type="Script" uid="uid://bllcd34ean062" path="res://Assets/Scenes/clear_button.gd" id="8_nb11o"]
+[ext_resource type="Script" uid="uid://bllcd34ean062" path="res://Assets/Scripts/UI/Tool Buttons/clear_button.gd" id="8_nb11o"]
 [ext_resource type="Texture2D" uid="uid://clajws0yfjfvu" path="res://Assets/Textures/UI/right button.png" id="8_qscjt"]
 [ext_resource type="Texture2D" uid="uid://c3tiv6p5trq6x" path="res://Assets/Textures/UI/down button.png" id="9_ccmul"]
 [ext_resource type="Texture2D" uid="uid://dbpoq5q68nyav" path="res://Assets/Textures/UI/zoom button.png" id="10_cun2r"]
-[ext_resource type="Script" uid="uid://dgwq34hubjpu7" path="res://Assets/Scenes/circle_button.gd" id="10_xcy2v"]
-[ext_resource type="Script" uid="uid://b6let06siy3ka" path="res://Assets/Scenes/randomize_button.gd" id="11_dxo86"]
+[ext_resource type="Script" uid="uid://dgwq34hubjpu7" path="res://Assets/Scripts/UI/Tool Buttons/circle_button.gd" id="10_xcy2v"]
+[ext_resource type="Script" uid="uid://b6let06siy3ka" path="res://Assets/Scripts/UI/Tool Buttons/randomize_button.gd" id="11_dxo86"]
 [ext_resource type="Texture2D" uid="uid://bq5kp2dk1xacv" path="res://Assets/Textures/UI/play button.png" id="11_nb11o"]
 [ext_resource type="Texture2D" uid="uid://jn8k8x7o35sv" path="res://Assets/Textures/UI/seed bar.png" id="11_qscjt"]
-[ext_resource type="Script" uid="uid://gmqxxhb6exfc" path="res://Assets/Scenes/seed_text.gd" id="12_ccmul"]
+[ext_resource type="Script" uid="uid://gmqxxhb6exfc" path="res://Assets/Scripts/UI/Labels/seed_text.gd" id="12_ccmul"]
 [ext_resource type="Script" uid="uid://n1c7utg00au7" path="res://Assets/Scripts/UI/reseed_button.gd" id="13_4qkp8"]
-[ext_resource type="Script" uid="uid://ln4bvim1l3tx" path="res://Assets/Scenes/spawn_lower_text.gd" id="14_e0qyk"]
-[ext_resource type="Script" uid="uid://di6tioiftri6d" path="res://Assets/Scenes/spawn_upper_text.gd" id="15_747jk"]
+[ext_resource type="Script" uid="uid://ln4bvim1l3tx" path="res://Assets/Scripts/UI/Labels/spawn_lower_text.gd" id="14_e0qyk"]
+[ext_resource type="Script" uid="uid://di6tioiftri6d" path="res://Assets/Scripts/UI/Labels/spawn_upper_text.gd" id="15_747jk"]
 [ext_resource type="Texture2D" uid="uid://c6gbyodrab0sa" path="res://Assets/Textures/UI/toolbar.png" id="16_ltoj3"]
-[ext_resource type="Script" uid="uid://dw76mnmf76bcs" path="res://Assets/Scenes/stable_lower_text.gd" id="16_nqgrc"]
-[ext_resource type="Script" uid="uid://b23ox3750gmn5" path="res://Assets/Scenes/stable_upper_text.gd" id="17_730o7"]
-[ext_resource type="Script" uid="uid://cbxol4ngxuqsp" path="res://Assets/Scenes/new_seed_button.gd" id="17_tm25p"]
+[ext_resource type="Script" uid="uid://dw76mnmf76bcs" path="res://Assets/Scripts/UI/Labels/stable_lower_text.gd" id="16_nqgrc"]
+[ext_resource type="Script" uid="uid://b23ox3750gmn5" path="res://Assets/Scripts/UI/Labels/stable_upper_text.gd" id="17_730o7"]
+[ext_resource type="Script" uid="uid://cbxol4ngxuqsp" path="res://Assets/Scripts/UI/new_seed_button.gd" id="17_tm25p"]
 
 [sub_resource type="Environment" id="Environment_0xm2m"]
 
@@ -297,7 +297,6 @@ texture = ExtResource("5_uq7jr")
 texture_filter = 1
 texture_repeat = 1
 position = Vector2(217.5, 567.5)
-scale = Vector2(1, 1)
 texture = ExtResource("11_qscjt")
 
 [node name="Seed Text" type="RichTextLabel" parent="UI/Node2D/Seed Bar"]
