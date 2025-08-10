@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=44 format=4 uid="uid://cfsgy7huubpok"]
 
 [ext_resource type="Script" uid="uid://djni3vb2o3xa1" path="res://Assets/Scripts/game_master.gd" id="1_ttgh6"]
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_vlji8"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://clajws0yfjfvu" path="res://Assets/Textures/UI/right button.png" id="8_qscjt"]
 [ext_resource type="Texture2D" uid="uid://c3tiv6p5trq6x" path="res://Assets/Textures/UI/down button.png" id="9_ccmul"]
 [ext_resource type="Texture2D" uid="uid://dbpoq5q68nyav" path="res://Assets/Textures/UI/zoom button.png" id="10_cun2r"]
+[ext_resource type="Script" uid="uid://tfw2d2tkk7d6" path="res://Assets/Scripts/UI/Tool Buttons/keyboard_button.gd" id="10_usbst"]
 [ext_resource type="Script" uid="uid://dgwq34hubjpu7" path="res://Assets/Scripts/UI/Tool Buttons/circle_button.gd" id="10_xcy2v"]
 [ext_resource type="Script" uid="uid://b6let06siy3ka" path="res://Assets/Scripts/UI/Tool Buttons/randomize_button.gd" id="11_dxo86"]
 [ext_resource type="Texture2D" uid="uid://bq5kp2dk1xacv" path="res://Assets/Textures/UI/play button.png" id="11_nb11o"]
@@ -138,7 +139,7 @@ position = Vector2(182, 183)
 tile_set = SubResource("TileSet_ltoj3")
 
 [node name="Guides Grid" type="TileMapLayer" parent="UI/Neighborhoods/Neighborhood 1/Grid"]
-modulate = Color(0.196078, 0.196078, 0.196078, 0.262745)
+modulate = Color(1, 1, 1, 0.0627451)
 z_index = -1
 position = Vector2(182, 183)
 tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAD9/wEAAQABAAAAAAD9/wAAAQABAAAAAAD9////AQABAAAAAAD//wMAAQABAAAAAAAAAAMAAQABAAAAAAABAAMAAQABAAAAAAADAAEAAQABAAAAAAADAAAAAQABAAAAAAADAP//AQABAAAAAAABAP3/AQABAAAAAAAAAP3/AQABAAAAAAD///3/AQABAAAAAAD6/wIAAQABAAAAAAD6/wEAAQABAAAAAAD6/wAAAQABAAAAAAD6////AQABAAAAAAD6//7/AQABAAAAAAD+//r/AQABAAAAAAD///r/AQABAAAAAAAAAPr/AQABAAAAAAABAPr/AQABAAAAAAACAPr/AQABAAAAAAAGAP7/AQABAAAAAAAGAP//AQABAAAAAAAGAAEAAQABAAAAAAAGAAAAAQABAAAAAAAGAAIAAQABAAAAAAD+/wYAAQABAAAAAAD//wYAAQABAAAAAAAAAAYAAQABAAAAAAABAAYAAQABAAAAAAACAAYAAQABAAAAAAA=")
@@ -175,7 +176,7 @@ offset_top = 418.0
 offset_right = 108.0
 offset_bottom = 456.0
 mouse_default_cursor_shape = 2
-script = ExtResource("13_4qkp8")
+script = ExtResource("10_usbst")
 
 [node name="Circle Button" type="Panel" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 offset_left = 108.0
