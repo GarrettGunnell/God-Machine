@@ -2,6 +2,8 @@
 #kernel Automaton
 #kernel Blit
 
+#extension GL_ARB_gpu_shader_int64 : require
+
 
 layout(rgba8, set = 0, binding = 0) uniform image2D _RenderTarget;
 layout(r16f, set = 0, binding = 2) uniform image2D _AutomatonFrom;
@@ -31,7 +33,7 @@ void Seed() {
 
 	if (seed < 0.75) seed = 0.0;
 	else seed = 1.0;
-	
+
 	imageStore(_AutomatonFrom, uv, vec4(seed));
 }
 
@@ -41,29 +43,163 @@ void Automaton() {
 	ivec2 size = ivec2(raster_size);
 	if (uv.x >= size.x || uv.y >= size.y) return;
 
-	int cell = int(imageLoad(_AutomatonFrom, uv).r);;
+	int cell = int(imageLoad(_AutomatonFrom, uv).r);
+	
+	uint64_t top_row_mask = 18374686479671623680UL;
+	uint64_t left_column_mask = 9259542123273814144UL;
 
-	int neighbor_count = 0;
-	int neighborhood_size = 5;
-	for (int x = -neighborhood_size; x <= neighborhood_size; ++x) {
-		for (int y = -neighborhood_size; y <= neighborhood_size; ++y) {
-			// if (x == 0 && y == 0) continue;
+	uint64_t upper_left_mask = 770;
+	uint64_t upper_right_mask = 49216 & ~(left_column_mask);
+	uint64_t lower_left_mask = 144959613005987840UL & ~(top_row_mask);
+	uint64_t lower_right_mask = 4665729213955833856UL & ~(top_row_mask | left_column_mask);
 
-			ivec2 texcoords = uv + ivec2(x, y);
-			texcoords.x = texcoords.x % 512;
-			texcoords.y = texcoords.y % 512;
+	uint neighbor_count = 0;
+	int neighborhood_radius = 1;
 
-			neighbor_count += int(imageLoad(_AutomatonFrom, texcoords).r);
+
+	uint64_t upper_left_quadrant_bits = 0;
+
+	// Upper Left Quadrant
+	for (int y = -1; y <= 0; ++y) {
+		for (int x = -1; x <= 0; ++x) {
+			uint bit_index = -x + -y * 8; // Convert to 1D index in 64 bit uint
+
+			ivec2 world_coords = uv + ivec2(x, y);
+
+			uint64_t cell_value = int(imageLoad(_AutomatonFrom, world_coords % 512).r);
+			
+			upper_left_quadrant_bits |= (cell_value << bit_index); // Shift cell value to bit index and add it to quadrant bit string
 		}
 	}
 
-	// if (neighbor_count <= 1) cell = 0;
-	// if (neighbor_count == 3) cell = 1;
-	// if (neighbor_count >= 4) cell = 0;
+	upper_left_quadrant_bits = upper_left_quadrant_bits & upper_left_mask; // Apply neighborhood mask
+
+	// Sum bits in string to get active cell count of quadrant
+	while (upper_left_quadrant_bits != 0) {
+		neighbor_count += uint(upper_left_quadrant_bits & 1);
+
+		upper_left_quadrant_bits = upper_left_quadrant_bits >> 1;
+	}
+
+
+	uint64_t upper_right_quadrant_bits = 0;
+
+	// Upper Right Quadrant
+	for (int y = -1; y <= 0; ++y) {
+		for (int x = 0; x <= 1; ++x) {
+			uint bit_index = (7 - x) + -y * 8; // Convert to 1D index in 64 bit uint
+
+			ivec2 world_coords = uv + ivec2(x, y);
+
+			uint64_t cell_value = int(imageLoad(_AutomatonFrom, world_coords % 512).r);
+			
+			upper_right_quadrant_bits |= (cell_value << bit_index); // Shift cell value to bit index and add it to quadrant bit string
+		}
+	}
+
+	upper_right_quadrant_bits &= upper_right_mask;
+
+	// Sum bits in string to get active cell count of quadrant
+	while (upper_right_quadrant_bits != 0) {
+		neighbor_count += uint(upper_right_quadrant_bits & 1);
+
+		upper_right_quadrant_bits = upper_right_quadrant_bits >> 1;
+	}
+
 	
-	if (neighbor_count <= 33) cell = 0;
-	if (34 <= neighbor_count && neighbor_count <= 45) cell = 1;
-	if (58 <= neighbor_count && neighbor_count <= 121) cell = 0;
+
+
+	uint64_t lower_left_quadrant_bits = 0;
+
+	// lower Left Quadrant
+	for (int y = 0; y <= 1; ++y) {
+		for (int x = -1; x <= 0; ++x) {
+			uint bit_index = -x + (7 - y) * 8; // Convert to 1D index in 64 bit uint
+
+			ivec2 world_coords = uv + ivec2(x, y);
+
+			uint64_t cell_value = int(imageLoad(_AutomatonFrom, world_coords % 512).r);
+			
+			lower_left_quadrant_bits |= (cell_value << bit_index); // Shift cell value to bit index and add it to quadrant bit string
+		}
+	}
+
+	lower_left_quadrant_bits &= lower_left_mask;
+
+	// Sum bits in string to get active cell count of quadrant
+	while (lower_left_quadrant_bits != 0) {
+		neighbor_count += uint(lower_left_quadrant_bits & 1);
+
+		lower_left_quadrant_bits = lower_left_quadrant_bits >> 1;
+	}
+
+	uint64_t lower_right_quadrant_bits = 0;
+
+	// lower Right Quadrant
+	for (int y = 0; y <= 1; ++y) {
+		for (int x = 0; x <= 1; ++x) {
+			uint bit_index = (7 - x) + (7 - y) * 8; // Convert to 1D index in 64 bit uint
+
+			ivec2 world_coords = uv + ivec2(x, y);
+
+			uint64_t cell_value = int(imageLoad(_AutomatonFrom, world_coords % 512).r);
+			
+			lower_right_quadrant_bits |= (cell_value << bit_index); // Shift cell value to bit index and add it to quadrant bit string
+		}
+	}
+
+	lower_right_quadrant_bits &= lower_right_mask;
+
+	// Sum bits in string to get active cell count of quadrant
+	while (lower_right_quadrant_bits != 0) {
+		neighbor_count += uint(lower_right_quadrant_bits & 1);
+
+		lower_right_quadrant_bits = lower_right_quadrant_bits >> 1;
+	}
+
+
+	// Upper Left
+	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2(-1, -1) % 512)).r);
+	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2( 0, -1) % 512)).r);
+	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2(-1,  0) % 512)).r);
+
+	// Upper Right
+	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2( 0, -1) % 512)).r);
+	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2( 1, -1) % 512)).r);
+	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2( 1,  0) % 512)).r);
+
+	// Center
+	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2( 0,  0) % 512)).r);
+
+	// Lower Left
+	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2(-1,  0) % 512)).r);
+	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2(-1,  1) % 512)).r);
+	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2( 0,  1) % 512)).r);
+
+	// Lower Right
+	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2( 1,  0) % 512)).r);
+	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2( 0,  1) % 512)).r);
+	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2( 1,  1) % 512)).r);
+
+
+	// for (int x = -neighborhood_radius; x <= neighborhood_radius; ++x) {
+	// 	for (int y = -neighborhood_radius; y <= neighborhood_radius; ++y) {
+	// 		if (x == 0 && y == 0) continue;
+
+	// 		ivec2 texcoords = uv + ivec2(x, y);
+	// 		texcoords = texcoords % 512;
+
+	// 		neighbor_count += int(imageLoad(_AutomatonFrom, texcoords).r);
+	// 	}
+	// }
+
+	if (neighbor_count <= 1) cell = 0;
+	if (neighbor_count == 3) cell = 1;
+	if (neighbor_count >= 4) cell = 0;
+	
+	// if (neighbor_count <= 33) cell = 0;
+	// if (34 <= neighbor_count && neighbor_count <= 45) cell = 1;
+	// if (58 <= neighbor_count && neighbor_count <= 121) cell = 0;
 
 	imageStore(_AutomatonTo, uv, vec4(cell));
 }

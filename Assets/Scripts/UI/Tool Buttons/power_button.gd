@@ -1,4 +1,4 @@
 extends AcerolaPanel
 
 func on_pressed() -> void:
-	get_node("/root/Node3D/Game Master").queue_reseed()
+	get_node("../../.").encode_grid_to_bit_string()
