@@ -37,6 +37,36 @@ void Seed() {
 	imageStore(_AutomatonFrom, uv, vec4(seed));
 }
 
+
+uint64_t encode_tile_to_uint(ivec2 uv) {
+	uint64_t tile_bits = 0;
+
+	for (int y = 0; y < 8; ++y) {
+		for (int x = 0; x < 8; ++x) {
+			uint bit_index = x + y * 8; // Convert to 1D index in 64 bit uint
+
+			ivec2 world_coords = uv + ivec2(-x, -y);
+			uint64_t cell_value = int(imageLoad(_AutomatonFrom, world_coords % 512).r);
+
+			tile_bits |= (cell_value << bit_index);
+		}
+	}
+	
+	return tile_bits;
+}
+
+uint sum_uint_bits(uint64_t i) {
+	uint sum = 0;
+
+	while (i != 0) {
+		sum += uint(i & 1);
+		i >>= 1;
+	}
+
+	return sum;
+}
+
+
 [numthreads(8, 8, 1)]
 void Automaton() {
 	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
@@ -48,138 +78,28 @@ void Automaton() {
 	uint64_t top_row_mask = 18374686479671623680UL;
 	uint64_t left_column_mask = 9259542123273814144UL;
 
-	uint64_t upper_left_mask = 770;
-	uint64_t upper_right_mask = 49216 & ~(left_column_mask);
-	uint64_t lower_left_mask = 144959613005987840UL & ~(top_row_mask);
-	uint64_t lower_right_mask = 4665729213955833856UL & ~(top_row_mask | left_column_mask);
+	// uint64_t upper_left_mask = 770;
+	uint64_t upper_left_mask = 69540876599103UL;
+
+	// uint64_t upper_right_mask = 49216 & ~(left_column_mask);
+	uint64_t upper_right_mask = 278163506396412UL & ~(left_column_mask);
+	
+	// uint64_t lower_left_mask = 144959613005987840UL & ~(top_row_mask);
+	uint64_t lower_left_mask = 4557430888798814208UL & ~(top_row_mask);
+	
+	// uint64_t lower_right_mask = 4665729213955833856UL & ~(top_row_mask | left_column_mask);
+	uint64_t lower_right_mask = 18229723555195256832UL & ~(top_row_mask | left_column_mask);
+
+	uint64_t upper_left_quadrant_bits = encode_tile_to_uint(uv) & upper_left_mask;
+	uint64_t upper_right_quadrant_bits = encode_tile_to_uint(uv + ivec2(7, 0)) & upper_right_mask;
+	uint64_t lower_left_quadrant_bits = encode_tile_to_uint(uv + ivec2(0, 7)) & lower_left_mask;
+	uint64_t lower_right_quadrant_bits = encode_tile_to_uint(uv + ivec2(7, 7)) & lower_right_mask;
 
 	uint neighbor_count = 0;
-	int neighborhood_radius = 1;
-
-
-	uint64_t upper_left_quadrant_bits = 0;
-
-	// Upper Left Quadrant
-	for (int y = -1; y <= 0; ++y) {
-		for (int x = -1; x <= 0; ++x) {
-			uint bit_index = -x + -y * 8; // Convert to 1D index in 64 bit uint
-
-			ivec2 world_coords = uv + ivec2(x, y);
-
-			uint64_t cell_value = int(imageLoad(_AutomatonFrom, world_coords % 512).r);
-			
-			upper_left_quadrant_bits |= (cell_value << bit_index); // Shift cell value to bit index and add it to quadrant bit string
-		}
-	}
-
-	upper_left_quadrant_bits = upper_left_quadrant_bits & upper_left_mask; // Apply neighborhood mask
-
-	// Sum bits in string to get active cell count of quadrant
-	while (upper_left_quadrant_bits != 0) {
-		neighbor_count += uint(upper_left_quadrant_bits & 1);
-
-		upper_left_quadrant_bits = upper_left_quadrant_bits >> 1;
-	}
-
-
-	uint64_t upper_right_quadrant_bits = 0;
-
-	// Upper Right Quadrant
-	for (int y = -1; y <= 0; ++y) {
-		for (int x = 0; x <= 1; ++x) {
-			uint bit_index = (7 - x) + -y * 8; // Convert to 1D index in 64 bit uint
-
-			ivec2 world_coords = uv + ivec2(x, y);
-
-			uint64_t cell_value = int(imageLoad(_AutomatonFrom, world_coords % 512).r);
-			
-			upper_right_quadrant_bits |= (cell_value << bit_index); // Shift cell value to bit index and add it to quadrant bit string
-		}
-	}
-
-	upper_right_quadrant_bits &= upper_right_mask;
-
-	// Sum bits in string to get active cell count of quadrant
-	while (upper_right_quadrant_bits != 0) {
-		neighbor_count += uint(upper_right_quadrant_bits & 1);
-
-		upper_right_quadrant_bits = upper_right_quadrant_bits >> 1;
-	}
-
-	
-
-
-	uint64_t lower_left_quadrant_bits = 0;
-
-	// lower Left Quadrant
-	for (int y = 0; y <= 1; ++y) {
-		for (int x = -1; x <= 0; ++x) {
-			uint bit_index = -x + (7 - y) * 8; // Convert to 1D index in 64 bit uint
-
-			ivec2 world_coords = uv + ivec2(x, y);
-
-			uint64_t cell_value = int(imageLoad(_AutomatonFrom, world_coords % 512).r);
-			
-			lower_left_quadrant_bits |= (cell_value << bit_index); // Shift cell value to bit index and add it to quadrant bit string
-		}
-	}
-
-	lower_left_quadrant_bits &= lower_left_mask;
-
-	// Sum bits in string to get active cell count of quadrant
-	while (lower_left_quadrant_bits != 0) {
-		neighbor_count += uint(lower_left_quadrant_bits & 1);
-
-		lower_left_quadrant_bits = lower_left_quadrant_bits >> 1;
-	}
-
-	uint64_t lower_right_quadrant_bits = 0;
-
-	// lower Right Quadrant
-	for (int y = 0; y <= 1; ++y) {
-		for (int x = 0; x <= 1; ++x) {
-			uint bit_index = (7 - x) + (7 - y) * 8; // Convert to 1D index in 64 bit uint
-
-			ivec2 world_coords = uv + ivec2(x, y);
-
-			uint64_t cell_value = int(imageLoad(_AutomatonFrom, world_coords % 512).r);
-			
-			lower_right_quadrant_bits |= (cell_value << bit_index); // Shift cell value to bit index and add it to quadrant bit string
-		}
-	}
-
-	lower_right_quadrant_bits &= lower_right_mask;
-
-	// Sum bits in string to get active cell count of quadrant
-	while (lower_right_quadrant_bits != 0) {
-		neighbor_count += uint(lower_right_quadrant_bits & 1);
-
-		lower_right_quadrant_bits = lower_right_quadrant_bits >> 1;
-	}
-
-
-	// Upper Left
-	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2(-1, -1) % 512)).r);
-	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2( 0, -1) % 512)).r);
-	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2(-1,  0) % 512)).r);
-
-	// Upper Right
-	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2( 0, -1) % 512)).r);
-	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2( 1, -1) % 512)).r);
-	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2( 1,  0) % 512)).r);
-
-	// Center
-	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2( 0,  0) % 512)).r);
-
-	// Lower Left
-	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2(-1,  0) % 512)).r);
-	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2(-1,  1) % 512)).r);
-	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2( 0,  1) % 512)).r);
-
-	// Lower Right
-	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2( 1,  0) % 512)).r);
-	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2( 0,  1) % 512)).r);
-	// neighbor_count += uint(imageLoad(_AutomatonFrom, (uv + ivec2( 1,  1) % 512)).r);
+	neighbor_count += sum_uint_bits(upper_left_quadrant_bits);
+	neighbor_count += sum_uint_bits(upper_right_quadrant_bits);
+	neighbor_count += sum_uint_bits(lower_left_quadrant_bits);
+	neighbor_count += sum_uint_bits(lower_right_quadrant_bits);
 
 
 	// for (int x = -neighborhood_radius; x <= neighborhood_radius; ++x) {
@@ -193,13 +113,13 @@ void Automaton() {
 	// 	}
 	// }
 
-	if (neighbor_count <= 1) cell = 0;
-	if (neighbor_count == 3) cell = 1;
-	if (neighbor_count >= 4) cell = 0;
+	// if (neighbor_count <= 1) cell = 0;
+	// if (neighbor_count == 3) cell = 1;
+	// if (neighbor_count >= 4) cell = 0;
 	
-	// if (neighbor_count <= 33) cell = 0;
-	// if (34 <= neighbor_count && neighbor_count <= 45) cell = 1;
-	// if (58 <= neighbor_count && neighbor_count <= 121) cell = 0;
+	if (neighbor_count <= 33) cell = 0;
+	if (34 <= neighbor_count && neighbor_count <= 45) cell = 1;
+	if (58 <= neighbor_count && neighbor_count <= 121) cell = 0;
 
 	imageStore(_AutomatonTo, uv, vec4(cell));
 }
