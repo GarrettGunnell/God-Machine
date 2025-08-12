@@ -119,13 +119,13 @@ void Automaton() {
 	// 	}
 	// }
 
-	if (neighbor_count <= 1) cell = 0;
-	if (neighbor_count == 3) cell = 1;
-	if (neighbor_count >= 4) cell = 0;
+	// if (neighbor_count <= 1) cell = 0;
+	// if (neighbor_count == 3) cell = 1;
+	// if (neighbor_count >= 4) cell = 0;
 	
-	// if (neighbor_count <= 33) cell = 0;
-	// if (34 <= neighbor_count && neighbor_count <= 45) cell = 1;
-	// if (58 <= neighbor_count && neighbor_count <= 121) cell = 0;
+	if (neighbor_count <= 33) cell = 0;
+	if (34 <= neighbor_count && neighbor_count <= 45) cell = 1;
+	if (58 <= neighbor_count && neighbor_count <= 121) cell = 0;
 
 	imageStore(_AutomatonTo, uv, vec4(cell));
 }

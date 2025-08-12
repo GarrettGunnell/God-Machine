@@ -50,13 +50,57 @@ func encode_grid_to_neighborhood_bytes() -> void:
 		byte_array.encode_u8(y, byte_string.bin_to_int())
 
 
-	var full_byte_string = ""
-	for i in range(0, 8): 
-		print(byte_strings[7 - i] + " -> " + str(byte_strings[7 - i].bin_to_int()))
+	# Top Right Quadrant
+	byte_strings.clear()
+	for y in range(0, 8):
+		var byte_string = ""
+		for x in range(0, 8):
+			var grid_coord = Vector2i(x, -y)
 
-		full_byte_string += byte_strings[7 - i]
+			var cell = grid.get_cell_atlas_coords(grid_coord).x
+			
+			byte_string += "0" if cell == 0 else "1"
 
-	print(PackedInt64Array(byte_strings))
+		
+		byte_strings.append(byte_string)
+		neighborhood.encode_quadrant_byte(neighborhood.Quadrant.UPPER_RIGHT, byte_string.bin_to_int(), y)
+		byte_array.encode_u8(y, byte_string.bin_to_int())
+
+	# Lower Left Quadrant
+	byte_strings.clear()
+	for y in range(-7, 1):
+		var byte_string = ""
+		for x in range(-7, 1):
+			var grid_coord = Vector2i(x, -y)
+
+			var cell = grid.get_cell_atlas_coords(grid_coord).x
+			
+			byte_string += "0" if cell == 0 else "1"
+
+		
+		byte_strings.append(byte_string)
+		neighborhood.encode_quadrant_byte(neighborhood.Quadrant.LOWER_LEFT, byte_string.bin_to_int(), y + 7)
+		byte_array.encode_u8(y + 7, byte_string.bin_to_int())
+
+	# Lower Right Quadrant
+	byte_strings.clear()
+	for y in range(-7, 1):
+		var byte_string = ""
+		for x in range(0, 8):
+			var grid_coord = Vector2i(x, -y)
+
+			var cell = grid.get_cell_atlas_coords(grid_coord).x
+			
+			byte_string += "0" if cell == 0 else "1"
+
+		
+		byte_strings.append(byte_string)
+		neighborhood.encode_quadrant_byte(neighborhood.Quadrant.LOWER_RIGHT, byte_string.bin_to_int(), y + 7)
+		byte_array.encode_u8(y + 7, byte_string.bin_to_int())
+
+
+	for i in range(0, 8): print(byte_strings[7 - i])
+
 	print(byte_array)
 	print(neighborhood.get_neighborhood_bytes())
 
