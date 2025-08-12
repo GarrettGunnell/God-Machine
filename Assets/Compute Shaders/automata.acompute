@@ -14,8 +14,10 @@ layout(binding = 1) uniform UniformBufferObject {
 };
 
 layout(push_constant, std430) uniform Params {
-	vec2 raster_size;
-	vec2 seeds;
+	uint64_t _UpperLeftMask;
+	uint64_t _UpperRightMask;
+	uint64_t _LowerLeftMask;
+	uint64_t _LowerRightMask;
 };
 
 float pseudo(vec2 v) {
@@ -26,8 +28,8 @@ float pseudo(vec2 v) {
 [numthreads(8, 8, 1)]
 void Seed() {
 	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
-	ivec2 size = ivec2(raster_size);
-	if (uv.x >= size.x || uv.y >= size.y) return;
+
+	vec2 seeds = vec2(0.0, 0.0);
 
 	float seed = pseudo(vec2(float(uv.x) * 0.1 + seeds.x, float(uv.y) * 0.1 + seeds.x * 3));
 
@@ -70,25 +72,29 @@ uint sum_uint_bits(uint64_t i) {
 [numthreads(8, 8, 1)]
 void Automaton() {
 	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
-	ivec2 size = ivec2(raster_size);
-	if (uv.x >= size.x || uv.y >= size.y) return;
 
 	int cell = int(imageLoad(_AutomatonFrom, uv).r);
 	
 	uint64_t top_row_mask = 18374686479671623680UL;
 	uint64_t left_column_mask = 9259542123273814144UL;
 
+	// GAME OF LIFE
 	// uint64_t upper_left_mask = 770;
-	uint64_t upper_left_mask = 69540876599103UL;
-
 	// uint64_t upper_right_mask = 49216 & ~(left_column_mask);
-	uint64_t upper_right_mask = 278163506396412UL & ~(left_column_mask);
-	
 	// uint64_t lower_left_mask = 144959613005987840UL & ~(top_row_mask);
-	uint64_t lower_left_mask = 4557430888798814208UL & ~(top_row_mask);
-	
 	// uint64_t lower_right_mask = 4665729213955833856UL & ~(top_row_mask | left_column_mask);
-	uint64_t lower_right_mask = 18229723555195256832UL & ~(top_row_mask | left_column_mask);
+
+	// BUGS
+	// uint64_t upper_left_mask = 69540876599103UL;
+	// uint64_t upper_right_mask = 278163506396412UL & ~(left_column_mask);
+	// uint64_t lower_left_mask = 4557430888798814208UL & ~(top_row_mask);
+	// uint64_t lower_right_mask = 18229723555195256832UL & ~(top_row_mask | left_column_mask);
+
+	uint64_t upper_left_mask = _UpperLeftMask;
+	uint64_t upper_right_mask = _UpperRightMask & ~(left_column_mask);
+	uint64_t lower_left_mask = _LowerLeftMask & ~(top_row_mask);
+	uint64_t lower_right_mask = _LowerRightMask & ~(top_row_mask | left_column_mask);
+
 
 	uint64_t upper_left_quadrant_bits = encode_tile_to_uint(uv) & upper_left_mask;
 	uint64_t upper_right_quadrant_bits = encode_tile_to_uint(uv + ivec2(7, 0)) & upper_right_mask;
@@ -102,8 +108,8 @@ void Automaton() {
 	neighbor_count += sum_uint_bits(lower_right_quadrant_bits);
 
 
-	// for (int x = -neighborhood_radius; x <= neighborhood_radius; ++x) {
-	// 	for (int y = -neighborhood_radius; y <= neighborhood_radius; ++y) {
+	// for (int x = -1; x <= 1; ++x) {
+	// 	for (int y = -1; y <= 1; ++y) {
 	// 		if (x == 0 && y == 0) continue;
 
 	// 		ivec2 texcoords = uv + ivec2(x, y);
@@ -113,13 +119,13 @@ void Automaton() {
 	// 	}
 	// }
 
-	// if (neighbor_count <= 1) cell = 0;
-	// if (neighbor_count == 3) cell = 1;
-	// if (neighbor_count >= 4) cell = 0;
+	if (neighbor_count <= 1) cell = 0;
+	if (neighbor_count == 3) cell = 1;
+	if (neighbor_count >= 4) cell = 0;
 	
-	if (neighbor_count <= 33) cell = 0;
-	if (34 <= neighbor_count && neighbor_count <= 45) cell = 1;
-	if (58 <= neighbor_count && neighbor_count <= 121) cell = 0;
+	// if (neighbor_count <= 33) cell = 0;
+	// if (34 <= neighbor_count && neighbor_count <= 45) cell = 1;
+	// if (58 <= neighbor_count && neighbor_count <= 121) cell = 0;
 
 	imageStore(_AutomatonTo, uv, vec4(cell));
 }
@@ -127,9 +133,6 @@ void Automaton() {
 [numthreads(8, 8, 1)]
 void Blit() {
 	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
-	ivec2 size = ivec2(raster_size);
-	
-	if (uv.x >= size.x || uv.y >= size.y) return;
 
 	float automata = imageLoad(_AutomatonTo, uv / 2).r;
 	

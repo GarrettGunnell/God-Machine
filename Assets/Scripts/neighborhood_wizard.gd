@@ -1,12 +1,16 @@
 extends Node
+class_name NeighborhoodWizard
 
 var neighborhood : Neighborhood
 
 var grid : TileMapLayer
 
+var upper_left_quadrant : PackedByteArray
+
 func _ready() -> void:
 	neighborhood = Neighborhood.new()
 	grid = get_node("Grid/Actual Grid")
+	encode_grid_to_neighborhood_bytes()
 
 
 func get_spawn_range() -> Vector2i:
@@ -25,29 +29,39 @@ func add_to_stable_range(v : Vector2i) -> void:
 	neighborhood.add_to_stable_range(v)
 
 
-func encode_grid_to_bit_string() -> void:
-	var bit_string = ""
-	var full_bit_string = ""
+func encode_grid_to_neighborhood_bytes() -> void:
+	var byte_strings = Array()
 	var byte_array = PackedByteArray()
 	byte_array.resize(8)
 
 	# Top Left Quadrant
-	var row = 0;
-	for y in range(-7, 1):
-		bit_string = ""
+	for y in range(0, 8):
+		var byte_string = ""
 		for x in range(-7, 1):
-			var grid_coord = Vector2i(x, y)
+			var grid_coord = Vector2i(x, -y)
 
 			var cell = grid.get_cell_atlas_coords(grid_coord).x
 			
-			bit_string += "0" if cell == 0 else "1"
+			byte_string += "0" if cell == 0 else "1"
 
 		
-		print(bit_string + " -> " + str(bit_string.bin_to_int()))
-		byte_array.encode_u8(row, bit_string.bin_to_int())
-		row += 1
-		full_bit_string += bit_string
+		byte_strings.append(byte_string)
+		neighborhood.encode_quadrant_byte(neighborhood.Quadrant.UPPER_LEFT, byte_string.bin_to_int(), y)
+		byte_array.encode_u8(y, byte_string.bin_to_int())
 
 
+	var full_byte_string = ""
+	for i in range(0, 8): 
+		print(byte_strings[7 - i] + " -> " + str(byte_strings[7 - i].bin_to_int()))
+
+		full_byte_string += byte_strings[7 - i]
+
+	print(PackedInt64Array(byte_strings))
 	print(byte_array)
-	print(full_bit_string)
+	print(neighborhood.get_neighborhood_bytes())
+
+	upper_left_quadrant = PackedByteArray(byte_array)
+
+
+func get_quadrant() -> PackedByteArray:
+	return neighborhood.get_neighborhood_bytes()

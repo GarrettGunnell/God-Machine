@@ -3,6 +3,8 @@ class_name GameMaster
 
 var automata_compositor_effect : CompositorEffect
 
+var neighborhood_wizard : Node
+
 var current_seed : int = 0
 
 func _ready() -> void:
@@ -14,6 +16,9 @@ func _ready() -> void:
 		return
 
 	automata_compositor_effect = environment.compositor.compositor_effects[0]
+
+	neighborhood_wizard = root_node.get_node("Node3D/UI/Neighborhoods/Neighborhood 1")
+	automata_compositor_effect.neighborhood_wizard = neighborhood_wizard
 
 
 func _process(delta: float) -> void:

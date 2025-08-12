@@ -28,6 +28,10 @@ var timer = 0.0
 var current_seed : int = 0
 var needs_seeding = true
 
+var push_constant : PackedByteArray = PackedByteArray()
+
+var neighborhood_wizard : Node
+
 func _init():
 	effect_callback_type = EFFECT_CALLBACK_TYPE_POST_TRANSPARENT
 	rd = RenderingServer.get_rendering_device()
@@ -101,7 +105,10 @@ func _render_callback(p_effect_callback_type, p_render_data):
 		reseed = false
 
 	# Vulkan has a feature known as push constants which are like uniform sets but for very small amounts of data
-	var push_constant : PackedFloat32Array = PackedFloat32Array([size.x, size.y, current_seed, 0.0])
+	push_constant = neighborhood_wizard.get_quadrant()
+	# push_constant = PackedByteArray()
+
+	# push_constant.resize(16)
 	
 	for view in range(render_scene_buffers.get_view_count()):
 		var input_image = render_scene_buffers.get_color_layer(view)
@@ -114,7 +121,7 @@ func _render_callback(p_effect_callback_type, p_render_data):
 		exposure_compute.set_texture(2, previous_generation)
 		exposure_compute.set_texture(3, next_generation)
 		exposure_compute.set_uniform_buffer(1, uniform_array)
-		exposure_compute.set_push_constant(push_constant.to_byte_array())
+		exposure_compute.set_push_constant(push_constant)
 
 		# Dispatch the compute kernel
 		if (needs_seeding):
@@ -139,3 +146,6 @@ func set_seed(new_seed : int):
 
 func get_world_texture() -> RID:
 	return world_texture;
+
+func set_push_constant(buffer : PackedByteArray):
+	push_constant = buffer
