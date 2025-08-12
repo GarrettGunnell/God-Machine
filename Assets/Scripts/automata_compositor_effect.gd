@@ -105,10 +105,10 @@ func _render_callback(p_effect_callback_type, p_render_data):
 		reseed = false
 
 	# Vulkan has a feature known as push constants which are like uniform sets but for very small amounts of data
-	push_constant = neighborhood_wizard.get_quadrant()
-	# push_constant = PackedByteArray()
+	push_constant = PackedByteArray(neighborhood_wizard.get_quadrant())
 
-	# push_constant.resize(16)
+	var rule_ranges = neighborhood_wizard.get_rule_ranges()
+	push_constant.append_array(PackedInt32Array([rule_ranges.x, rule_ranges.y, rule_ranges.z, rule_ranges.w]).to_byte_array())
 	
 	for view in range(render_scene_buffers.get_view_count()):
 		var input_image = render_scene_buffers.get_color_layer(view)

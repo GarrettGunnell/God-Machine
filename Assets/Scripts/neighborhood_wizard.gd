@@ -109,3 +109,9 @@ func encode_grid_to_neighborhood_bytes() -> void:
 
 func get_quadrant() -> PackedByteArray:
 	return neighborhood.get_neighborhood_bytes()
+
+func get_rule_ranges() -> Vector4i:
+	var spawn = neighborhood.get_spawn_range()
+	var stable = neighborhood.get_stable_range()
+
+	return Vector4i(spawn.x, spawn.y, stable.x, stable.y)

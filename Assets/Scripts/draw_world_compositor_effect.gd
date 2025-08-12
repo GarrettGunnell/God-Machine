@@ -146,6 +146,7 @@ func initialize_render_pipelines(framebuffer_format : int) -> void:
 	p_render_pipeline = rd.render_pipeline_create(p_shader, framebuffer_format, vertex_format, rd.RENDER_PRIMITIVE_TRIANGLES, raster_state, RDPipelineMultisampleState.new(), depth_state, blend)
 
 var regenerate = true
+var uniform_buffer_data = Array()
 func _render_callback(_effect_callback_type : int, render_data : RenderData):
 	if not enabled: return
 	if _effect_callback_type != effect_callback_type: return
@@ -178,45 +179,45 @@ func _render_callback(_effect_callback_type : int, render_data : RenderData):
 		p_framebuffer = current_framebuffer
 		initialize_render_pipelines(rd.framebuffer_get_format(p_framebuffer))
 
-	var uniform_buffer_data = Array()
+	if uniform_buffer_data.size() == 0:
+		var model = transform
+		var view = render_scene_data.get_cam_transform().inverse()
+		var projection = render_scene_data.get_view_projection(0)
 
-	var model = transform
-	var view = render_scene_data.get_cam_transform().inverse()
-	var projection = render_scene_data.get_view_projection(0)
-
-	var model_view = Projection(view * model)
-	var MVP = projection * model_view;
+		var model_view = Projection(view * model)
+		var MVP = projection * model_view;
+		
+		for i in range(0,16):
+			uniform_buffer_data.push_back(MVP[i / 4][i % 4])
 	
-	for i in range(0,16):
-		uniform_buffer_data.push_back(MVP[i / 4][i % 4])
-	
 
-	# All of our settings are stored in a single uniform buffer, certainly not the best decision, but it's easy to work with
-	var buffer_bytes : PackedByteArray = PackedFloat32Array(uniform_buffer_data).to_byte_array()
-	var p_uniform_buffer_rid : RID = rd.uniform_buffer_create(buffer_bytes.size(), buffer_bytes)
+		# All of our settings are stored in a single uniform buffer, certainly not the best decision, but it's easy to work with
+		var buffer_bytes : PackedByteArray = PackedFloat32Array(uniform_buffer_data).to_byte_array()
+
+		var p_uniform_buffer_rid : RID = rd.uniform_buffer_create(buffer_bytes.size(), buffer_bytes)
 
 
-	var uniforms = []
-	var uniform_buffer_uniform := RDUniform.new()
-	
-	# The gpu needs to know the layout of the uniform variables, even though we have many variables here on the cpu, they're all in one uniform buffer, and so there is technically only one shader uniform
-	uniform_buffer_uniform.binding = 0
-	uniform_buffer_uniform.uniform_type = rd.UNIFORM_TYPE_UNIFORM_BUFFER
-	uniform_buffer_uniform.add_id(p_uniform_buffer_rid)
-	uniforms.push_back(uniform_buffer_uniform)
+		var uniforms = []
+		var uniform_buffer_uniform := RDUniform.new()
+		
+		# The gpu needs to know the layout of the uniform variables, even though we have many variables here on the cpu, they're all in one uniform buffer, and so there is technically only one shader uniform
+		uniform_buffer_uniform.binding = 0
+		uniform_buffer_uniform.uniform_type = rd.UNIFORM_TYPE_UNIFORM_BUFFER
+		uniform_buffer_uniform.add_id(p_uniform_buffer_rid)
+		uniforms.push_back(uniform_buffer_uniform)
 
-	var world_texture_uniform := RDUniform.new()
-	world_texture_uniform.binding = 1
-	world_texture_uniform.uniform_type = rd.UNIFORM_TYPE_SAMPLER_WITH_TEXTURE
-	world_texture_uniform.add_id(p_sampler_state)
-	world_texture_uniform.add_id(world_texture_rid)
-	uniforms.push_back(world_texture_uniform)
-	
-	# Currently we just free the previously instantiated uniform set and then make a new one, ideally this is only done when the uniform variables change
-	if p_render_pipeline_uniform_set.is_valid():
-		rd.free_rid(p_render_pipeline_uniform_set)
-	
-	p_render_pipeline_uniform_set = rd.uniform_set_create(uniforms, p_shader, 0)
+		var world_texture_uniform := RDUniform.new()
+		world_texture_uniform.binding = 1
+		world_texture_uniform.uniform_type = rd.UNIFORM_TYPE_SAMPLER_WITH_TEXTURE
+		world_texture_uniform.add_id(p_sampler_state)
+		world_texture_uniform.add_id(world_texture_rid)
+		uniforms.push_back(world_texture_uniform)
+		
+		# Currently we just free the previously instantiated uniform set and then make a new one, ideally this is only done when the uniform variables change
+		if p_render_pipeline_uniform_set.is_valid():
+			rd.free_rid(p_render_pipeline_uniform_set)
+		
+		p_render_pipeline_uniform_set = rd.uniform_set_create(uniforms, p_shader, 0)
 
 	# If you frame capture the program with something like NVIDIA NSight you will see this label show up so you can easily see the render time of the terrain
 	rd.draw_command_begin_label("Terrain Mesh", Color(1.0, 1.0, 1.0, 1.0))

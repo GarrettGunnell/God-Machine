@@ -18,6 +18,7 @@ layout(push_constant, std430) uniform Params {
 	uint64_t _UpperRightMask;
 	uint64_t _LowerLeftMask;
 	uint64_t _LowerRightMask;
+	ivec4 _RuleRanges;
 };
 
 float pseudo(vec2 v) {
@@ -122,10 +123,14 @@ void Automaton() {
 	// if (neighbor_count <= 1) cell = 0;
 	// if (neighbor_count == 3) cell = 1;
 	// if (neighbor_count >= 4) cell = 0;
-	
-	if (neighbor_count <= 33) cell = 0;
-	if (34 <= neighbor_count && neighbor_count <= 45) cell = 1;
-	if (58 <= neighbor_count && neighbor_count <= 121) cell = 0;
+
+	if (_RuleRanges.x <= neighbor_count && neighbor_count <= _RuleRanges.y) { // Spawn
+		cell = 1;
+	} else if (_RuleRanges.z <= neighbor_count && neighbor_count <= _RuleRanges.w) { // Stable
+		cell = cell;
+	} else {
+		cell = 0; // RIP
+	}
 
 	imageStore(_AutomatonTo, uv, vec4(cell));
 }
