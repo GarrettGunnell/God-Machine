@@ -47,7 +47,7 @@ needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("1_vlji8")
 pause = false
-update_speed = 0.025
+update_speed = 0.001
 exposure = Vector4(2, 1, 1, 1)
 metadata/_custom_type_script = "uid://drfxlavovcgta"
 
@@ -100,8 +100,8 @@ blend_mode = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_052nx"]
 shader = ExtResource("36_l2vhu")
-shader_parameter/first_color = Color(0.147984, 0.050227, 0.0839159, 1)
-shader_parameter/second_color = Color(0.743183, 0.702316, 0.71273, 1)
+shader_parameter/first_color = Color(0.120647, 0.229811, 0.120427, 1)
+shader_parameter/second_color = Color(0.449922, 0.532924, 0.299953, 1)
 
 [node name="Node3D" type="Node3D"]
 

@@ -103,10 +103,10 @@ func encode_grid_to_neighborhood_bytes() -> void:
 		byte_array.encode_u8(y + 7, byte_string.bin_to_int())
 
 
-	for i in range(0, 8): print(byte_strings[7 - i])
+	# for i in range(0, 8): print(byte_strings[7 - i])
 
-	print(byte_array)
-	print(neighborhood.get_neighborhood_bytes())
+	# print(byte_array)
+	# print(neighborhood.get_neighborhood_bytes())
 
 	upper_left_quadrant = PackedByteArray(byte_array)
 

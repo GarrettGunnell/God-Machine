@@ -9,16 +9,25 @@ layout(rgba8, set = 0, binding = 0) uniform image2D _RenderTarget;
 layout(r16f, set = 0, binding = 2) uniform image2D _AutomatonFrom;
 layout(r16f, set = 0, binding = 3) uniform image2D _AutomatonTo;
 
+struct Neighborhood {
+	uint64_t upper_left_mask;
+	uint64_t upper_right_mask;
+	uint64_t lower_left_mask;
+	uint64_t lower_right_mask;
+};
+
 layout(binding = 1) uniform UniformBufferObject {
-	vec4 _Exposure;
+	ivec4 _RuleRanges;
+	ivec4 _RuleRanges2;
+	ivec4 _RuleRanges3;
+	ivec4 _RuleRanges4;
 };
 
 layout(push_constant, std430) uniform Params {
-	uint64_t _UpperLeftMask;
-	uint64_t _UpperRightMask;
-	uint64_t _LowerLeftMask;
-	uint64_t _LowerRightMask;
-	ivec4 _RuleRanges;
+	Neighborhood _Neighborhood1;
+	Neighborhood _Neighborhood2;
+	Neighborhood _Neighborhood3;
+	Neighborhood _Neighborhood4;
 };
 
 float pseudo(vec2 v) {
@@ -91,22 +100,55 @@ void Automaton() {
 	// uint64_t lower_left_mask = 4557430888798814208UL & ~(top_row_mask);
 	// uint64_t lower_right_mask = 18229723555195256832UL & ~(top_row_mask | left_column_mask);
 
-	uint64_t upper_left_mask = _UpperLeftMask;
-	uint64_t upper_right_mask = _UpperRightMask & ~(left_column_mask);
-	uint64_t lower_left_mask = _LowerLeftMask & ~(top_row_mask);
-	uint64_t lower_right_mask = _LowerRightMask & ~(top_row_mask | left_column_mask);
+	uint64_t upper_left_mask = _Neighborhood1.upper_left_mask;
+	uint64_t upper_right_mask = _Neighborhood1.upper_right_mask & ~(left_column_mask);
+	uint64_t lower_left_mask = _Neighborhood1.lower_left_mask & ~(top_row_mask);
+	uint64_t lower_right_mask = _Neighborhood1.lower_right_mask & ~(top_row_mask | left_column_mask);
+
+	uint64_t upper_left_mask2 = _Neighborhood2.upper_left_mask;
+	uint64_t upper_right_mask2 = _Neighborhood2.upper_right_mask & ~(left_column_mask);
+	uint64_t lower_left_mask2 = _Neighborhood2.lower_left_mask & ~(top_row_mask);
+	uint64_t lower_right_mask2 = _Neighborhood2.lower_right_mask & ~(top_row_mask | left_column_mask);
+
+	uint64_t upper_left_mask3 = _Neighborhood3.upper_left_mask;
+	uint64_t upper_right_mask3 = _Neighborhood3.upper_right_mask & ~(left_column_mask);
+	uint64_t lower_left_mask3 = _Neighborhood3.lower_left_mask & ~(top_row_mask);
+	uint64_t lower_right_mask3 = _Neighborhood3.lower_right_mask & ~(top_row_mask | left_column_mask);
+
+	uint64_t upper_left_mask4 = _Neighborhood4.upper_left_mask;
+	uint64_t upper_right_mask4 = _Neighborhood4.upper_right_mask & ~(left_column_mask);
+	uint64_t lower_left_mask4 = _Neighborhood4.lower_left_mask & ~(top_row_mask);
+	uint64_t lower_right_mask4 = _Neighborhood4.lower_right_mask & ~(top_row_mask | left_column_mask);
 
 
-	uint64_t upper_left_quadrant_bits = encode_tile_to_uint(uv) & upper_left_mask;
-	uint64_t upper_right_quadrant_bits = encode_tile_to_uint(uv + ivec2(7, 0)) & upper_right_mask;
-	uint64_t lower_left_quadrant_bits = encode_tile_to_uint(uv + ivec2(0, 7)) & lower_left_mask;
-	uint64_t lower_right_quadrant_bits = encode_tile_to_uint(uv + ivec2(7, 7)) & lower_right_mask;
+	uint64_t upper_left_quadrant_bits = encode_tile_to_uint(uv);
+	uint64_t upper_right_quadrant_bits = encode_tile_to_uint(uv + ivec2(7, 0));
+	uint64_t lower_left_quadrant_bits = encode_tile_to_uint(uv + ivec2(0, 7));
+	uint64_t lower_right_quadrant_bits = encode_tile_to_uint(uv + ivec2(7, 7));
 
-	uint neighbor_count = 0;
-	neighbor_count += sum_uint_bits(upper_left_quadrant_bits);
-	neighbor_count += sum_uint_bits(upper_right_quadrant_bits);
-	neighbor_count += sum_uint_bits(lower_left_quadrant_bits);
-	neighbor_count += sum_uint_bits(lower_right_quadrant_bits);
+	uint neighbor_count1 = 0;
+	neighbor_count1 += sum_uint_bits(upper_left_quadrant_bits & upper_left_mask);
+	neighbor_count1 += sum_uint_bits(upper_right_quadrant_bits & upper_right_mask);
+	neighbor_count1 += sum_uint_bits(lower_left_quadrant_bits & lower_left_mask);
+	neighbor_count1 += sum_uint_bits(lower_right_quadrant_bits & lower_right_mask);
+	
+	uint neighbor_count2 = 0;
+	neighbor_count2 += sum_uint_bits(upper_left_quadrant_bits & upper_left_mask2);
+	neighbor_count2 += sum_uint_bits(upper_right_quadrant_bits & upper_right_mask2);
+	neighbor_count2 += sum_uint_bits(lower_left_quadrant_bits & lower_left_mask2);
+	neighbor_count2 += sum_uint_bits(lower_right_quadrant_bits & lower_right_mask2);
+	
+	uint neighbor_count3 = 0;
+	neighbor_count3 += sum_uint_bits(upper_left_quadrant_bits & upper_left_mask3);
+	neighbor_count3 += sum_uint_bits(upper_right_quadrant_bits & upper_right_mask3);
+	neighbor_count3 += sum_uint_bits(lower_left_quadrant_bits & lower_left_mask3);
+	neighbor_count3 += sum_uint_bits(lower_right_quadrant_bits & lower_right_mask3);
+
+	uint neighbor_count4 = 0;
+	neighbor_count4 += sum_uint_bits(upper_left_quadrant_bits & upper_left_mask4);
+	neighbor_count4 += sum_uint_bits(upper_right_quadrant_bits & upper_right_mask4);
+	neighbor_count4 += sum_uint_bits(lower_left_quadrant_bits & lower_left_mask4);
+	neighbor_count4 += sum_uint_bits(lower_right_quadrant_bits & lower_right_mask4);
 
 
 	// for (int x = -1; x <= 1; ++x) {
@@ -124,9 +166,34 @@ void Automaton() {
 	// if (neighbor_count == 3) cell = 1;
 	// if (neighbor_count >= 4) cell = 0;
 
-	if (_RuleRanges.x <= neighbor_count && neighbor_count <= _RuleRanges.y) { // Spawn
+
+	if (_RuleRanges.x <= neighbor_count1 && neighbor_count1 <= _RuleRanges.y) { // Spawn
 		cell = 1;
-	} else if (_RuleRanges.z <= neighbor_count && neighbor_count <= _RuleRanges.w) { // Stable
+	} else if (_RuleRanges.z <= neighbor_count1 && neighbor_count1 <= _RuleRanges.w) { // Stable
+		cell = cell;
+	} else {
+		cell = 0; // RIP
+	}
+
+	if (_RuleRanges2.x <= neighbor_count2 && neighbor_count2 <= _RuleRanges2.y) { // Spawn
+		cell = 1;
+	} else if (_RuleRanges2.z <= neighbor_count2 && neighbor_count2 <= _RuleRanges2.w) { // Stable
+		cell = cell;
+	} else {
+		cell = 0; // RIP
+	}
+
+	if (_RuleRanges3.x <= neighbor_count3 && neighbor_count3 <= _RuleRanges3.y) { // Spawn
+		cell = 1;
+	} else if (_RuleRanges3.z <= neighbor_count3 && neighbor_count3 <= _RuleRanges3.w) { // Stable
+		cell = cell;
+	} else {
+		cell = 0; // RIP
+	}
+
+	if (_RuleRanges4.x <= neighbor_count4 && neighbor_count4 <= _RuleRanges4.y) { // Spawn
+		cell = 1;
+	} else if (_RuleRanges4.z <= neighbor_count4 && neighbor_count4 <= _RuleRanges4.w) { // Stable
 		cell = cell;
 	} else {
 		cell = 0; // RIP
@@ -139,7 +206,7 @@ void Automaton() {
 void Blit() {
 	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
 
-	float automata = imageLoad(_AutomatonTo, uv).r;
+	float automata = imageLoad(_AutomatonTo, uv / 2).r;
 	
 	imageStore(_RenderTarget, uv, vec4(automata, 0, 0, 1.0));
 }

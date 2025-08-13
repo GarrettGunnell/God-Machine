@@ -106,17 +106,15 @@ func _render_callback(p_effect_callback_type, p_render_data):
 	var automaton = GameMaster.get_active_automaton()
 	if not automaton: return
 
-	var rule_ranges = automaton.get_rule_ranges()
-	var neighborhood_bytes = automaton.get_neighorhood_bytes().slice(0, 32)
-	
-	push_constant.append_array(neighborhood_bytes)
-	push_constant.append_array(PackedInt32Array([rule_ranges[0], rule_ranges[1], rule_ranges[2], rule_ranges[3]]).to_byte_array())
+	# print("neighborhood_bytes: ")
+	# print(neighborhood_bytes)
+	push_constant.append_array(automaton.get_neighorhood_bytes())
 	
 	# print(push_constant)
 
 	for view in range(render_scene_buffers.get_view_count()):
 		# Pack the exposure vector into a byte array
-		var uniform_array = PackedFloat32Array([exposure.x, exposure.y, exposure.z, exposure.w]).to_byte_array()
+		var uniform_array = PackedInt32Array(automaton.get_rule_ranges()).to_byte_array()
 
 		# ACompute handles uniform caching under the hood, as long as the exposure value doesn't change or the render target doesn't change, these functions will only do work once
 		exposure_compute.set_texture(0, world_texture)
