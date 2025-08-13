@@ -1,6 +1,8 @@
 extends Node
 class_name NeighborhoodWizard
 
+@export var neighborhood_id = 0
+
 var neighborhood : Neighborhood
 
 var grid : TileMapLayer
@@ -8,7 +10,7 @@ var grid : TileMapLayer
 var upper_left_quadrant : PackedByteArray
 
 func _ready() -> void:
-	neighborhood = Neighborhood.new()
+	neighborhood = GameMaster.get_active_automaton().get_neighborhood(neighborhood_id)
 	grid = get_node("Grid/Actual Grid")
 	encode_grid_to_neighborhood_bytes()
 
@@ -30,6 +32,8 @@ func add_to_stable_range(v : Vector2i) -> void:
 
 
 func encode_grid_to_neighborhood_bytes() -> void:
+	if not grid: return
+	
 	var byte_strings = Array()
 	var byte_array = PackedByteArray()
 	byte_array.resize(8)
@@ -105,6 +109,11 @@ func encode_grid_to_neighborhood_bytes() -> void:
 	print(neighborhood.get_neighborhood_bytes())
 
 	upper_left_quadrant = PackedByteArray(byte_array)
+
+	var robot = Automaton.new() 
+	robot.update_neighorhood(0, neighborhood)
+
+	robot.save_automaton_to_disk()
 
 
 func get_quadrant() -> PackedByteArray:

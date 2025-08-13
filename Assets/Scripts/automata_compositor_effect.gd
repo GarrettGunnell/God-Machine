@@ -28,10 +28,6 @@ var timer = 0.0
 var current_seed : int = 0
 var needs_seeding = true
 
-var push_constant : PackedByteArray = PackedByteArray()
-
-var neighborhood_wizard : Node
-
 func _init():
 	effect_callback_type = EFFECT_CALLBACK_TYPE_POST_TRANSPARENT
 	rd = RenderingServer.get_rendering_device()
@@ -39,7 +35,7 @@ func _init():
 	# To make use of an existing ACompute shader we use its filename to access it, in this case, the example compute shader file is 'exposure_example.acompute'
 	exposure_compute = ACompute.new('automata')
 
-	var automaton_resolution = 512
+	var automaton_resolution = 1024
 
 	var automaton_format : RDTextureFormat = RDTextureFormat.new()
 
@@ -100,19 +96,25 @@ func _render_callback(p_effect_callback_type, p_render_data):
 	var y_groups = (size.y - 1) / 8 + 1
 	var z_groups = 1
 
-	if (reseed):
+	if (GameMaster.get_reseed()):
 		needs_seeding = true
-		reseed = false
+		GameMaster.finish_reseed()
 
 	# Vulkan has a feature known as push constants which are like uniform sets but for very small amounts of data
-	push_constant = PackedByteArray(neighborhood_wizard.get_quadrant())
-
-	var rule_ranges = neighborhood_wizard.get_rule_ranges()
-	push_constant.append_array(PackedInt32Array([rule_ranges.x, rule_ranges.y, rule_ranges.z, rule_ranges.w]).to_byte_array())
+	var push_constant := PackedByteArray()
 	
-	for view in range(render_scene_buffers.get_view_count()):
-		var input_image = render_scene_buffers.get_color_layer(view)
+	var automaton = GameMaster.get_active_automaton()
+	if not automaton: return
 
+	var rule_ranges = automaton.get_rule_ranges()
+	var neighborhood_bytes = automaton.get_neighorhood_bytes().slice(0, 32)
+	
+	push_constant.append_array(neighborhood_bytes)
+	push_constant.append_array(PackedInt32Array([rule_ranges[0], rule_ranges[1], rule_ranges[2], rule_ranges[3]]).to_byte_array())
+	
+	# print(push_constant)
+
+	for view in range(render_scene_buffers.get_view_count()):
 		# Pack the exposure vector into a byte array
 		var uniform_array = PackedFloat32Array([exposure.x, exposure.y, exposure.z, exposure.w]).to_byte_array()
 
@@ -125,7 +127,7 @@ func _render_callback(p_effect_callback_type, p_render_data):
 
 		# Dispatch the compute kernel
 		if (needs_seeding):
-			exposure_compute.dispatch(0, 512 / 8, 512 / 8, 1)
+			exposure_compute.dispatch(0, 1024 / 8, 1024 / 8, 1)
 			needs_seeding = false
 
 		exposure_compute.dispatch(2, x_groups, y_groups, z_groups)
@@ -133,7 +135,7 @@ func _render_callback(p_effect_callback_type, p_render_data):
 
 		if (timer > update_speed):
 			timer = 0.0
-			exposure_compute.dispatch(1, 512 / 8, 512 / 8, 1)
+			exposure_compute.dispatch(1, 1024 / 8, 1024 / 8, 1)
 
 			var temp : RID = previous_generation
 			previous_generation = next_generation
@@ -146,6 +148,3 @@ func set_seed(new_seed : int):
 
 func get_world_texture() -> RID:
 	return world_texture;
-
-func set_push_constant(buffer : PackedByteArray):
-	push_constant = buffer

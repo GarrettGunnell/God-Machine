@@ -6,9 +6,9 @@ class_name Neighborhood
 
 enum Quadrant { UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT }
 
-var quadrant_strings : Array = Array([[], [], [], []])
+@export var quadrant_strings : Array = Array([[], [], [], []])
 
-var neighborhood_bytes : PackedByteArray = PackedByteArray()
+@export var neighborhood_bytes : PackedByteArray = PackedByteArray()
 
 func _init() -> void:
     neighborhood_bytes.resize(32)

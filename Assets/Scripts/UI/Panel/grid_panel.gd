@@ -41,3 +41,4 @@ func _on_gui_input(event: InputEvent) -> void:
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 			var new_cell_value = 1 if neighborhood_grid.get_cell_atlas_coords(grid_coords).x == 0 else 0
 			neighborhood_grid.set_cell(grid_coords, 1, Vector2i(new_cell_value, 0), 0)
+			get_parent().encode_grid_to_neighborhood_bytes()

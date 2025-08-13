@@ -30,9 +30,9 @@ float pseudo(vec2 v) {
 void Seed() {
 	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
 
-	vec2 seeds = vec2(0.0, 0.0);
+	ivec2 seeds = uv + ivec2(1223, 04112);
 
-	float seed = pseudo(vec2(float(uv.x) * 0.1 + seeds.x, float(uv.y) * 0.1 + seeds.x * 3));
+	float seed = pseudo(vec2(seeds.x * 0.1, seeds.y * 0.1));
 
 	if (seed < 0.75) seed = 0.0;
 	else seed = 1.0;
@@ -49,7 +49,7 @@ uint64_t encode_tile_to_uint(ivec2 uv) {
 			uint bit_index = x + y * 8; // Convert to 1D index in 64 bit uint
 
 			ivec2 world_coords = uv + ivec2(-x, -y);
-			uint64_t cell_value = int(imageLoad(_AutomatonFrom, world_coords % 512).r);
+			uint64_t cell_value = int(imageLoad(_AutomatonFrom, world_coords % 1024).r);
 
 			tile_bits |= (cell_value << bit_index);
 		}
@@ -139,7 +139,7 @@ void Automaton() {
 void Blit() {
 	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
 
-	float automata = imageLoad(_AutomatonTo, uv / 2).r;
+	float automata = imageLoad(_AutomatonTo, uv).r;
 	
 	imageStore(_RenderTarget, uv, vec4(automata, 0, 0, 1.0));
 }

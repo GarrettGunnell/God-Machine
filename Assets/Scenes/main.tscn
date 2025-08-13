@@ -1,6 +1,5 @@
-[gd_scene load_steps=48 format=4 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=47 format=4 uid="uid://cfsgy7huubpok"]
 
-[ext_resource type="Script" uid="uid://djni3vb2o3xa1" path="res://Assets/Scripts/game_master.gd" id="1_ttgh6"]
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_vlji8"]
 [ext_resource type="Script" uid="uid://bjuwof03jt0ds" path="res://Assets/Scripts/draw_world_compositor_effect.gd" id="2_ttgh6"]
 [ext_resource type="Texture2D" uid="uid://blyf4v5v8ognm" path="res://Assets/Textures/UI/frame.png" id="3_4qkp8"]
@@ -48,7 +47,7 @@ needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("1_vlji8")
 pause = false
-update_speed = 0.024
+update_speed = 0.025
 exposure = Vector4(2, 1, 1, 1)
 metadata/_custom_type_script = "uid://drfxlavovcgta"
 
@@ -101,13 +100,10 @@ blend_mode = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_052nx"]
 shader = ExtResource("36_l2vhu")
-shader_parameter/first_color = Color(0.0578907, 0.0888331, 0.132425, 1)
-shader_parameter/second_color = Color(0.590504, 0.610149, 0.645581, 1)
+shader_parameter/first_color = Color(0.147984, 0.050227, 0.0839159, 1)
+shader_parameter/second_color = Color(0.743183, 0.702316, 0.71273, 1)
 
 [node name="Node3D" type="Node3D"]
-
-[node name="Game Master" type="Node" parent="."]
-script = ExtResource("1_ttgh6")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.485)
@@ -315,6 +311,7 @@ script = ExtResource("21_qvima")
 [node name="Neighborhood 2" type="Node2D" parent="UI/Neighborhoods"]
 position = Vector2(420, 0)
 script = ExtResource("4_a8up6")
+neighborhood_id = 1
 
 [node name="Grid" type="Panel" parent="UI/Neighborhoods/Neighborhood 2"]
 offset_left = 28.0
@@ -507,6 +504,7 @@ script = ExtResource("21_qvima")
 [node name="Neighborhood 3" type="Node2D" parent="UI/Neighborhoods"]
 position = Vector2(0, 597)
 script = ExtResource("4_a8up6")
+neighborhood_id = 2
 
 [node name="Grid" type="Panel" parent="UI/Neighborhoods/Neighborhood 3"]
 offset_left = 28.0
@@ -699,6 +697,7 @@ script = ExtResource("21_qvima")
 [node name="Neighborhood 4" type="Node2D" parent="UI/Neighborhoods"]
 position = Vector2(420, 597)
 script = ExtResource("4_a8up6")
+neighborhood_id = 3
 
 [node name="Grid" type="Panel" parent="UI/Neighborhoods/Neighborhood 4"]
 offset_left = 28.0
