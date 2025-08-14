@@ -100,8 +100,8 @@ blend_mode = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_052nx"]
 shader = ExtResource("36_l2vhu")
-shader_parameter/first_color = Color(0.0175723, 0.0851443, 0.0188878, 1)
-shader_parameter/second_color = Color(0.984072, 0.946004, 0.93546, 1)
+shader_parameter/first_color = Color(0.0359937, 0.079438, 0.0354487, 1)
+shader_parameter/second_color = Color(0.840735, 0.526914, 0.15112, 1)
 
 [node name="Node3D" type="Node3D"]
 
@@ -145,7 +145,7 @@ tile_set = SubResource("TileSet_ltoj3")
 modulate = Color(1, 1, 1, 0.0627451)
 z_index = -1
 position = Vector2(182, 183)
-tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAD9/wEAAQABAAAAAAD9/wAAAQABAAAAAAD9////AQABAAAAAAD//wMAAQABAAAAAAAAAAMAAQABAAAAAAABAAMAAQABAAAAAAADAAEAAQABAAAAAAADAAAAAQABAAAAAAADAP//AQABAAAAAAABAP3/AQABAAAAAAAAAP3/AQABAAAAAAD///3/AQABAAAAAAD6/wIAAQABAAAAAAD6/wEAAQABAAAAAAD6/wAAAQABAAAAAAD6////AQABAAAAAAD6//7/AQABAAAAAAD+//r/AQABAAAAAAD///r/AQABAAAAAAAAAPr/AQABAAAAAAABAPr/AQABAAAAAAACAPr/AQABAAAAAAAGAP7/AQABAAAAAAAGAP//AQABAAAAAAAGAAEAAQABAAAAAAAGAAAAAQABAAAAAAAGAAIAAQABAAAAAAD+/wYAAQABAAAAAAD//wYAAQABAAAAAAAAAAYAAQABAAAAAAABAAYAAQABAAAAAAACAAYAAQABAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAA=")
 tile_set = SubResource("TileSet_ltoj3")
 
 [node name="Grid Overlay" type="Sprite2D" parent="UI/Neighborhoods/Neighborhood 1/Grid"]
@@ -188,6 +188,8 @@ offset_right = 134.0
 offset_bottom = 456.0
 mouse_default_cursor_shape = 2
 script = ExtResource("10_xcy2v")
+base_radius = 0.25
+radius_increment = 0.1
 
 [node name="Randomize Button" type="Panel" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 offset_left = 134.0
