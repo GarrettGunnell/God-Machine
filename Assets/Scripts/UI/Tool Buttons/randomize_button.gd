@@ -7,8 +7,12 @@ func _ready() -> void:
 
 func on_pressed() -> void:
 	randomize()
-	for x in range(-7, 8):
-		for y in range(-7, 8):
-			var cell_coord = Vector2i(x, y)
-			var random_cell_value = 1 if randf() > randf() else 0
-			grid.set_cell(cell_coord, 1, Vector2i(random_cell_value, 0), 0)
+	
+	var cell_coord = Vector2i(randi() % 15 - 7, randi() % 15 - 7)
+	grid.set_cell(cell_coord, 1, Vector2i(1, 0), 0)
+
+func on_alternate_pressed() -> void:
+	randomize()
+	
+	var cell_coord = Vector2i(randi() % 15 - 7, randi() % 15 - 7)
+	grid.set_cell(cell_coord, 1, Vector2i(0, 0), 0)
