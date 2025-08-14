@@ -31,6 +31,17 @@ func add_to_stable_range(v : Vector2i) -> void:
 	neighborhood.add_to_stable_range(v)
 
 
+func toggle_neighborhood() -> void:
+	if neighborhood.is_enabled():
+		neighborhood.disable()
+	else:
+		neighborhood.enable()
+
+
+func is_enabled() -> bool:
+	return neighborhood.is_enabled()
+
+
 func encode_grid_to_neighborhood_bytes() -> void:
 	if not grid: return
 	

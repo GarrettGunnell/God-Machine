@@ -3,6 +3,8 @@ class_name GridPanel
 
 var hovered = false
 
+var panel_style : StyleBoxFlat
+
 var neighborhood_grid : TileMapLayer
 var cursor_grid : TileMapLayer
 
@@ -11,8 +13,16 @@ var grid_coords : Vector2i
 func _ready() -> void:
 	neighborhood_grid = get_child(0)
 	cursor_grid = get_child(1)
+	panel_style = StyleBoxFlat.new()
+	panel_style.bg_color = Color(1.0, 1.0, 1.0, 0.0)
+	add_theme_stylebox_override("panel", panel_style)	
 	
 func _process(delta: float) -> void:
+	if get_parent().is_enabled():
+		panel_style.bg_color = Color(0.0, 0.0, 0.0, 0.0)
+	else:
+		panel_style.bg_color = Color(0.0, 0.0, 0.0, 0.75)
+
 	if hovered:
 		var mouse_pos = get_global_mouse_position()
 		cursor_grid.clear()

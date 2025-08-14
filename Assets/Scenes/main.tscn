@@ -100,8 +100,8 @@ blend_mode = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_052nx"]
 shader = ExtResource("36_l2vhu")
-shader_parameter/first_color = Color(0.120647, 0.229811, 0.120427, 1)
-shader_parameter/second_color = Color(0.449922, 0.532924, 0.299953, 1)
+shader_parameter/first_color = Color(0.0175723, 0.0851443, 0.0188878, 1)
+shader_parameter/second_color = Color(0.984072, 0.946004, 0.93546, 1)
 
 [node name="Node3D" type="Node3D"]
 
