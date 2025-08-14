@@ -21,6 +21,10 @@ layout(binding = 1) uniform UniformBufferObject {
 	ivec4 _RuleRanges2;
 	ivec4 _RuleRanges3;
 	ivec4 _RuleRanges4;
+	int _Seed;
+	int _Pad1;
+	int _Pad2;
+	int _Pad3;
 };
 
 layout(push_constant, std430) uniform Params {
@@ -39,7 +43,7 @@ float pseudo(vec2 v) {
 void Seed() {
 	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
 
-	ivec2 seeds = uv + ivec2(1223, 04112);
+	ivec2 seeds = uv + ivec2(_Seed, _Seed * 2);
 
 	float seed = pseudo(vec2(seeds.x * 0.1, seeds.y * 0.1));
 
