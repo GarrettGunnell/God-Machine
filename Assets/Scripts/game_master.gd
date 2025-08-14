@@ -8,6 +8,8 @@ var current_seed : int = 0
 
 var needs_reseed : bool = true
 
+var paused = false
+
 func _ready() -> void:
 	active_automaton = Automaton.new()
 
@@ -40,3 +42,10 @@ func set_active_automaton(robot : Automaton) -> void:
 
 func get_active_automaton() -> Automaton:
 	return active_automaton
+
+
+func pause_automaton() -> void:
+	paused = !paused
+
+func is_paused() -> bool:
+	return paused
