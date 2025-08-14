@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=4 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=53 format=4 uid="uid://cfsgy7huubpok"]
 
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_vlji8"]
 [ext_resource type="Script" uid="uid://bjuwof03jt0ds" path="res://Assets/Scripts/draw_world_compositor_effect.gd" id="2_ttgh6"]
@@ -34,7 +34,12 @@
 [ext_resource type="Script" uid="uid://cbxol4ngxuqsp" path="res://Assets/Scripts/UI/new_seed_button.gd" id="17_tm25p"]
 [ext_resource type="Script" uid="uid://bj4mhuarslaom" path="res://Assets/Scripts/UI/Tool Buttons/stable_lower_button.gd" id="19_2whn1"]
 [ext_resource type="Script" uid="uid://dnos8f2lfqq4t" path="res://Assets/Scripts/UI/Tool Buttons/stable_upper_button.gd" id="21_qvima"]
+[ext_resource type="Script" uid="uid://csran21uqb4ik" path="res://Assets/Scenes/right_button.gd" id="28_e7l2l"]
+[ext_resource type="Script" uid="uid://bamfdhdbb8wim" path="res://Assets/Scenes/down_button.gd" id="30_snioh"]
 [ext_resource type="Script" uid="uid://dn6pyw303yaas" path="res://Assets/Scenes/play_button.gd" id="31_l2vhu"]
+[ext_resource type="Script" uid="uid://3nx16dgm23ms" path="res://Assets/Scenes/zoom_button.gd" id="33_052nx"]
+[ext_resource type="Script" uid="uid://frngf0psnuck" path="res://Assets/Scenes/left_button.gd" id="35_sld5i"]
+[ext_resource type="Script" uid="uid://bjimcn3qcxim1" path="res://Assets/Scenes/up_button.gd" id="36_ews5c"]
 [ext_resource type="Shader" uid="uid://bmeyydltsvw3p" path="res://Assets/Shaders/color_palette.gdshader" id="36_l2vhu"]
 
 [sub_resource type="Environment" id="Environment_0xm2m"]
@@ -938,7 +943,7 @@ offset_top = -14.0
 offset_right = 13.5
 offset_bottom = 14.0
 mouse_default_cursor_shape = 2
-script = ExtResource("13_4qkp8")
+script = ExtResource("28_e7l2l")
 
 [node name="Down Button Sprite" type="Sprite2D" parent="UI"]
 texture_filter = 1
@@ -953,7 +958,7 @@ offset_top = -14.0
 offset_right = 13.5
 offset_bottom = 13.0
 mouse_default_cursor_shape = 2
-script = ExtResource("13_4qkp8")
+script = ExtResource("30_snioh")
 
 [node name="Play Button Sprite" type="Sprite2D" parent="UI"]
 texture_filter = 1
@@ -983,7 +988,7 @@ offset_top = -14.0
 offset_right = 13.5
 offset_bottom = 14.0
 mouse_default_cursor_shape = 2
-script = ExtResource("13_4qkp8")
+script = ExtResource("33_052nx")
 
 [node name="Left Button Sprite" type="Sprite2D" parent="UI"]
 texture_filter = 1
@@ -998,7 +1003,7 @@ offset_top = -14.0
 offset_right = 13.5
 offset_bottom = 14.0
 mouse_default_cursor_shape = 2
-script = ExtResource("13_4qkp8")
+script = ExtResource("35_sld5i")
 
 [node name="Up Button Sprite" type="Sprite2D" parent="UI"]
 texture_filter = 1
@@ -1013,7 +1018,7 @@ offset_top = -14.0
 offset_right = 13.5
 offset_bottom = 14.0
 mouse_default_cursor_shape = 2
-script = ExtResource("13_4qkp8")
+script = ExtResource("36_ews5c")
 
 [node name="Reseed Button" type="Panel" parent="UI"]
 offset_left = 223.0

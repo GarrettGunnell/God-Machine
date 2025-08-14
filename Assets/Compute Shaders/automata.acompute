@@ -23,8 +23,7 @@ layout(binding = 1) uniform UniformBufferObject {
 	ivec4 _RuleRanges4;
 	int _Seed;
 	int _Zoom;
-	int _Pad2;
-	int _Pad3;
+	ivec2 _Offset;
 };
 
 layout(push_constant, std430) uniform Params {
@@ -210,7 +209,7 @@ void Automaton() {
 void Blit() {
 	ivec2 uv = ivec2(gl_GlobalInvocationID.xy);
 
-	float automata = imageLoad(_AutomatonFrom, uv / _Zoom).r;
+	float automata = imageLoad(_AutomatonFrom, ((uv + _Offset * _Zoom) / _Zoom) % 1024).r;
 	
 	imageStore(_RenderTarget, uv, vec4(automata, 0, 0, 1.0));
 }

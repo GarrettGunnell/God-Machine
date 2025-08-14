@@ -10,6 +10,11 @@ var needs_reseed : bool = true
 
 var paused = false
 
+var zoom_setting = 0
+var zoom_settings : Array = Array([1, 2, 4, 8])
+
+var world_offset : Vector2i = Vector2i.ZERO
+
 func _ready() -> void:
 	active_automaton = Automaton.new()
 
@@ -49,3 +54,21 @@ func pause_automaton() -> void:
 
 func is_paused() -> bool:
 	return paused
+
+func cycle_zoom() -> void:
+	zoom_setting += 1
+	if zoom_setting > zoom_settings.size() - 1: zoom_setting = 0
+
+func get_zoom_setting() -> int:
+	return zoom_settings[zoom_setting]
+
+
+func get_horizontal_offset() -> int:
+	return world_offset.x
+
+func get_vertical_offset() -> int:
+	return world_offset.y
+
+
+func move(v : Vector2i) -> void:
+	world_offset += v

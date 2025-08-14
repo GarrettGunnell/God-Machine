@@ -115,7 +115,7 @@ func _render_callback(p_effect_callback_type, p_render_data):
 	for view in range(render_scene_buffers.get_view_count()):
 		# Pack the exposure vector into a byte array
 		var uniform_array = PackedInt32Array(automaton.get_rule_ranges())
-		uniform_array.append_array([GameMaster.get_seed(), 1, 0, 0])
+		uniform_array.append_array([GameMaster.get_seed(), GameMaster.get_zoom_setting(), GameMaster.get_horizontal_offset(), GameMaster.get_vertical_offset()])
 
 		# ACompute handles uniform caching under the hood, as long as the exposure value doesn't change or the render target doesn't change, these functions will only do work once
 		exposure_compute.set_texture(0, world_texture)
