@@ -27,9 +27,15 @@ func get_stable_range() -> Vector2i:
 func add_to_spawn_range(v : Vector2i) -> void:
 	spawn_range = spawn_range + v
 
+	spawn_range.x = max(0, min(spawn_range.x, 255))
+	spawn_range.y = max(0, min(spawn_range.y, 255))
+
 
 func add_to_stable_range(v : Vector2i) -> void:
 	stable_range = stable_range + v
+
+	stable_range.x = max(0, min(stable_range.x, 255))
+	stable_range.y = max(0, min(stable_range.y, 255))
 	
 
 func set_quadrant_strings(quadrant : Quadrant, byte_strings : Array) -> void:
