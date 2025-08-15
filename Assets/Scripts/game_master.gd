@@ -33,24 +33,24 @@ func _ready() -> void:
 		var error = DirAccess.make_dir_absolute(automaton_cache_path)
 		if error != OK: print(error)
 
-	for i in range(100):
-		var automaton_template = Automaton.new()
+		for i in range(100):
+			var automaton_template = Automaton.new()
 
-		# Game Of Life Template
-		automaton_template.get_neighborhood(0).set_ranges(Vector4i(3, 3, 2, 3))
-		automaton_template.get_neighborhood(0).set_quadrant_strings(Neighborhood.Quadrant.UPPER_LEFT, ["00000010", "00000011", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"])
-		automaton_template.get_neighborhood(0).set_quadrant_strings(Neighborhood.Quadrant.UPPER_RIGHT, ["01000000", "11000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"])
-		automaton_template.get_neighborhood(0).set_quadrant_strings(Neighborhood.Quadrant.LOWER_LEFT, ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000011", "00000010"])
-		automaton_template.get_neighborhood(0).set_quadrant_strings(Neighborhood.Quadrant.LOWER_RIGHT, ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "11000000", "01000000"])
-		automaton_template.get_neighborhood(1).disable()
-		automaton_template.get_neighborhood(2).disable()
-		automaton_template.get_neighborhood(3).disable()
+			# Game Of Life Template
+			automaton_template.get_neighborhood(0).set_ranges(Vector4i(3, 3, 2, 3))
+			automaton_template.get_neighborhood(0).set_quadrant_strings(Neighborhood.Quadrant.UPPER_LEFT, ["00000010", "00000011", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"])
+			automaton_template.get_neighborhood(0).set_quadrant_strings(Neighborhood.Quadrant.UPPER_RIGHT, ["01000000", "11000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"])
+			automaton_template.get_neighborhood(0).set_quadrant_strings(Neighborhood.Quadrant.LOWER_LEFT, ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000011", "00000010"])
+			automaton_template.get_neighborhood(0).set_quadrant_strings(Neighborhood.Quadrant.LOWER_RIGHT, ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "11000000", "01000000"])
+			automaton_template.get_neighborhood(1).disable()
+			automaton_template.get_neighborhood(2).disable()
+			automaton_template.get_neighborhood(3).disable()
 
-		automaton_template.name = "CUSTOM " + str(i).pad_zeros(3)
+			automaton_template.name = "CUSTOM " + str(i).pad_zeros(3)
 
-		var error2 = ResourceSaver.save(automaton_template, "user://automaton_cache/automaton_" + str(i).pad_zeros(3) + ".tres")
+			var error2 = ResourceSaver.save(automaton_template, "user://automaton_cache/automaton_" + str(i).pad_zeros(3) + ".tres")
 
-		if error2 != OK: print(error2)
+			if error2 != OK: print(error2)
 
 
 	for i in range(100):
@@ -120,7 +120,6 @@ func previous_automaton_index() -> void:
 	
 func next_automaton_index() -> void:
 	automaton_index = min(automaton_cache.size() - 1, automaton_index + 1)
-	print(automaton_index)
 
 
 func get_preset_name() -> String:
