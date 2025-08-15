@@ -211,5 +211,5 @@ void Blit() {
 
 	float automata = imageLoad(_AutomatonFrom, ((uv + _Offset * _Zoom) / _Zoom) % 1024).r;
 	
-	imageStore(_RenderTarget, uv, vec4(automata, 0, 0, 1.0));
+	imageStore(_RenderTarget, uv, vec4(automata, automata, automata, 1.0));
 }

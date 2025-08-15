@@ -1,14 +1,11 @@
-@tool
 extends CompositorEffect
 class_name AutomataCompositorEffect
 
-@export var pause = false
+@export var main_menu : bool = false
+
 @export_range(0.001, 0.5) var update_speed = 0.05
 
 var reseed = true
-
-@export_group("Shader Settings")
-@export var exposure = Vector4(2, 1, 1, 1)
 
 var rd : RenderingDevice
 var exposure_compute : ACompute
@@ -27,6 +24,8 @@ var timer = 0.0
 
 var current_seed : int = 0
 var needs_seeding = true
+
+@export var cook_time = 1
 
 func _init():
 	effect_callback_type = EFFECT_CALLBACK_TYPE_POST_TRANSPARENT
@@ -113,12 +112,12 @@ func _render_callback(p_effect_callback_type, p_render_data):
 	# print(push_constant)
 
 	for view in range(render_scene_buffers.get_view_count()):
-		# Pack the exposure vector into a byte array
+		var input_image = render_scene_buffers.get_color_layer(view)
+		
 		var uniform_array = PackedInt32Array(automaton.get_rule_ranges())
-		uniform_array.append_array([GameMaster.get_seed(), GameMaster.get_zoom_setting(), GameMaster.get_horizontal_offset(), GameMaster.get_vertical_offset()])
+		uniform_array.append_array([GameMaster.get_seed(), GameMaster.get_zoom_setting() if not main_menu else 4, GameMaster.get_horizontal_offset(), GameMaster.get_vertical_offset()])
 
-		# ACompute handles uniform caching under the hood, as long as the exposure value doesn't change or the render target doesn't change, these functions will only do work once
-		exposure_compute.set_texture(0, world_texture)
+		exposure_compute.set_texture(0, world_texture if not main_menu else input_image)
 		exposure_compute.set_texture(2, previous_generation)
 		exposure_compute.set_texture(3, next_generation)
 		exposure_compute.set_uniform_buffer(1, uniform_array.to_byte_array())
@@ -129,18 +128,31 @@ func _render_callback(p_effect_callback_type, p_render_data):
 			exposure_compute.dispatch(0, 1024 / 8, 1024 / 8, 1)
 			needs_seeding = false
 
-		exposure_compute.dispatch(2, x_groups, y_groups, z_groups)
-		if (GameMaster.is_paused()): return
+			for i in range(0, cook_time - 1):
+				exposure_compute.dispatch(1, 1024 / 8, 1024 / 8, 1)
+
+				var temp : RID = previous_generation
+				previous_generation = next_generation
+				next_generation = temp
+
+				exposure_compute.set_texture(2, previous_generation)
+				exposure_compute.set_texture(3, next_generation)
+
 
 		if (timer > update_speed):
 			timer = 0.0
+
 			exposure_compute.dispatch(1, 1024 / 8, 1024 / 8, 1)
 
 			var temp : RID = previous_generation
 			previous_generation = next_generation
 			next_generation = temp
 
-		timer += Engine.get_main_loop().root.get_process_delta_time()
+		
+		exposure_compute.dispatch(2, x_groups, y_groups, z_groups)
+
+		if not GameMaster.is_paused():
+			timer += Engine.get_main_loop().root.get_process_delta_time()
 
 func set_seed(new_seed : int):
 	current_seed = new_seed

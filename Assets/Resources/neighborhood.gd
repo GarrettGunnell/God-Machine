@@ -65,6 +65,9 @@ func encode_quadrant_byte(quadrant : Quadrant, value : int, byte_offset : int) -
 
 	neighborhood_bytes.encode_u8(index, value)
 
+func set_neighorhood_bytes(byte_array : PackedByteArray):
+	neighborhood_bytes = byte_array.duplicate()
+
 
 func get_neighborhood_bytes() -> PackedByteArray:
 	return neighborhood_bytes

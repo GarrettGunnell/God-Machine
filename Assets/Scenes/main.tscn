@@ -58,9 +58,9 @@ effect_callback_type = 4
 needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("1_vlji8")
-pause = false
+main_menu = false
 update_speed = 0.05
-exposure = Vector4(2, 1, 1, 1)
+cook_time = 1
 metadata/_custom_type_script = "uid://drfxlavovcgta"
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_h2yge"]
@@ -132,9 +132,9 @@ projection = 1
 environment = SubResource("Environment_0xm2m")
 compositor = SubResource("Compositor_1bvp3")
 
-[node name="UI" type="Node" parent="."]
+[node name="UI" type="Node2D" parent="."]
 
-[node name="Neighborhoods" type="Node" parent="UI"]
+[node name="Neighborhoods" type="Node2D" parent="UI"]
 
 [node name="Neighborhood 1" type="Node2D" parent="UI/Neighborhoods"]
 script = ExtResource("4_a8up6")
@@ -1114,7 +1114,6 @@ script = ExtResource("17_tm25p")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
 material = SubResource("ShaderMaterial_052nx")
 anchors_preset = 15
 anchor_right = 1.0

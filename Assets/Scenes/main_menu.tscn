@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://50jykn4bwujk"]
+
+[ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_fsbqx"]
+
+[sub_resource type="Environment" id="Environment_tanm1"]
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_ig7tw"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("1_fsbqx")
+main_menu = true
+update_speed = 0.05
+cook_time = 1
+metadata/_custom_type_script = "uid://drfxlavovcgta"
+
+[sub_resource type="Compositor" id="Compositor_6qsvb"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_ig7tw")])
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.485)
+projection = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tanm1")
+compositor = SubResource("Compositor_6qsvb")

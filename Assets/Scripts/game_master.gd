@@ -24,6 +24,7 @@ var world_offset : Vector2i = Vector2i.ZERO
 func _ready() -> void:
 	current_seed = randi() % 10000
 	active_automaton = Automaton.new()
+	automaton_cache.clear()
 
 	var automaton_cache_path = "user://automaton_cache"
 
@@ -43,6 +44,8 @@ func _ready() -> void:
 			automaton_template.get_neighborhood(0).set_quadrant_strings(Neighborhood.Quadrant.UPPER_RIGHT, ["01000000", "11000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"])
 			automaton_template.get_neighborhood(0).set_quadrant_strings(Neighborhood.Quadrant.LOWER_LEFT, ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000011", "00000010"])
 			automaton_template.get_neighborhood(0).set_quadrant_strings(Neighborhood.Quadrant.LOWER_RIGHT, ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "11000000", "01000000"])
+			automaton_template.get_neighborhood(0).set_neighorhood_bytes(PackedByteArray([2, 3, 0, 0, 0, 0, 0, 0, 64, 192, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 2, 0, 0, 0, 0, 0, 0, 192, 64]))
+
 			automaton_template.get_neighborhood(1).disable()
 			automaton_template.get_neighborhood(2).disable()
 			automaton_template.get_neighborhood(3).disable()
@@ -112,7 +115,7 @@ func get_vertical_offset() -> int:
 
 
 func move(v : Vector2i) -> void:
-	world_offset += v
+	world_offset += v * 5
 
 
 func previous_automaton_index() -> void:
@@ -137,3 +140,15 @@ func load_automaton_from_preset() -> void:
 	active_automaton.reflect(ResourceLoader.load(automaton_cache[automaton_index].resource_path, "Automaton", ResourceLoader.CACHE_MODE_IGNORE) as Automaton)
 
 	loaded_preset.emit()
+
+
+
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_SPACE:
+			pause_automaton()
+
+		if event.keycode == KEY_R:
+			queue_reseed()
