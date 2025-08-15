@@ -22,6 +22,7 @@ var zoom_settings : Array = Array([1, 2, 4, 8])
 var world_offset : Vector2i = Vector2i.ZERO
 
 func _ready() -> void:
+	current_seed = randi() % 10000
 	active_automaton = Automaton.new()
 
 	var automaton_cache_path = "user://automaton_cache"
