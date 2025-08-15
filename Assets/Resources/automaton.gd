@@ -64,4 +64,6 @@ func reflect(a : Automaton) -> void:
 	self.neighborhoods.clear()
 
 	for i in a.neighborhoods:
-		add_neighborhood(i)
+		var n = Neighborhood.new()
+		n.reflect(i)
+		add_neighborhood(n)

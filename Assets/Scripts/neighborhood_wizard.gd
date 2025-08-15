@@ -97,6 +97,8 @@ func load_neighborhood_to_grid() -> void:
 
 			grid.set_cell(grid_coord, 1, Vector2i(0 if bit == "0" else 1, 0), 0)
 
+	encode_grid_to_neighborhood_bytes()
+
 
 
 func encode_grid_to_neighborhood_bytes() -> void:

@@ -33,6 +33,11 @@ func get_stable_range() -> Vector2i:
 	if not enabled: return Vector2i(0, 255)
 	return stable_range
 
+func set_ranges(v : Vector4i) -> void:
+	spawn_range.x = v.x
+	spawn_range.y = v.y
+	stable_range.x = v.z
+	stable_range.y = v.w
 
 func add_to_spawn_range(v : Vector2i) -> void:
 	spawn_range = spawn_range + v
@@ -72,3 +77,16 @@ func disable() -> void:
 
 func is_enabled() -> bool:
 	return enabled
+
+
+func reflect(n : Neighborhood) -> void:
+	self.enabled = n.enabled
+	self.spawn_range = n.spawn_range
+	self.stable_range = n.stable_range
+
+	self.quadrant_strings[0] = n.quadrant_strings[0].duplicate()
+	self.quadrant_strings[1] = n.quadrant_strings[1].duplicate()
+	self.quadrant_strings[2] = n.quadrant_strings[2].duplicate()
+	self.quadrant_strings[3] = n.quadrant_strings[3].duplicate()
+
+	self.neighborhood_bytes = n.neighborhood_bytes.duplicate()
