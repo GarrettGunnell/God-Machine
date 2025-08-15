@@ -1,6 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://50jykn4bwujk"]
+[gd_scene load_steps=11 format=3 uid="uid://50jykn4bwujk"]
 
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_fsbqx"]
+[ext_resource type="Shader" uid="uid://dfjf6tq1tdr61" path="res://Assets/Scenes/main_menu_logo.gdshader" id="2_fsbqx"]
+[ext_resource type="Texture2D" uid="uid://ck27dmw6p4pwv" path="res://Assets/Textures/UI/logo 4x.png" id="3_tanm1"]
+[ext_resource type="Shader" uid="uid://bmeyydltsvw3p" path="res://Assets/Shaders/color_palette.gdshader" id="4_tanm1"]
+[ext_resource type="AudioStream" uid="uid://c1qdaras5fad6" path="res://Assets/Audio/bgm.mp3" id="5_6qsvb"]
 
 [sub_resource type="Environment" id="Environment_tanm1"]
 
@@ -13,12 +17,23 @@ needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("1_fsbqx")
 main_menu = true
-update_speed = 0.05
-cook_time = 1
+update_speed = 0.02
+cook_time = 20
 metadata/_custom_type_script = "uid://drfxlavovcgta"
 
 [sub_resource type="Compositor" id="Compositor_6qsvb"]
 compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_ig7tw")])
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cbhea"]
+shader = ExtResource("2_fsbqx")
+shader_parameter/logo_texture = ExtResource("3_tanm1")
+shader_parameter/first_color = Color(0.956466, 0.95718, 0.934532, 1)
+shader_parameter/second_color = Color(0.066285, 0.109783, 0.0112395, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6qsvb"]
+shader = ExtResource("4_tanm1")
+shader_parameter/first_color = Color(0.709738, 0.753587, 0.670586, 1)
+shader_parameter/second_color = Color(0.00724959, 0.0692669, 3.00817e-09, 1)
 
 [node name="Node3D" type="Node3D"]
 
@@ -29,3 +44,35 @@ projection = 1
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_tanm1")
 compositor = SubResource("Compositor_6qsvb")
+
+[node name="UI" type="Node2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_cbhea")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 139.735
+offset_bottom = -662.265
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+material = SubResource("ShaderMaterial_6qsvb")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_6qsvb")
+volume_db = -16.562
+autoplay = true

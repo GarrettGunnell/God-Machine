@@ -6,7 +6,7 @@ signal loaded_preset
 
 var automaton_cache = Array()
 
-var automaton_index = 0
+var automaton_index = 2
 
 var active_automaton : Automaton
 
@@ -60,7 +60,7 @@ func _ready() -> void:
 	for i in range(100):
 		automaton_cache.append(ResourceLoader.load("user://automaton_cache/automaton_" + str(i).pad_zeros(3) + ".tres", "Automaton", ResourceLoader.CACHE_MODE_IGNORE) as Automaton)
 
-	active_automaton.reflect(automaton_cache[0])
+	active_automaton.reflect(automaton_cache[automaton_index])
 
 
 func _process(delta: float) -> void:

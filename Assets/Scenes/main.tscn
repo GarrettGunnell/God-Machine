@@ -59,7 +59,7 @@ needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("1_vlji8")
 main_menu = false
-update_speed = 0.05
+update_speed = 0.023
 cook_time = 1
 metadata/_custom_type_script = "uid://drfxlavovcgta"
 
