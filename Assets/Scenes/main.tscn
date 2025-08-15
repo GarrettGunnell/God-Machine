@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=4 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=61 format=4 uid="uid://cfsgy7huubpok"]
 
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_vlji8"]
 [ext_resource type="Script" uid="uid://bjuwof03jt0ds" path="res://Assets/Scripts/draw_world_compositor_effect.gd" id="2_ttgh6"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://bq5kp2dk1xacv" path="res://Assets/Textures/UI/play button.png" id="11_nb11o"]
 [ext_resource type="Texture2D" uid="uid://jn8k8x7o35sv" path="res://Assets/Textures/UI/seed bar.png" id="11_qscjt"]
 [ext_resource type="Script" uid="uid://gmqxxhb6exfc" path="res://Assets/Scripts/UI/Labels/seed_text.gd" id="12_ccmul"]
+[ext_resource type="Texture2D" uid="uid://b3dyfiw4gorvq" path="res://Assets/Textures/UI/toolbar icons.png" id="12_g0ep4"]
 [ext_resource type="Script" uid="uid://n1c7utg00au7" path="res://Assets/Scripts/UI/reseed_button.gd" id="13_4qkp8"]
 [ext_resource type="Script" uid="uid://ln4bvim1l3tx" path="res://Assets/Scripts/UI/Labels/spawn_lower_text.gd" id="14_e0qyk"]
 [ext_resource type="Texture2D" uid="uid://delx4m5jxlmw4" path="res://Assets/Textures/UI/spawn range frame.png" id="14_hlqjr"]
@@ -221,8 +222,8 @@ script = ExtResource("11_dxo86")
 [node name="Tool Bar Sprite" type="Sprite2D" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 z_index = -1
 texture_filter = 1
-position = Vector2(224, 437)
-texture = ExtResource("16_ltoj3")
+position = Vector2(95.5, 437)
+texture = ExtResource("12_g0ep4")
 
 [node name="Spawn Frame" type="Sprite2D" parent="UI/Neighborhoods/Neighborhood 1/Tool Bar"]
 z_index = -1
