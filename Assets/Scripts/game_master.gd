@@ -1,6 +1,12 @@
 @tool
 extends Node
 
+signal loaded_preset
+
+
+var automaton_cache = Array()
+
+var automaton_index = 0
 
 var active_automaton : Automaton
 
@@ -17,6 +23,26 @@ var world_offset : Vector2i = Vector2i.ZERO
 
 func _ready() -> void:
 	active_automaton = Automaton.new()
+
+	var automaton_cache_path = "user://automaton_cache"
+
+	var automaton_dir = DirAccess.open(automaton_cache_path)
+
+	if not automaton_dir:
+		print("Creating automaton cache directory")
+		var error = DirAccess.make_dir_absolute(automaton_cache_path)
+		if error != OK: print(error)
+
+		for i in range(100):
+			error = ResourceSaver.save(Automaton.new(), "user://automaton_cache/automaton_" + str(i).pad_zeros(3) + ".tres")
+
+			if error != OK: print(error)
+
+
+	for i in range(100):
+		automaton_cache.append(ResourceLoader.load("user://automaton_cache/automaton_" + str(i).pad_zeros(3) + ".tres", "Automaton", ResourceLoader.CACHE_MODE_IGNORE) as Automaton)
+
+	active_automaton.reflect(automaton_cache[0])
 
 
 func _process(delta: float) -> void:
@@ -42,7 +68,7 @@ func get_seed() -> int:
 
 
 func set_active_automaton(robot : Automaton) -> void:
-	active_automaton = robot.duplicate()
+	active_automaton = robot.duplicate(true)
 
 
 func get_active_automaton() -> Automaton:
@@ -72,3 +98,28 @@ func get_vertical_offset() -> int:
 
 func move(v : Vector2i) -> void:
 	world_offset += v
+
+
+func previous_automaton_index() -> void:
+	automaton_index = max(0, automaton_index - 1)
+
+	
+func next_automaton_index() -> void:
+	automaton_index = min(automaton_cache.size() - 1, automaton_index + 1)
+	print(automaton_index)
+
+
+func get_preset_name() -> String:
+	return automaton_cache[automaton_index].name
+
+
+func save_active_automaton_to_preset() -> void:
+	var error = ResourceSaver.save(active_automaton.duplicate(true), automaton_cache[automaton_index].resource_path)
+
+	if error != OK: print(error)
+
+
+func load_automaton_from_preset() -> void:
+	active_automaton.reflect(ResourceLoader.load(automaton_cache[automaton_index].resource_path, "Automaton", ResourceLoader.CACHE_MODE_IGNORE) as Automaton)
+
+	loaded_preset.emit()

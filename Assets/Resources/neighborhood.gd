@@ -12,6 +12,16 @@ enum Quadrant { UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT }
 @export var neighborhood_bytes : PackedByteArray = PackedByteArray()
 
 func _init() -> void:
+	var empty_byte_string = "00000000"
+	var empty_byte_strings = Array()
+	empty_byte_strings.resize(8)
+	empty_byte_strings.fill(empty_byte_string)
+
+	set_quadrant_strings(Quadrant.UPPER_LEFT, empty_byte_strings)
+	set_quadrant_strings(Quadrant.UPPER_RIGHT, empty_byte_strings)
+	set_quadrant_strings(Quadrant.LOWER_LEFT, empty_byte_strings)
+	set_quadrant_strings(Quadrant.LOWER_RIGHT, empty_byte_strings)
+
 	neighborhood_bytes.resize(32)
 
 func get_spawn_range() -> Vector2i:
@@ -39,7 +49,11 @@ func add_to_stable_range(v : Vector2i) -> void:
 	
 
 func set_quadrant_strings(quadrant : Quadrant, byte_strings : Array) -> void:
-	quadrant_strings[quadrant] = Array(byte_strings)
+	quadrant_strings[quadrant] = byte_strings.duplicate()
+
+func get_quadrant_strings(quadrant : Quadrant) -> Array:
+	return quadrant_strings[quadrant]
+
 
 func encode_quadrant_byte(quadrant : Quadrant, value : int, byte_offset : int) -> void:
 	var index = quadrant * 8 + byte_offset

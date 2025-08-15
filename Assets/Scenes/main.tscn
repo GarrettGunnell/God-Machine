@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=60 format=4 uid="uid://cfsgy7huubpok"]
 
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_vlji8"]
 [ext_resource type="Script" uid="uid://bjuwof03jt0ds" path="res://Assets/Scripts/draw_world_compositor_effect.gd" id="2_ttgh6"]
@@ -34,13 +34,19 @@
 [ext_resource type="Script" uid="uid://cbxol4ngxuqsp" path="res://Assets/Scripts/UI/new_seed_button.gd" id="17_tm25p"]
 [ext_resource type="Script" uid="uid://bj4mhuarslaom" path="res://Assets/Scripts/UI/Tool Buttons/stable_lower_button.gd" id="19_2whn1"]
 [ext_resource type="Script" uid="uid://dnos8f2lfqq4t" path="res://Assets/Scripts/UI/Tool Buttons/stable_upper_button.gd" id="21_qvima"]
-[ext_resource type="Script" uid="uid://csran21uqb4ik" path="res://Assets/Scenes/right_button.gd" id="28_e7l2l"]
-[ext_resource type="Script" uid="uid://bamfdhdbb8wim" path="res://Assets/Scenes/down_button.gd" id="30_snioh"]
-[ext_resource type="Script" uid="uid://dn6pyw303yaas" path="res://Assets/Scenes/play_button.gd" id="31_l2vhu"]
-[ext_resource type="Script" uid="uid://3nx16dgm23ms" path="res://Assets/Scenes/zoom_button.gd" id="33_052nx"]
-[ext_resource type="Script" uid="uid://frngf0psnuck" path="res://Assets/Scenes/left_button.gd" id="35_sld5i"]
-[ext_resource type="Script" uid="uid://bjimcn3qcxim1" path="res://Assets/Scenes/up_button.gd" id="36_ews5c"]
+[ext_resource type="Texture2D" uid="uid://dmf8hsq7qwcej" path="res://Assets/Textures/UI/automaton name bar.png" id="27_hhkki"]
+[ext_resource type="Script" uid="uid://b8b54r038drj0" path="res://Assets/Scenes/automaton_name_text.gd" id="28_0kfto"]
+[ext_resource type="Script" uid="uid://csran21uqb4ik" path="res://Assets/Scripts/UI/right_button.gd" id="28_e7l2l"]
+[ext_resource type="Script" uid="uid://bamfdhdbb8wim" path="res://Assets/Scripts/UI/down_button.gd" id="30_snioh"]
+[ext_resource type="Script" uid="uid://dn6pyw303yaas" path="res://Assets/Scripts/UI/play_button.gd" id="31_l2vhu"]
+[ext_resource type="Script" uid="uid://3nx16dgm23ms" path="res://Assets/Scripts/UI/zoom_button.gd" id="33_052nx"]
+[ext_resource type="Script" uid="uid://frngf0psnuck" path="res://Assets/Scripts/UI/left_button.gd" id="35_sld5i"]
+[ext_resource type="Script" uid="uid://bjimcn3qcxim1" path="res://Assets/Scripts/UI/up_button.gd" id="36_ews5c"]
 [ext_resource type="Shader" uid="uid://bmeyydltsvw3p" path="res://Assets/Shaders/color_palette.gdshader" id="36_l2vhu"]
+[ext_resource type="Script" uid="uid://crpi3xiph4k3h" path="res://Assets/Scenes/save_button.gd" id="42_lfe4p"]
+[ext_resource type="Script" uid="uid://bgihnnx0yu44j" path="res://Assets/Scenes/load_button.gd" id="43_3awfk"]
+[ext_resource type="Script" uid="uid://crq07m1x6lflo" path="res://Assets/Scenes/previous_preset_button.gd" id="44_m1eu0"]
+[ext_resource type="Script" uid="uid://8a62se707mjg" path="res://Assets/Scenes/next_preset_button.gd" id="44_vjyh1"]
 
 [sub_resource type="Environment" id="Environment_0xm2m"]
 
@@ -101,13 +107,20 @@ multichannel_signed_distance_field = true
 msdf_pixel_range = 0
 msdf_size = 55
 
+[sub_resource type="SystemFont" id="SystemFont_0kfto"]
+font_names = PackedStringArray("Terminus (TTF)")
+hinting = 0
+subpixel_positioning = 0
+multichannel_signed_distance_field = true
+msdf_size = 83
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4qkp8"]
 blend_mode = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_052nx"]
 shader = ExtResource("36_l2vhu")
-shader_parameter/first_color = Color(0.0359937, 0.079438, 0.0354487, 1)
-shader_parameter/second_color = Color(0.840735, 0.526914, 0.15112, 1)
+shader_parameter/first_color = Color(0.0894384, 0.0620982, 0.0170826, 1)
+shader_parameter/second_color = Color(0.82616, 0.878282, 0.883431, 1)
 
 [node name="Node3D" type="Node3D"]
 
@@ -930,6 +943,28 @@ scroll_active = false
 autowrap_mode = 0
 script = ExtResource("12_ccmul")
 
+[node name="Automaton Name Bar" type="Sprite2D" parent="UI/Automaton List"]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(218, 526)
+texture = ExtResource("27_hhkki")
+
+[node name="Automaton Name Text" type="RichTextLabel" parent="UI/Automaton List/Automaton Name Bar"]
+texture_filter = 1
+offset_left = -140.0
+offset_top = -23.0
+offset_right = 140.0
+offset_bottom = 23.0
+theme_override_fonts/normal_font = SubResource("SystemFont_0kfto")
+theme_override_font_sizes/normal_font_size = 44
+bbcode_enabled = true
+text = "[center]GAME OF LIFE[/center]"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("28_0kfto")
+
 [node name="Right Button Sprite" type="Sprite2D" parent="UI"]
 texture_filter = 1
 texture_repeat = 1
@@ -1034,7 +1069,7 @@ offset_top = 462.0
 offset_right = 205.0
 offset_bottom = 503.0
 mouse_default_cursor_shape = 2
-script = ExtResource("13_4qkp8")
+script = ExtResource("42_lfe4p")
 
 [node name="Load Button" type="Panel" parent="UI"]
 offset_left = 230.0
@@ -1042,7 +1077,7 @@ offset_top = 462.0
 offset_right = 273.0
 offset_bottom = 503.0
 mouse_default_cursor_shape = 2
-script = ExtResource("13_4qkp8")
+script = ExtResource("43_3awfk")
 
 [node name="Left Preset Button" type="Panel" parent="UI"]
 offset_left = 41.0
@@ -1050,7 +1085,7 @@ offset_top = 505.0
 offset_right = 77.0
 offset_bottom = 546.0
 mouse_default_cursor_shape = 2
-script = ExtResource("13_4qkp8")
+script = ExtResource("44_m1eu0")
 
 [node name="Right Preset Button" type="Panel" parent="UI"]
 offset_left = 359.0
@@ -1058,7 +1093,7 @@ offset_top = 505.0
 offset_right = 395.0
 offset_bottom = 546.0
 mouse_default_cursor_shape = 2
-script = ExtResource("13_4qkp8")
+script = ExtResource("44_vjyh1")
 
 [node name="New Seed Button" type="Panel" parent="UI"]
 offset_left = 168.0
@@ -1071,6 +1106,7 @@ script = ExtResource("17_tm25p")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 material = SubResource("ShaderMaterial_052nx")
 anchors_preset = 15
 anchor_right = 1.0
