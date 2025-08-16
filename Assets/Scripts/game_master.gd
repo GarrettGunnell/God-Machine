@@ -21,6 +21,9 @@ var zoom_settings : Array = Array([1, 2, 4, 8])
 
 var world_offset : Vector2i = Vector2i.ZERO
 
+# var game_scene = preload("res://Assets/Scenes/main.tscn")
+
+
 func _ready() -> void:
 	current_seed = randi() % 10000
 	active_automaton = Automaton.new()
@@ -142,6 +145,8 @@ func load_automaton_from_preset() -> void:
 	loaded_preset.emit()
 
 
+func start_game() -> void:
+	get_tree().change_scene_to_file("res://Assets/Scenes/main.tscn")
 
 
 

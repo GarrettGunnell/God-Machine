@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=4 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=61 format=4 uid="uid://cfsgy7huubpok"]
 
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_vlji8"]
 [ext_resource type="Script" uid="uid://bjuwof03jt0ds" path="res://Assets/Scripts/draw_world_compositor_effect.gd" id="2_ttgh6"]
@@ -47,6 +47,7 @@
 [ext_resource type="Script" uid="uid://bgihnnx0yu44j" path="res://Assets/Scenes/load_button.gd" id="43_3awfk"]
 [ext_resource type="Script" uid="uid://crq07m1x6lflo" path="res://Assets/Scenes/previous_preset_button.gd" id="44_m1eu0"]
 [ext_resource type="Script" uid="uid://8a62se707mjg" path="res://Assets/Scenes/next_preset_button.gd" id="44_vjyh1"]
+[ext_resource type="AudioStream" uid="uid://cbgnmsbb5cf4x" path="res://Assets/Audio/bgm2.mp3" id="48_g0ep4"]
 
 [sub_resource type="Environment" id="Environment_0xm2m"]
 
@@ -1121,6 +1122,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("48_g0ep4")
+volume_db = -16.562
+autoplay = true
 
 [connection signal="gui_input" from="UI/Neighborhoods/Neighborhood 1/Grid" to="UI/Neighborhoods/Neighborhood 1/Grid" method="_on_gui_input"]
 [connection signal="mouse_entered" from="UI/Neighborhoods/Neighborhood 1/Grid" to="UI/Neighborhoods/Neighborhood 1/Grid" method="_on_mouse_entered"]

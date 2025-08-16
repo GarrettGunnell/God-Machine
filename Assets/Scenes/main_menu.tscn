@@ -1,10 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://50jykn4bwujk"]
+[gd_scene load_steps=18 format=3 uid="uid://50jykn4bwujk"]
 
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_fsbqx"]
 [ext_resource type="Shader" uid="uid://dfjf6tq1tdr61" path="res://Assets/Scenes/main_menu_logo.gdshader" id="2_fsbqx"]
+[ext_resource type="Script" uid="uid://dn6pyw303yaas" path="res://Assets/Scripts/UI/play_button.gd" id="2_shbfh"]
+[ext_resource type="Script" uid="uid://bgndlslbekjfr" path="res://Assets/Scenes/play_game_button.gd" id="2_xkmpe"]
 [ext_resource type="Texture2D" uid="uid://ck27dmw6p4pwv" path="res://Assets/Textures/UI/logo 4x.png" id="3_tanm1"]
 [ext_resource type="Shader" uid="uid://bmeyydltsvw3p" path="res://Assets/Shaders/color_palette.gdshader" id="4_tanm1"]
-[ext_resource type="AudioStream" uid="uid://c1qdaras5fad6" path="res://Assets/Audio/bgm.mp3" id="5_6qsvb"]
+[ext_resource type="AudioStream" uid="uid://cbgnmsbb5cf4x" path="res://Assets/Audio/bgm2.mp3" id="5_6qsvb"]
+[ext_resource type="Texture2D" uid="uid://htll4mmav1ce" path="res://Assets/Textures/UI/play4.png" id="5_hxcs8"]
+[ext_resource type="Texture2D" uid="uid://ctv7c3mevda8l" path="res://Assets/Textures/UI/tutorial button.png" id="6_xkmpe"]
 
 [sub_resource type="Environment" id="Environment_tanm1"]
 
@@ -24,11 +28,26 @@ metadata/_custom_type_script = "uid://drfxlavovcgta"
 [sub_resource type="Compositor" id="Compositor_6qsvb"]
 compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_ig7tw")])
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xkmpe"]
+blend_mode = 2
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cbhea"]
 shader = ExtResource("2_fsbqx")
 shader_parameter/logo_texture = ExtResource("3_tanm1")
 shader_parameter/first_color = Color(0.956466, 0.95718, 0.934532, 1)
 shader_parameter/second_color = Color(0.066285, 0.109783, 0.0112395, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pd3f2"]
+shader = ExtResource("2_fsbqx")
+shader_parameter/logo_texture = ExtResource("5_hxcs8")
+shader_parameter/first_color = Color(0, 0, 0, 1)
+shader_parameter/second_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jkcs5"]
+shader = ExtResource("2_fsbqx")
+shader_parameter/logo_texture = ExtResource("6_xkmpe")
+shader_parameter/first_color = Color(0, 0, 0, 1)
+shader_parameter/second_color = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6qsvb"]
 shader = ExtResource("4_tanm1")
@@ -47,6 +66,28 @@ compositor = SubResource("Compositor_6qsvb")
 
 [node name="UI" type="Node2D" parent="."]
 
+[node name="Play Game Button" type="Panel" parent="UI"]
+z_index = 1
+material = SubResource("CanvasItemMaterial_xkmpe")
+offset_left = 801.0
+offset_top = 565.0
+offset_right = 820.0
+offset_bottom = 581.0
+scale = Vector2(16.869, 6.00736)
+mouse_default_cursor_shape = 2
+script = ExtResource("2_xkmpe")
+
+[node name="Tutorial Button" type="Panel" parent="UI"]
+z_index = 1
+material = SubResource("CanvasItemMaterial_xkmpe")
+offset_left = 648.0
+offset_top = 724.0
+offset_right = 685.0
+offset_bottom = 740.0
+scale = Vector2(16.869, 6.00736)
+mouse_default_cursor_shape = 2
+script = ExtResource("2_shbfh")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
@@ -55,10 +96,49 @@ material = SubResource("ShaderMaterial_cbhea")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 139.735
-offset_bottom = -662.265
+offset_top = 136.005
+offset_bottom = -665.995
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer3"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_pd3f2")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -172.0
+offset_right = -86.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+mouse_filter = 2
+
+[node name="CanvasLayer4" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer4"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_jkcs5")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -332.0
+offset_top = 156.28
+offset_right = -166.0
+offset_bottom = 194.28
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
 mouse_filter = 2
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
@@ -76,3 +156,10 @@ mouse_filter = 2
 stream = ExtResource("5_6qsvb")
 volume_db = -16.562
 autoplay = true
+
+[connection signal="gui_input" from="UI/Play Game Button" to="UI/Play Game Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Play Game Button" to="UI/Play Game Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Play Game Button" to="UI/Play Game Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="UI/Tutorial Button" to="UI/Tutorial Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="UI/Tutorial Button" to="UI/Tutorial Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="UI/Tutorial Button" to="UI/Tutorial Button" method="_on_mouse_exited"]
