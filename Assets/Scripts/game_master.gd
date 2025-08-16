@@ -2,7 +2,9 @@
 extends Node
 
 signal loaded_preset
-
+signal increment_input
+signal decrement_input
+signal hover_input
 
 var automaton_cache = Array()
 
@@ -71,6 +73,7 @@ func _process(delta: float) -> void:
 
 
 func queue_reseed() -> void:
+	increment_input.emit()
 	needs_reseed = true
 
 func get_reseed() -> bool:
@@ -81,6 +84,7 @@ func finish_reseed() -> void:
 
 
 func set_seed(new_seed : int) -> void:
+	increment_input.emit()
 	current_seed = new_seed
 
 
@@ -98,6 +102,8 @@ func get_active_automaton() -> Automaton:
 
 
 func pause_automaton() -> void:
+	if not paused: decrement_input.emit()
+	else: increment_input.emit()
 	paused = !paused
 
 func is_paused() -> bool:
@@ -120,6 +126,9 @@ func get_vertical_offset() -> int:
 
 func move(v : Vector2i) -> void:
 	world_offset += v * 5
+
+func set_automaton_index(i : int) -> void:
+	automaton_index = i
 
 
 func previous_automaton_index() -> void:
@@ -147,7 +156,14 @@ func load_automaton_from_preset() -> void:
 
 
 func start_game() -> void:
+	automaton_index = 0
+	_ready()
 	get_tree().change_scene_to_file("res://Assets/Scenes/main.tscn")
+
+
+func start_tutorial() -> void:
+	tutorial_setup()
+	get_tree().change_scene_to_file("res://Assets/Scenes/tutorial.tscn")
 
 
 func tutorial_setup() -> void:

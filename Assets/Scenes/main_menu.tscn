@@ -1,14 +1,20 @@
-[gd_scene load_steps=18 format=3 uid="uid://50jykn4bwujk"]
+[gd_scene load_steps=24 format=3 uid="uid://50jykn4bwujk"]
 
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_fsbqx"]
-[ext_resource type="Shader" uid="uid://dfjf6tq1tdr61" path="res://Assets/Scenes/main_menu_logo.gdshader" id="2_fsbqx"]
-[ext_resource type="Script" uid="uid://dn6pyw303yaas" path="res://Assets/Scripts/UI/play_button.gd" id="2_shbfh"]
-[ext_resource type="Script" uid="uid://bgndlslbekjfr" path="res://Assets/Scenes/play_game_button.gd" id="2_xkmpe"]
+[ext_resource type="Shader" uid="uid://dfjf6tq1tdr61" path="res://Assets/Shaders/main_menu_logo.gdshader" id="2_fsbqx"]
+[ext_resource type="Script" uid="uid://bgndlslbekjfr" path="res://Assets/Scripts/UI/play_game_button.gd" id="2_xkmpe"]
+[ext_resource type="Script" uid="uid://dwvnsvy8v35mq" path="res://Assets/Scenes/start_tutorial_button.gd" id="3_0youy"]
 [ext_resource type="Texture2D" uid="uid://ck27dmw6p4pwv" path="res://Assets/Textures/UI/logo 4x.png" id="3_tanm1"]
 [ext_resource type="Shader" uid="uid://bmeyydltsvw3p" path="res://Assets/Shaders/color_palette.gdshader" id="4_tanm1"]
-[ext_resource type="AudioStream" uid="uid://cbgnmsbb5cf4x" path="res://Assets/Audio/bgm2.mp3" id="5_6qsvb"]
 [ext_resource type="Texture2D" uid="uid://htll4mmav1ce" path="res://Assets/Textures/UI/play4.png" id="5_hxcs8"]
 [ext_resource type="Texture2D" uid="uid://ctv7c3mevda8l" path="res://Assets/Textures/UI/tutorial button.png" id="6_xkmpe"]
+[ext_resource type="AudioStream" uid="uid://cwclwa6iryeqf" path="res://Assets/Audio/bgm3.mp3" id="9_xkmpe"]
+[ext_resource type="AudioStream" uid="uid://26ko7au7t7ed" path="res://Assets/Audio/left click 2.mp3" id="10_0youy"]
+[ext_resource type="Script" uid="uid://c813c5ts2xint" path="res://Assets/Scripts/UI/left_click_audio.gd" id="11_o6fo6"]
+[ext_resource type="AudioStream" uid="uid://c7q2np1u2hpgm" path="res://Assets/Audio/right click sound.mp3" id="12_m3o7a"]
+[ext_resource type="Script" uid="uid://cfbfopm0wh0rt" path="res://Assets/Scripts/UI/right_click_audio.gd" id="13_s707j"]
+[ext_resource type="AudioStream" uid="uid://d0ddji755mg6q" path="res://Assets/Audio/hover sound.mp3" id="14_00jt8"]
+[ext_resource type="Script" uid="uid://dgmjkkr1d5145" path="res://Assets/Scripts/UI/hover_audio.gd" id="15_wdfnr"]
 
 [sub_resource type="Environment" id="Environment_tanm1"]
 
@@ -87,7 +93,7 @@ offset_right = 685.0
 offset_bottom = 740.0
 scale = Vector2(16.869, 6.00736)
 mouse_default_cursor_shape = 2
-script = ExtResource("2_shbfh")
+script = ExtResource("3_0youy")
 metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -159,9 +165,27 @@ mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_6qsvb")
-volume_db = -16.562
+stream = ExtResource("9_xkmpe")
+volume_db = -3.0
 autoplay = true
+
+[node name="Left Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_0youy")
+volume_db = -6.0
+max_polyphony = 3
+script = ExtResource("11_o6fo6")
+
+[node name="Right Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_m3o7a")
+volume_db = -15.793
+max_polyphony = 3
+script = ExtResource("13_s707j")
+
+[node name="Hover Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_00jt8")
+volume_db = -2.0
+max_polyphony = 5
+script = ExtResource("15_wdfnr")
 
 [connection signal="gui_input" from="UI/Play Game Button" to="UI/Play Game Button" method="_on_gui_input"]
 [connection signal="mouse_entered" from="UI/Play Game Button" to="UI/Play Game Button" method="_on_mouse_entered"]

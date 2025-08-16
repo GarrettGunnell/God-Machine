@@ -16,6 +16,7 @@ func _init() -> void:
 
 
 func _on_mouse_entered() -> void:
+	GameMaster.hover_input.emit()
 	panel_style.bg_color = Color(1.0, 1.0, 1.0, 0.2)
 
 
@@ -39,8 +40,10 @@ func _on_gui_input(event: InputEvent) -> void:
 
 		if event.pressed:
 			if event.button_index == MOUSE_BUTTON_LEFT: 
+				GameMaster.increment_input.emit()
 				on_pressed()
 			if event.button_index == MOUSE_BUTTON_RIGHT: 
+				GameMaster.decrement_input.emit()
 				on_alternate_pressed()
 			
 	if event is InputEventMouseMotion && pressed && draggable:

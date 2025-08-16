@@ -1,8 +1,8 @@
-[gd_scene load_steps=47 format=4 uid="uid://fcc8cpx5ri13"]
+[gd_scene load_steps=53 format=4 uid="uid://fcc8cpx5ri13"]
 
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_4ppop"]
-[ext_resource type="Script" uid="uid://bv7ngik6tjsjc" path="res://Assets/Scenes/slideshow.gd" id="2_1w871"]
-[ext_resource type="Script" uid="uid://bgndlslbekjfr" path="res://Assets/Scenes/play_game_button.gd" id="2_tlord"]
+[ext_resource type="Script" uid="uid://bv7ngik6tjsjc" path="res://Assets/Scripts/slideshow.gd" id="2_1w871"]
+[ext_resource type="Script" uid="uid://bgndlslbekjfr" path="res://Assets/Scripts/UI/play_game_button.gd" id="2_tlord"]
 [ext_resource type="Texture2D" uid="uid://co6teowcqpj5b" path="res://Assets/Textures/Tutorial Slides/slide 1.png" id="2_wywo6"]
 [ext_resource type="Texture2D" uid="uid://bijil3e0201gn" path="res://Assets/Textures/Tutorial Slides/slide 2.png" id="3_oy3kw"]
 [ext_resource type="Texture2D" uid="uid://b30t2dvt1qo08" path="res://Assets/Textures/Tutorial Slides/slide 3.png" id="4_wimws"]
@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://u7cmfxq60fu4" path="res://Assets/Textures/UI/grid.png" id="8_ssaki"]
 [ext_resource type="Shader" uid="uid://bmeyydltsvw3p" path="res://Assets/Shaders/color_palette.gdshader" id="8_wkrhi"]
 [ext_resource type="Script" uid="uid://bulli3xclj2py" path="res://Assets/Scripts/UI/Tool Buttons/power_button.gd" id="9_64lsc"]
-[ext_resource type="AudioStream" uid="uid://cbgnmsbb5cf4x" path="res://Assets/Audio/bgm2.mp3" id="9_vedu2"]
 [ext_resource type="Script" uid="uid://bllcd34ean062" path="res://Assets/Scripts/UI/Tool Buttons/clear_button.gd" id="10_n1iyd"]
 [ext_resource type="Script" uid="uid://tfw2d2tkk7d6" path="res://Assets/Scripts/UI/Tool Buttons/keyboard_button.gd" id="11_nk6qg"]
 [ext_resource type="Script" uid="uid://dgwq34hubjpu7" path="res://Assets/Scripts/UI/Tool Buttons/circle_button.gd" id="12_lh552"]
@@ -36,8 +35,15 @@
 [ext_resource type="Texture2D" uid="uid://f144ca7ncoiu" path="res://Assets/Textures/Tutorial Slides/slide 8.png" id="29_ioof4"]
 [ext_resource type="Script" uid="uid://n1c7utg00au7" path="res://Assets/Scripts/UI/reseed_button.gd" id="31_n1iyd"]
 [ext_resource type="Texture2D" uid="uid://c4xfg8a07ddy4" path="res://Assets/Textures/UI/left slide button.png" id="32_xhr83"]
-[ext_resource type="Script" uid="uid://cglvstu26dupc" path="res://Assets/Scenes/previous_button.gd" id="34_ssaki"]
-[ext_resource type="Script" uid="uid://vqe37s4t7tyf" path="res://Assets/Scenes/next_button.gd" id="35_64lsc"]
+[ext_resource type="Script" uid="uid://cglvstu26dupc" path="res://Assets/Scripts/UI/previous_button.gd" id="34_ssaki"]
+[ext_resource type="Script" uid="uid://vqe37s4t7tyf" path="res://Assets/Scripts/UI/next_button.gd" id="35_64lsc"]
+[ext_resource type="AudioStream" uid="uid://cwclwa6iryeqf" path="res://Assets/Audio/bgm3.mp3" id="38_n1iyd"]
+[ext_resource type="AudioStream" uid="uid://26ko7au7t7ed" path="res://Assets/Audio/left click 2.mp3" id="39_54pdg"]
+[ext_resource type="Script" uid="uid://c813c5ts2xint" path="res://Assets/Scripts/UI/left_click_audio.gd" id="40_qexsy"]
+[ext_resource type="AudioStream" uid="uid://c7q2np1u2hpgm" path="res://Assets/Audio/right click sound.mp3" id="41_2y5xa"]
+[ext_resource type="Script" uid="uid://cfbfopm0wh0rt" path="res://Assets/Scripts/UI/right_click_audio.gd" id="42_p4lsv"]
+[ext_resource type="AudioStream" uid="uid://d0ddji755mg6q" path="res://Assets/Audio/hover sound.mp3" id="43_skjkt"]
+[ext_resource type="Script" uid="uid://dgmjkkr1d5145" path="res://Assets/Scripts/UI/hover_audio.gd" id="44_ys1x2"]
 
 [sub_resource type="Environment" id="Environment_oby5j"]
 
@@ -951,6 +957,7 @@ mouse_default_cursor_shape = 2
 script = ExtResource("24_2o5qy")
 
 [node name="TextureRect" type="TextureRect" parent="Slides/TextureRect7"]
+layout_mode = 0
 offset_left = 1460.0
 offset_top = 768.0
 offset_right = 1546.0
@@ -961,6 +968,7 @@ stretch_mode = 2
 
 [node name="Reseed Button" type="Panel" parent="Slides/TextureRect7"]
 z_index = 1
+layout_mode = 0
 offset_left = 1459.0
 offset_top = 775.0
 offset_right = 1639.0
@@ -1038,9 +1046,27 @@ mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_vedu2")
-volume_db = -16.562
+stream = ExtResource("38_n1iyd")
+volume_db = -3.0
 autoplay = true
+
+[node name="Left Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("39_54pdg")
+volume_db = -6.0
+max_polyphony = 3
+script = ExtResource("40_qexsy")
+
+[node name="Right Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("41_2y5xa")
+volume_db = -15.793
+max_polyphony = 3
+script = ExtResource("42_p4lsv")
+
+[node name="Hover Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("43_skjkt")
+volume_db = -2.0
+max_polyphony = 5
+script = ExtResource("44_ys1x2")
 
 [connection signal="gui_input" from="Slides/TextureRect3/Neighborhood 1/Grid" to="Slides/TextureRect3/Neighborhood 1/Grid" method="_on_gui_input"]
 [connection signal="mouse_entered" from="Slides/TextureRect3/Neighborhood 1/Grid" to="Slides/TextureRect3/Neighborhood 1/Grid" method="_on_mouse_entered"]

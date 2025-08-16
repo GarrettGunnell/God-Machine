@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=4 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=67 format=4 uid="uid://cfsgy7huubpok"]
 
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_vlji8"]
 [ext_resource type="Script" uid="uid://bjuwof03jt0ds" path="res://Assets/Scripts/draw_world_compositor_effect.gd" id="2_ttgh6"]
@@ -35,7 +35,7 @@
 [ext_resource type="Script" uid="uid://bj4mhuarslaom" path="res://Assets/Scripts/UI/Tool Buttons/stable_lower_button.gd" id="19_2whn1"]
 [ext_resource type="Script" uid="uid://dnos8f2lfqq4t" path="res://Assets/Scripts/UI/Tool Buttons/stable_upper_button.gd" id="21_qvima"]
 [ext_resource type="Texture2D" uid="uid://dmf8hsq7qwcej" path="res://Assets/Textures/UI/automaton name bar.png" id="27_hhkki"]
-[ext_resource type="Script" uid="uid://b8b54r038drj0" path="res://Assets/Scenes/automaton_name_text.gd" id="28_0kfto"]
+[ext_resource type="Script" uid="uid://b8b54r038drj0" path="res://Assets/Scripts/UI/Labels/automaton_name_text.gd" id="28_0kfto"]
 [ext_resource type="Script" uid="uid://csran21uqb4ik" path="res://Assets/Scripts/UI/right_button.gd" id="28_e7l2l"]
 [ext_resource type="Script" uid="uid://bamfdhdbb8wim" path="res://Assets/Scripts/UI/down_button.gd" id="30_snioh"]
 [ext_resource type="Script" uid="uid://dn6pyw303yaas" path="res://Assets/Scripts/UI/play_button.gd" id="31_l2vhu"]
@@ -43,11 +43,17 @@
 [ext_resource type="Script" uid="uid://frngf0psnuck" path="res://Assets/Scripts/UI/left_button.gd" id="35_sld5i"]
 [ext_resource type="Script" uid="uid://bjimcn3qcxim1" path="res://Assets/Scripts/UI/up_button.gd" id="36_ews5c"]
 [ext_resource type="Shader" uid="uid://bmeyydltsvw3p" path="res://Assets/Shaders/color_palette.gdshader" id="36_l2vhu"]
-[ext_resource type="Script" uid="uid://crpi3xiph4k3h" path="res://Assets/Scenes/save_button.gd" id="42_lfe4p"]
-[ext_resource type="Script" uid="uid://bgihnnx0yu44j" path="res://Assets/Scenes/load_button.gd" id="43_3awfk"]
-[ext_resource type="Script" uid="uid://crq07m1x6lflo" path="res://Assets/Scenes/previous_preset_button.gd" id="44_m1eu0"]
-[ext_resource type="Script" uid="uid://8a62se707mjg" path="res://Assets/Scenes/next_preset_button.gd" id="44_vjyh1"]
-[ext_resource type="AudioStream" uid="uid://cbgnmsbb5cf4x" path="res://Assets/Audio/bgm2.mp3" id="48_g0ep4"]
+[ext_resource type="Script" uid="uid://crpi3xiph4k3h" path="res://Assets/Scripts/UI/save_button.gd" id="42_lfe4p"]
+[ext_resource type="Script" uid="uid://bgihnnx0yu44j" path="res://Assets/Scripts/UI/load_button.gd" id="43_3awfk"]
+[ext_resource type="Script" uid="uid://crq07m1x6lflo" path="res://Assets/Scripts/UI/previous_preset_button.gd" id="44_m1eu0"]
+[ext_resource type="Script" uid="uid://8a62se707mjg" path="res://Assets/Scripts/UI/next_preset_button.gd" id="44_vjyh1"]
+[ext_resource type="AudioStream" uid="uid://cwclwa6iryeqf" path="res://Assets/Audio/bgm3.mp3" id="48_g0ep4"]
+[ext_resource type="AudioStream" uid="uid://26ko7au7t7ed" path="res://Assets/Audio/left click 2.mp3" id="49_csh63"]
+[ext_resource type="Script" uid="uid://c813c5ts2xint" path="res://Assets/Scripts/UI/left_click_audio.gd" id="50_nj45y"]
+[ext_resource type="AudioStream" uid="uid://c7q2np1u2hpgm" path="res://Assets/Audio/right click sound.mp3" id="51_20dqx"]
+[ext_resource type="Script" uid="uid://cfbfopm0wh0rt" path="res://Assets/Scripts/UI/right_click_audio.gd" id="51_nj45y"]
+[ext_resource type="AudioStream" uid="uid://d0ddji755mg6q" path="res://Assets/Audio/hover sound.mp3" id="53_sitla"]
+[ext_resource type="Script" uid="uid://dgmjkkr1d5145" path="res://Assets/Scripts/UI/hover_audio.gd" id="54_mje4x"]
 
 [sub_resource type="Environment" id="Environment_0xm2m"]
 
@@ -60,8 +66,8 @@ needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("1_vlji8")
 main_menu = false
-update_speed = 0.05
-cook_time = 5
+update_speed = 0.035
+cook_time = 10
 metadata/_custom_type_script = "uid://drfxlavovcgta"
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_h2yge"]
@@ -1125,8 +1131,27 @@ mouse_filter = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("48_g0ep4")
-volume_db = -16.562
+volume_db = -8.0
 autoplay = true
+parameters/looping = true
+
+[node name="Left Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("49_csh63")
+volume_db = -6.0
+max_polyphony = 3
+script = ExtResource("50_nj45y")
+
+[node name="Right Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("51_20dqx")
+volume_db = -15.793
+max_polyphony = 3
+script = ExtResource("51_nj45y")
+
+[node name="Hover Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("53_sitla")
+volume_db = -2.0
+max_polyphony = 5
+script = ExtResource("54_mje4x")
 
 [connection signal="gui_input" from="UI/Neighborhoods/Neighborhood 1/Grid" to="UI/Neighborhoods/Neighborhood 1/Grid" method="_on_gui_input"]
 [connection signal="mouse_entered" from="UI/Neighborhoods/Neighborhood 1/Grid" to="UI/Neighborhoods/Neighborhood 1/Grid" method="_on_mouse_entered"]

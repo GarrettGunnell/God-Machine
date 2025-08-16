@@ -40,4 +40,5 @@ func next_slide() -> void:
 	
 	slides[slide_index].show()
 
-	if slide_index == 1: GameMaster.set_active_automaton(tutorial_automaton)
+	if slide_index == 1: 
+		GameMaster.set_active_automaton(tutorial_automaton)
