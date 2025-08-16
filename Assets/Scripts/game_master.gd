@@ -90,6 +90,7 @@ func get_seed() -> int:
 
 func set_active_automaton(robot : Automaton) -> void:
 	active_automaton = robot.duplicate(true)
+	loaded_preset.emit()
 
 
 func get_active_automaton() -> Automaton:
@@ -147,6 +148,11 @@ func load_automaton_from_preset() -> void:
 
 func start_game() -> void:
 	get_tree().change_scene_to_file("res://Assets/Scenes/main.tscn")
+
+
+func tutorial_setup() -> void:
+	current_seed = 213451
+
 
 
 

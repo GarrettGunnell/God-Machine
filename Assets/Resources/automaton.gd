@@ -13,6 +13,10 @@ func _init() -> void:
 	neighborhoods.append(Neighborhood.new())
 	neighborhoods.append(Neighborhood.new())
 
+	neighborhoods[1].disable()
+	neighborhoods[2].disable()
+	neighborhoods[3].disable()
+
 
 func add_neighborhood(n : Neighborhood) -> void:
 	neighborhoods.append(n.duplicate(true))

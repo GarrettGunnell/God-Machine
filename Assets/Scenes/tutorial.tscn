@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://fcc8cpx5ri13"]
+[gd_scene load_steps=47 format=4 uid="uid://fcc8cpx5ri13"]
 
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_4ppop"]
 [ext_resource type="Script" uid="uid://bv7ngik6tjsjc" path="res://Assets/Scenes/slideshow.gd" id="2_1w871"]
@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://cwchwinllsefv" path="res://Assets/Textures/Tutorial Slides/slide 6.png" id="27_ehy4s"]
 [ext_resource type="Texture2D" uid="uid://dj8gys728ndb3" path="res://Assets/Textures/Tutorial Slides/slide 7.png" id="28_a21j5"]
 [ext_resource type="Texture2D" uid="uid://f144ca7ncoiu" path="res://Assets/Textures/Tutorial Slides/slide 8.png" id="29_ioof4"]
+[ext_resource type="Script" uid="uid://n1c7utg00au7" path="res://Assets/Scripts/UI/reseed_button.gd" id="31_n1iyd"]
 [ext_resource type="Texture2D" uid="uid://c4xfg8a07ddy4" path="res://Assets/Textures/UI/left slide button.png" id="32_xhr83"]
 [ext_resource type="Script" uid="uid://cglvstu26dupc" path="res://Assets/Scenes/previous_button.gd" id="34_ssaki"]
 [ext_resource type="Script" uid="uid://vqe37s4t7tyf" path="res://Assets/Scenes/next_button.gd" id="35_64lsc"]
@@ -949,6 +950,24 @@ offset_bottom = 456.0
 mouse_default_cursor_shape = 2
 script = ExtResource("24_2o5qy")
 
+[node name="TextureRect" type="TextureRect" parent="Slides/TextureRect7"]
+offset_left = 1460.0
+offset_top = 768.0
+offset_right = 1546.0
+offset_bottom = 808.0
+scale = Vector2(2, 2)
+texture = ExtResource("6_4prdx")
+stretch_mode = 2
+
+[node name="Reseed Button" type="Panel" parent="Slides/TextureRect7"]
+z_index = 1
+offset_left = 1459.0
+offset_top = 775.0
+offset_right = 1639.0
+offset_bottom = 837.0
+mouse_default_cursor_shape = 2
+script = ExtResource("31_n1iyd")
+
 [node name="TextureRect8" type="TextureRect" parent="Slides"]
 visible = false
 texture_filter = 1
@@ -967,7 +986,7 @@ scale = Vector2(4, 4)
 texture = ExtResource("6_4prdx")
 stretch_mode = 2
 
-[node name="Previous Button" type="Panel" parent="Slides/TextureRect8"]
+[node name="Play Game Button" type="Panel" parent="Slides/TextureRect8"]
 z_index = 1
 layout_mode = 0
 offset_left = 799.0
@@ -1143,9 +1162,12 @@ autoplay = true
 [connection signal="gui_input" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Stable Upper Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_gui_input"]
 [connection signal="mouse_entered" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Stable Upper Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Stable Upper Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_mouse_exited"]
-[connection signal="gui_input" from="Slides/TextureRect8/Previous Button" to="Slides/TextureRect8/Previous Button" method="_on_gui_input"]
-[connection signal="mouse_entered" from="Slides/TextureRect8/Previous Button" to="Slides/TextureRect8/Previous Button" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Slides/TextureRect8/Previous Button" to="Slides/TextureRect8/Previous Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect7/Reseed Button" to="Slides/TextureRect7/Reseed Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect7/Reseed Button" to="Slides/TextureRect7/Reseed Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect7/Reseed Button" to="Slides/TextureRect7/Reseed Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect8/Play Game Button" to="Slides/TextureRect8/Play Game Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect8/Play Game Button" to="Slides/TextureRect8/Play Game Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect8/Play Game Button" to="Slides/TextureRect8/Play Game Button" method="_on_mouse_exited"]
 [connection signal="gui_input" from="Node2D/Previous Button" to="Node2D/Previous Button" method="_on_gui_input"]
 [connection signal="mouse_entered" from="Node2D/Previous Button" to="Node2D/Previous Button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Node2D/Previous Button" to="Node2D/Previous Button" method="_on_mouse_exited"]
