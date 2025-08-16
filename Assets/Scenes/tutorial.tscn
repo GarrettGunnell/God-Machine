@@ -1,0 +1,1154 @@
+[gd_scene load_steps=46 format=4 uid="uid://fcc8cpx5ri13"]
+
+[ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_4ppop"]
+[ext_resource type="Script" uid="uid://bv7ngik6tjsjc" path="res://Assets/Scenes/slideshow.gd" id="2_1w871"]
+[ext_resource type="Script" uid="uid://bgndlslbekjfr" path="res://Assets/Scenes/play_game_button.gd" id="2_tlord"]
+[ext_resource type="Texture2D" uid="uid://co6teowcqpj5b" path="res://Assets/Textures/Tutorial Slides/slide 1.png" id="2_wywo6"]
+[ext_resource type="Texture2D" uid="uid://bijil3e0201gn" path="res://Assets/Textures/Tutorial Slides/slide 2.png" id="3_oy3kw"]
+[ext_resource type="Texture2D" uid="uid://b30t2dvt1qo08" path="res://Assets/Textures/Tutorial Slides/slide 3.png" id="4_wimws"]
+[ext_resource type="Script" uid="uid://g076xf3kaaym" path="res://Assets/Scripts/neighborhood_wizard.gd" id="5_po508"]
+[ext_resource type="Texture2D" uid="uid://htll4mmav1ce" path="res://Assets/Textures/UI/play4.png" id="6_4prdx"]
+[ext_resource type="Script" uid="uid://bjbolncishmo2" path="res://Assets/Scripts/UI/Panel/grid_panel.gd" id="6_xhr83"]
+[ext_resource type="Texture2D" uid="uid://tn8tv5giqmf8" path="res://Assets/Textures/UI/tile atlas.png" id="7_1w871"]
+[ext_resource type="Texture2D" uid="uid://u7cmfxq60fu4" path="res://Assets/Textures/UI/grid.png" id="8_ssaki"]
+[ext_resource type="Shader" uid="uid://bmeyydltsvw3p" path="res://Assets/Shaders/color_palette.gdshader" id="8_wkrhi"]
+[ext_resource type="Script" uid="uid://bulli3xclj2py" path="res://Assets/Scripts/UI/Tool Buttons/power_button.gd" id="9_64lsc"]
+[ext_resource type="AudioStream" uid="uid://cbgnmsbb5cf4x" path="res://Assets/Audio/bgm2.mp3" id="9_vedu2"]
+[ext_resource type="Script" uid="uid://bllcd34ean062" path="res://Assets/Scripts/UI/Tool Buttons/clear_button.gd" id="10_n1iyd"]
+[ext_resource type="Script" uid="uid://tfw2d2tkk7d6" path="res://Assets/Scripts/UI/Tool Buttons/keyboard_button.gd" id="11_nk6qg"]
+[ext_resource type="Script" uid="uid://dgwq34hubjpu7" path="res://Assets/Scripts/UI/Tool Buttons/circle_button.gd" id="12_lh552"]
+[ext_resource type="Script" uid="uid://b6let06siy3ka" path="res://Assets/Scripts/UI/Tool Buttons/randomize_button.gd" id="13_ndqen"]
+[ext_resource type="Texture2D" uid="uid://b3dyfiw4gorvq" path="res://Assets/Textures/UI/toolbar icons.png" id="14_p07xe"]
+[ext_resource type="Texture2D" uid="uid://delx4m5jxlmw4" path="res://Assets/Textures/UI/spawn range frame.png" id="15_kq3su"]
+[ext_resource type="Texture2D" uid="uid://xawwlhbs43nj" path="res://Assets/Textures/UI/stable range frame.png" id="16_54pdg"]
+[ext_resource type="Script" uid="uid://ln4bvim1l3tx" path="res://Assets/Scripts/UI/Labels/spawn_lower_text.gd" id="17_qexsy"]
+[ext_resource type="Script" uid="uid://1f3s0dh6gsv7" path="res://Assets/Scripts/UI/Tool Buttons/spawn_lower_button.gd" id="18_2y5xa"]
+[ext_resource type="Script" uid="uid://di6tioiftri6d" path="res://Assets/Scripts/UI/Labels/spawn_upper_text.gd" id="19_p4lsv"]
+[ext_resource type="Script" uid="uid://dd8ebsuidsvh1" path="res://Assets/Scripts/UI/Tool Buttons/spawn_upper_button.gd" id="20_skjkt"]
+[ext_resource type="Script" uid="uid://dw76mnmf76bcs" path="res://Assets/Scripts/UI/Labels/stable_lower_text.gd" id="21_ys1x2"]
+[ext_resource type="Script" uid="uid://bj4mhuarslaom" path="res://Assets/Scripts/UI/Tool Buttons/stable_lower_button.gd" id="22_bk3v1"]
+[ext_resource type="Script" uid="uid://b23ox3750gmn5" path="res://Assets/Scripts/UI/Labels/stable_upper_text.gd" id="23_3mfgr"]
+[ext_resource type="Script" uid="uid://dnos8f2lfqq4t" path="res://Assets/Scripts/UI/Tool Buttons/stable_upper_button.gd" id="24_2o5qy"]
+[ext_resource type="Texture2D" uid="uid://b7etkvlkv81ch" path="res://Assets/Textures/Tutorial Slides/slide 4.png" id="25_q2534"]
+[ext_resource type="Texture2D" uid="uid://dv67v2vdgj0m5" path="res://Assets/Textures/Tutorial Slides/slide 5.png" id="26_nasgh"]
+[ext_resource type="Texture2D" uid="uid://cwchwinllsefv" path="res://Assets/Textures/Tutorial Slides/slide 6.png" id="27_ehy4s"]
+[ext_resource type="Texture2D" uid="uid://dj8gys728ndb3" path="res://Assets/Textures/Tutorial Slides/slide 7.png" id="28_a21j5"]
+[ext_resource type="Texture2D" uid="uid://f144ca7ncoiu" path="res://Assets/Textures/Tutorial Slides/slide 8.png" id="29_ioof4"]
+[ext_resource type="Texture2D" uid="uid://c4xfg8a07ddy4" path="res://Assets/Textures/UI/left slide button.png" id="32_xhr83"]
+[ext_resource type="Script" uid="uid://cglvstu26dupc" path="res://Assets/Scenes/previous_button.gd" id="34_ssaki"]
+[ext_resource type="Script" uid="uid://vqe37s4t7tyf" path="res://Assets/Scenes/next_button.gd" id="35_64lsc"]
+
+[sub_resource type="Environment" id="Environment_oby5j"]
+
+[sub_resource type="CompositorEffect" id="CompositorEffect_ig7tw"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("1_4ppop")
+main_menu = true
+update_speed = 0.02
+cook_time = 20
+metadata/_custom_type_script = "uid://drfxlavovcgta"
+
+[sub_resource type="Compositor" id="Compositor_n25n6"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_ig7tw")])
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o8qvk"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jto1t"]
+texture = ExtResource("7_1w871")
+margins = Vector2i(4, 2)
+separation = Vector2i(4, 0)
+texture_region_size = Vector2i(26, 26)
+1:0/0 = 0
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_akkqo"]
+tile_size = Vector2i(26, 26)
+uv_clipping = true
+sources/1 = SubResource("TileSetAtlasSource_jto1t")
+
+[sub_resource type="SystemFont" id="SystemFont_rhnfa"]
+font_names = PackedStringArray("rainyhearts")
+subpixel_positioning = 0
+keep_rounding_remainders = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vmfjg"]
+shader = ExtResource("8_wkrhi")
+shader_parameter/first_color = Color(0.00784314, 0.0705882, 0, 1)
+shader_parameter/second_color = Color(0.709738, 0.753587, 0.670586, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.485)
+projection = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_oby5j")
+compositor = SubResource("Compositor_n25n6")
+
+[node name="Slides" type="Node2D" parent="."]
+script = ExtResource("2_1w871")
+
+[node name="TextureRect" type="TextureRect" parent="Slides"]
+visible = false
+texture_filter = 1
+texture_repeat = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_wywo6")
+
+[node name="TextureRect2" type="TextureRect" parent="Slides"]
+visible = false
+texture_filter = 1
+texture_repeat = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_oy3kw")
+
+[node name="TextureRect3" type="TextureRect" parent="Slides"]
+visible = false
+texture_filter = 1
+texture_repeat = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_wimws")
+
+[node name="Neighborhood 1" type="Node2D" parent="Slides/TextureRect3"]
+z_index = 1
+position = Vector2(745, 243)
+script = ExtResource("5_po508")
+
+[node name="Grid" type="Panel" parent="Slides/TextureRect3/Neighborhood 1"]
+offset_left = 28.0
+offset_top = 26.0
+offset_right = 420.0
+offset_bottom = 418.0
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o8qvk")
+script = ExtResource("6_xhr83")
+
+[node name="Actual Grid" type="TileMapLayer" parent="Slides/TextureRect3/Neighborhood 1/Grid"]
+z_index = -1
+position = Vector2(182, 184)
+tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAD9/wEAAQAAAAAAAAD9/wAAAQAAAAAAAAD8/wAAAQAAAAAAAAD9/wIAAQAAAAAAAAD8/wIAAQAAAAAAAAD8/wEAAQAAAAAAAAD7/wAAAQAAAAAAAAD6/wAAAQAAAAAAAAD5/wAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAFAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAD//wEAAQAAAAAAAAD//wAAAQAAAAAAAAAAAAEAAQAAAAAAAAABAAEAAQAAAAAAAAABAAAAAQAAAAAAAAAAAP//AQAAAAAAAAD/////AQAAAAAAAAABAP//AQAAAAAAAAD9////AQAAAAAAAAD8////AQAAAAAAAAD7////AQAAAAAAAAD6////AQAAAAAAAAD5////AQAAAAAAAAD5//7/AQAAAAAAAAD6//7/AQAAAAAAAAD7//7/AQAAAAAAAAD8//7/AQAAAAAAAAD9//7/AQAAAAAAAAADAP7/AQAAAAAAAAAEAP7/AQAAAAAAAAAFAP7/AQAAAAAAAAAGAP7/AQAAAAAAAAAHAP7/AQAAAAAAAAAHAP//AQAAAAAAAAAGAP//AQAAAAAAAAAFAP//AQAAAAAAAAAEAP//AQAAAAAAAAADAP//AQAAAAAAAAD5//3/AQAAAAAAAAD6//3/AQAAAAAAAAD7//3/AQAAAAAAAAD8//3/AQAAAAAAAAD9//3/AQAAAAAAAAD+//3/AQAAAAAAAAD///3/AQAAAAAAAAAAAP3/AQAAAAAAAAABAP3/AQAAAAAAAAACAP3/AQAAAAAAAAADAP3/AQAAAAAAAAAEAP3/AQAAAAAAAAAFAP3/AQAAAAAAAAAGAP3/AQAAAAAAAAAHAP3/AQAAAAAAAAAHAPz/AQAAAAAAAAAGAPz/AQAAAAAAAAAFAPz/AQAAAAAAAAAEAPz/AQAAAAAAAAADAPz/AQAAAAAAAAACAPz/AQAAAAAAAAABAPz/AQAAAAAAAAAAAPz/AQAAAAAAAAD///z/AQAAAAAAAAD+//z/AQAAAAAAAAD9//z/AQAAAAAAAAD8//z/AQAAAAAAAAD7//z/AQAAAAAAAAD6//z/AQAAAAAAAAD5//z/AQAAAAAAAAD5//v/AQAAAAAAAAD6//v/AQAAAAAAAAD7//v/AQAAAAAAAAD8//v/AQAAAAAAAAD9//v/AQAAAAAAAAD+//v/AQAAAAAAAAD///v/AQAAAAAAAAAAAPv/AQAAAAAAAAABAPv/AQAAAAAAAAACAPv/AQAAAAAAAAADAPv/AQAAAAAAAAAEAPv/AQAAAAAAAAAFAPv/AQAAAAAAAAAGAPv/AQAAAAAAAAAHAPv/AQAAAAAAAAAHAPr/AQAAAAAAAAAGAPr/AQAAAAAAAAAFAPr/AQAAAAAAAAAEAPr/AQAAAAAAAAADAPr/AQAAAAAAAAACAPr/AQAAAAAAAAABAPr/AQAAAAAAAAAAAPr/AQAAAAAAAAD///r/AQAAAAAAAAD+//r/AQAAAAAAAAD9//r/AQAAAAAAAAD8//r/AQAAAAAAAAD7//r/AQAAAAAAAAD6//r/AQAAAAAAAAD5//r/AQAAAAAAAAD5//n/AQAAAAAAAAD6//n/AQAAAAAAAAD7//n/AQAAAAAAAAD8//n/AQAAAAAAAAD9//n/AQAAAAAAAAD+//n/AQAAAAAAAAD///n/AQAAAAAAAAAAAPn/AQAAAAAAAAABAPn/AQAAAAAAAAACAPn/AQAAAAAAAAADAPn/AQAAAAAAAAAEAPn/AQAAAAAAAAAFAPn/AQAAAAAAAAAGAPn/AQAAAAAAAAAHAPn/AQAAAAAAAAAHAAEAAQAAAAAAAAAGAAEAAQAAAAAAAAAFAAEAAQAAAAAAAAAEAAEAAQAAAAAAAAADAAEAAQAAAAAAAAD7/wEAAQAAAAAAAAD6/wEAAQAAAAAAAAD5/wEAAQAAAAAAAAD5/wIAAQAAAAAAAAD6/wIAAQAAAAAAAAD7/wIAAQAAAAAAAAADAAIAAQAAAAAAAAAEAAIAAQAAAAAAAAAFAAIAAQAAAAAAAAAGAAIAAQAAAAAAAAAHAAIAAQAAAAAAAAAHAAMAAQAAAAAAAAAGAAMAAQAAAAAAAAAFAAMAAQAAAAAAAAAEAAMAAQAAAAAAAAABAAMAAQAAAAAAAAAAAAMAAQAAAAAAAAD//wMAAQAAAAAAAAD+/wMAAQAAAAAAAAD9/wMAAQAAAAAAAAD8/wMAAQAAAAAAAAD7/wMAAQAAAAAAAAD6/wMAAQAAAAAAAAD5/wMAAQAAAAAAAAD5/wQAAQAAAAAAAAD6/wQAAQAAAAAAAAD7/wQAAQAAAAAAAAD8/wQAAQAAAAAAAAD9/wQAAQAAAAAAAAD+/wQAAQAAAAAAAAD//wQAAQAAAAAAAAAAAAQAAQAAAAAAAAABAAQAAQAAAAAAAAACAAQAAQAAAAAAAAAEAAQAAQAAAAAAAAAFAAQAAQAAAAAAAAAGAAQAAQAAAAAAAAAHAAQAAQAAAAAAAAAHAAUAAQAAAAAAAAAGAAUAAQAAAAAAAAAFAAUAAQAAAAAAAAAEAAUAAQAAAAAAAAADAAUAAQAAAAAAAAACAAUAAQAAAAAAAAABAAUAAQAAAAAAAAAAAAUAAQAAAAAAAAD//wUAAQAAAAAAAAD+/wUAAQAAAAAAAAD9/wUAAQAAAAAAAAD8/wUAAQAAAAAAAAD7/wUAAQAAAAAAAAD6/wUAAQAAAAAAAAD5/wUAAQAAAAAAAAD5/wYAAQAAAAAAAAD6/wYAAQAAAAAAAAD7/wYAAQAAAAAAAAD8/wYAAQAAAAAAAAD9/wYAAQAAAAAAAAD+/wYAAQAAAAAAAAD//wYAAQAAAAAAAAAAAAYAAQAAAAAAAAABAAYAAQAAAAAAAAACAAYAAQAAAAAAAAADAAYAAQAAAAAAAAAEAAYAAQAAAAAAAAAFAAYAAQAAAAAAAAAGAAYAAQAAAAAAAAAHAAYAAQAAAAAAAAAHAAcAAQAAAAAAAAAGAAcAAQAAAAAAAAAFAAcAAQAAAAAAAAAEAAcAAQAAAAAAAAADAAcAAQAAAAAAAAACAAcAAQAAAAAAAAABAAcAAQAAAAAAAAAAAAcAAQAAAAAAAAD//wcAAQAAAAAAAAD+/wcAAQAAAAAAAAD9/wcAAQAAAAAAAAD8/wcAAQAAAAAAAAD7/wcAAQAAAAAAAAD6/wcAAQAAAAAAAAD5/wcAAQAAAAAAAAADAAQAAQAAAAAAAAADAAMAAQAAAAAAAAACAAMAAQAAAAAAAAACAAIAAQAAAAAAAAACAAEAAQAAAAAAAAACAAAAAQAAAAAAAAACAP7/AQAAAAAAAAACAP//AQAAAAAAAAABAP7/AQAAAAAAAAAAAP7/AQAAAAAAAAD///7/AQAAAAAAAAD+//7/AQAAAAAAAAD+////AQAAAAAAAAD+/wAAAQAAAAAAAAD+/wEAAQAAAAAAAAD+/wIAAQAAAAAAAAD//wIAAQAAAAAAAAAAAAIAAQAAAAAAAAABAAIAAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_akkqo")
+
+[node name="Cursor Grid" type="TileMapLayer" parent="Slides/TextureRect3/Neighborhood 1/Grid"]
+modulate = Color(0.196078, 0.196078, 0.196078, 0.262745)
+z_index = -1
+position = Vector2(182, 184)
+tile_set = SubResource("TileSet_akkqo")
+
+[node name="Guides Grid" type="TileMapLayer" parent="Slides/TextureRect3/Neighborhood 1/Grid"]
+modulate = Color(1, 1, 1, 0.0627451)
+z_index = -1
+position = Vector2(182, 184)
+tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAA=")
+tile_set = SubResource("TileSet_akkqo")
+
+[node name="Grid Overlay" type="Sprite2D" parent="Slides/TextureRect3/Neighborhood 1/Grid"]
+self_modulate = Color(0.125911, 0.125911, 0.125911, 1)
+z_index = -1
+texture_filter = 1
+position = Vector2(196, 216)
+texture = ExtResource("8_ssaki")
+
+[node name="Tool Bar" type="Node2D" parent="Slides/TextureRect3/Neighborhood 1"]
+
+[node name="Power Button" type="Panel" parent="Slides/TextureRect3/Neighborhood 1/Tool Bar"]
+offset_left = 29.0
+offset_top = 418.0
+offset_right = 57.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("9_64lsc")
+
+[node name="Clear Button" type="Panel" parent="Slides/TextureRect3/Neighborhood 1/Tool Bar"]
+offset_left = 57.0
+offset_top = 418.0
+offset_right = 82.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("10_n1iyd")
+
+[node name="Keyb Button" type="Panel" parent="Slides/TextureRect3/Neighborhood 1/Tool Bar"]
+offset_left = 82.0
+offset_top = 418.0
+offset_right = 108.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("11_nk6qg")
+
+[node name="Circle Button" type="Panel" parent="Slides/TextureRect3/Neighborhood 1/Tool Bar"]
+offset_left = 108.0
+offset_top = 418.0
+offset_right = 134.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("12_lh552")
+base_radius = 0.25
+radius_increment = 0.1
+
+[node name="Randomize Button" type="Panel" parent="Slides/TextureRect3/Neighborhood 1/Tool Bar"]
+offset_left = 134.0
+offset_top = 418.0
+offset_right = 160.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_ndqen")
+
+[node name="Tool Bar Sprite" type="Sprite2D" parent="Slides/TextureRect3/Neighborhood 1/Tool Bar"]
+z_index = -1
+texture_filter = 1
+position = Vector2(95.5, 437)
+texture = ExtResource("14_p07xe")
+
+[node name="Spawn Frame" type="Sprite2D" parent="Slides/TextureRect3/Neighborhood 1/Tool Bar"]
+z_index = -1
+texture_filter = 1
+position = Vector2(226, 437)
+texture = ExtResource("15_kq3su")
+
+[node name="Stable Frame" type="Sprite2D" parent="Slides/TextureRect3/Neighborhood 1/Tool Bar"]
+modulate = Color(0.769432, 0.769432, 0.769432, 1)
+z_index = -1
+texture_filter = 1
+position = Vector2(354.5, 437)
+texture = ExtResource("16_54pdg")
+
+[node name="Spawn Lower Bound" type="RichTextLabel" parent="Slides/TextureRect3/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 188.0
+offset_top = 425.0
+offset_right = 230.0
+offset_bottom = 455.0
+theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("17_qexsy")
+
+[node name="Spawn Lower Button" type="Panel" parent="Slides/TextureRect3/Neighborhood 1/Tool Bar"]
+offset_left = 183.0
+offset_top = 418.0
+offset_right = 235.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("18_2y5xa")
+
+[node name="Spawn Upper Bound" type="RichTextLabel" parent="Slides/TextureRect3/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 241.0
+offset_top = 418.0
+offset_right = 283.0
+offset_bottom = 448.0
+theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("19_p4lsv")
+
+[node name="Spawn Upper Button" type="Panel" parent="Slides/TextureRect3/Neighborhood 1/Tool Bar"]
+offset_left = 236.0
+offset_top = 418.0
+offset_right = 290.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("20_skjkt")
+
+[node name="Stable Lower Bound" type="RichTextLabel" parent="Slides/TextureRect3/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 316.0
+offset_top = 425.0
+offset_right = 358.0
+offset_bottom = 455.0
+theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("21_ys1x2")
+
+[node name="Stable Lower Button" type="Panel" parent="Slides/TextureRect3/Neighborhood 1/Tool Bar"]
+offset_left = 311.0
+offset_top = 418.0
+offset_right = 363.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("22_bk3v1")
+
+[node name="Stable Upper Bound" type="RichTextLabel" parent="Slides/TextureRect3/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 369.0
+offset_top = 418.0
+offset_right = 411.0
+offset_bottom = 448.0
+theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("23_3mfgr")
+
+[node name="Stable Upper Button" type="Panel" parent="Slides/TextureRect3/Neighborhood 1/Tool Bar"]
+offset_left = 364.0
+offset_top = 418.0
+offset_right = 419.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("24_2o5qy")
+
+[node name="ColorRect" type="ColorRect" parent="Slides/TextureRect3"]
+z_index = 2
+layout_mode = 0
+offset_left = 772.0
+offset_top = 661.0
+offset_right = 812.0
+offset_bottom = 701.0
+scale = Vector2(9.84, 1)
+
+[node name="TextureRect4" type="TextureRect" parent="Slides"]
+visible = false
+texture_filter = 1
+texture_repeat = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("25_q2534")
+
+[node name="Neighborhood 1" type="Node2D" parent="Slides/TextureRect4"]
+z_index = 1
+position = Vector2(745, 232)
+script = ExtResource("5_po508")
+
+[node name="Grid" type="Panel" parent="Slides/TextureRect4/Neighborhood 1"]
+offset_left = 28.0
+offset_top = 26.0
+offset_right = 420.0
+offset_bottom = 418.0
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o8qvk")
+script = ExtResource("6_xhr83")
+
+[node name="Actual Grid" type="TileMapLayer" parent="Slides/TextureRect4/Neighborhood 1/Grid"]
+z_index = -1
+position = Vector2(182, 184)
+tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAD9/wEAAQAAAAAAAAD9/wAAAQAAAAAAAAD8/wAAAQAAAAAAAAD9/wIAAQAAAAAAAAD8/wIAAQAAAAAAAAD8/wEAAQAAAAAAAAD7/wAAAQAAAAAAAAD6/wAAAQAAAAAAAAD5/wAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAFAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAD//wEAAQAAAAAAAAD//wAAAQAAAAAAAAAAAAEAAQAAAAAAAAABAAEAAQAAAAAAAAABAAAAAQAAAAAAAAAAAP//AQAAAAAAAAD/////AQAAAAAAAAABAP//AQAAAAAAAAD9////AQAAAAAAAAD8////AQAAAAAAAAD7////AQAAAAAAAAD6////AQAAAAAAAAD5////AQAAAAAAAAD5//7/AQAAAAAAAAD6//7/AQAAAAAAAAD7//7/AQAAAAAAAAD8//7/AQAAAAAAAAD9//7/AQAAAAAAAAADAP7/AQAAAAAAAAAEAP7/AQAAAAAAAAAFAP7/AQAAAAAAAAAGAP7/AQAAAAAAAAAHAP7/AQAAAAAAAAAHAP//AQAAAAAAAAAGAP//AQAAAAAAAAAFAP//AQAAAAAAAAAEAP//AQAAAAAAAAADAP//AQAAAAAAAAD5//3/AQAAAAAAAAD6//3/AQAAAAAAAAD7//3/AQAAAAAAAAD8//3/AQAAAAAAAAD9//3/AQAAAAAAAAD+//3/AQAAAAAAAAD///3/AQAAAAAAAAAAAP3/AQAAAAAAAAABAP3/AQAAAAAAAAACAP3/AQAAAAAAAAADAP3/AQAAAAAAAAAEAP3/AQAAAAAAAAAFAP3/AQAAAAAAAAAGAP3/AQAAAAAAAAAHAP3/AQAAAAAAAAAHAPz/AQAAAAAAAAAGAPz/AQAAAAAAAAAFAPz/AQAAAAAAAAAEAPz/AQAAAAAAAAADAPz/AQAAAAAAAAACAPz/AQAAAAAAAAABAPz/AQAAAAAAAAAAAPz/AQAAAAAAAAD///z/AQAAAAAAAAD+//z/AQAAAAAAAAD9//z/AQAAAAAAAAD8//z/AQAAAAAAAAD7//z/AQAAAAAAAAD6//z/AQAAAAAAAAD5//z/AQAAAAAAAAD5//v/AQAAAAAAAAD6//v/AQAAAAAAAAD7//v/AQAAAAAAAAD8//v/AQAAAAAAAAD9//v/AQAAAAAAAAD+//v/AQAAAAAAAAD///v/AQAAAAAAAAAAAPv/AQAAAAAAAAABAPv/AQAAAAAAAAACAPv/AQAAAAAAAAADAPv/AQAAAAAAAAAEAPv/AQAAAAAAAAAFAPv/AQAAAAAAAAAGAPv/AQAAAAAAAAAHAPv/AQAAAAAAAAAHAPr/AQAAAAAAAAAGAPr/AQAAAAAAAAAFAPr/AQAAAAAAAAAEAPr/AQAAAAAAAAADAPr/AQAAAAAAAAACAPr/AQAAAAAAAAABAPr/AQAAAAAAAAAAAPr/AQAAAAAAAAD///r/AQAAAAAAAAD+//r/AQAAAAAAAAD9//r/AQAAAAAAAAD8//r/AQAAAAAAAAD7//r/AQAAAAAAAAD6//r/AQAAAAAAAAD5//r/AQAAAAAAAAD5//n/AQAAAAAAAAD6//n/AQAAAAAAAAD7//n/AQAAAAAAAAD8//n/AQAAAAAAAAD9//n/AQAAAAAAAAD+//n/AQAAAAAAAAD///n/AQAAAAAAAAAAAPn/AQAAAAAAAAABAPn/AQAAAAAAAAACAPn/AQAAAAAAAAADAPn/AQAAAAAAAAAEAPn/AQAAAAAAAAAFAPn/AQAAAAAAAAAGAPn/AQAAAAAAAAAHAPn/AQAAAAAAAAAHAAEAAQAAAAAAAAAGAAEAAQAAAAAAAAAFAAEAAQAAAAAAAAAEAAEAAQAAAAAAAAADAAEAAQAAAAAAAAD7/wEAAQAAAAAAAAD6/wEAAQAAAAAAAAD5/wEAAQAAAAAAAAD5/wIAAQAAAAAAAAD6/wIAAQAAAAAAAAD7/wIAAQAAAAAAAAADAAIAAQAAAAAAAAAEAAIAAQAAAAAAAAAFAAIAAQAAAAAAAAAGAAIAAQAAAAAAAAAHAAIAAQAAAAAAAAAHAAMAAQAAAAAAAAAGAAMAAQAAAAAAAAAFAAMAAQAAAAAAAAAEAAMAAQAAAAAAAAABAAMAAQAAAAAAAAAAAAMAAQAAAAAAAAD//wMAAQAAAAAAAAD+/wMAAQAAAAAAAAD9/wMAAQAAAAAAAAD8/wMAAQAAAAAAAAD7/wMAAQAAAAAAAAD6/wMAAQAAAAAAAAD5/wMAAQAAAAAAAAD5/wQAAQAAAAAAAAD6/wQAAQAAAAAAAAD7/wQAAQAAAAAAAAD8/wQAAQAAAAAAAAD9/wQAAQAAAAAAAAD+/wQAAQAAAAAAAAD//wQAAQAAAAAAAAAAAAQAAQAAAAAAAAABAAQAAQAAAAAAAAACAAQAAQAAAAAAAAAEAAQAAQAAAAAAAAAFAAQAAQAAAAAAAAAGAAQAAQAAAAAAAAAHAAQAAQAAAAAAAAAHAAUAAQAAAAAAAAAGAAUAAQAAAAAAAAAFAAUAAQAAAAAAAAAEAAUAAQAAAAAAAAADAAUAAQAAAAAAAAACAAUAAQAAAAAAAAABAAUAAQAAAAAAAAAAAAUAAQAAAAAAAAD//wUAAQAAAAAAAAD+/wUAAQAAAAAAAAD9/wUAAQAAAAAAAAD8/wUAAQAAAAAAAAD7/wUAAQAAAAAAAAD6/wUAAQAAAAAAAAD5/wUAAQAAAAAAAAD5/wYAAQAAAAAAAAD6/wYAAQAAAAAAAAD7/wYAAQAAAAAAAAD8/wYAAQAAAAAAAAD9/wYAAQAAAAAAAAD+/wYAAQAAAAAAAAD//wYAAQAAAAAAAAAAAAYAAQAAAAAAAAABAAYAAQAAAAAAAAACAAYAAQAAAAAAAAADAAYAAQAAAAAAAAAEAAYAAQAAAAAAAAAFAAYAAQAAAAAAAAAGAAYAAQAAAAAAAAAHAAYAAQAAAAAAAAAHAAcAAQAAAAAAAAAGAAcAAQAAAAAAAAAFAAcAAQAAAAAAAAAEAAcAAQAAAAAAAAADAAcAAQAAAAAAAAACAAcAAQAAAAAAAAABAAcAAQAAAAAAAAAAAAcAAQAAAAAAAAD//wcAAQAAAAAAAAD+/wcAAQAAAAAAAAD9/wcAAQAAAAAAAAD8/wcAAQAAAAAAAAD7/wcAAQAAAAAAAAD6/wcAAQAAAAAAAAD5/wcAAQAAAAAAAAADAAQAAQAAAAAAAAADAAMAAQAAAAAAAAACAAMAAQAAAAAAAAACAAIAAQAAAAAAAAACAAEAAQAAAAAAAAACAAAAAQAAAAAAAAACAP7/AQAAAAAAAAACAP//AQAAAAAAAAABAP7/AQAAAAAAAAAAAP7/AQAAAAAAAAD///7/AQAAAAAAAAD+//7/AQAAAAAAAAD+////AQAAAAAAAAD+/wAAAQAAAAAAAAD+/wEAAQAAAAAAAAD+/wIAAQAAAAAAAAD//wIAAQAAAAAAAAAAAAIAAQAAAAAAAAABAAIAAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_akkqo")
+
+[node name="Cursor Grid" type="TileMapLayer" parent="Slides/TextureRect4/Neighborhood 1/Grid"]
+modulate = Color(0.196078, 0.196078, 0.196078, 0.262745)
+z_index = -1
+position = Vector2(182, 184)
+tile_set = SubResource("TileSet_akkqo")
+
+[node name="Guides Grid" type="TileMapLayer" parent="Slides/TextureRect4/Neighborhood 1/Grid"]
+modulate = Color(1, 1, 1, 0.0627451)
+z_index = -1
+position = Vector2(182, 184)
+tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAA=")
+tile_set = SubResource("TileSet_akkqo")
+
+[node name="Grid Overlay" type="Sprite2D" parent="Slides/TextureRect4/Neighborhood 1/Grid"]
+self_modulate = Color(0.125911, 0.125911, 0.125911, 1)
+z_index = -1
+texture_filter = 1
+position = Vector2(196, 216)
+texture = ExtResource("8_ssaki")
+
+[node name="Tool Bar" type="Node2D" parent="Slides/TextureRect4/Neighborhood 1"]
+
+[node name="Power Button" type="Panel" parent="Slides/TextureRect4/Neighborhood 1/Tool Bar"]
+offset_left = 29.0
+offset_top = 418.0
+offset_right = 57.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("9_64lsc")
+
+[node name="Clear Button" type="Panel" parent="Slides/TextureRect4/Neighborhood 1/Tool Bar"]
+offset_left = 57.0
+offset_top = 418.0
+offset_right = 82.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("10_n1iyd")
+
+[node name="Keyb Button" type="Panel" parent="Slides/TextureRect4/Neighborhood 1/Tool Bar"]
+offset_left = 82.0
+offset_top = 418.0
+offset_right = 108.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("11_nk6qg")
+
+[node name="Circle Button" type="Panel" parent="Slides/TextureRect4/Neighborhood 1/Tool Bar"]
+offset_left = 108.0
+offset_top = 418.0
+offset_right = 134.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("12_lh552")
+base_radius = 0.25
+radius_increment = 0.1
+
+[node name="Randomize Button" type="Panel" parent="Slides/TextureRect4/Neighborhood 1/Tool Bar"]
+offset_left = 134.0
+offset_top = 418.0
+offset_right = 160.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_ndqen")
+
+[node name="Tool Bar Sprite" type="Sprite2D" parent="Slides/TextureRect4/Neighborhood 1/Tool Bar"]
+z_index = -1
+texture_filter = 1
+position = Vector2(95.5, 437)
+texture = ExtResource("14_p07xe")
+
+[node name="Spawn Frame" type="Sprite2D" parent="Slides/TextureRect4/Neighborhood 1/Tool Bar"]
+z_index = -1
+texture_filter = 1
+position = Vector2(226, 437)
+texture = ExtResource("15_kq3su")
+
+[node name="Stable Frame" type="Sprite2D" parent="Slides/TextureRect4/Neighborhood 1/Tool Bar"]
+modulate = Color(0.769432, 0.769432, 0.769432, 1)
+z_index = -1
+texture_filter = 1
+position = Vector2(354.5, 437)
+texture = ExtResource("16_54pdg")
+
+[node name="Spawn Lower Bound" type="RichTextLabel" parent="Slides/TextureRect4/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 188.0
+offset_top = 425.0
+offset_right = 230.0
+offset_bottom = 455.0
+theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("17_qexsy")
+
+[node name="Spawn Lower Button" type="Panel" parent="Slides/TextureRect4/Neighborhood 1/Tool Bar"]
+offset_left = 183.0
+offset_top = 418.0
+offset_right = 235.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("18_2y5xa")
+
+[node name="Spawn Upper Bound" type="RichTextLabel" parent="Slides/TextureRect4/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 241.0
+offset_top = 418.0
+offset_right = 283.0
+offset_bottom = 448.0
+theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("19_p4lsv")
+
+[node name="Spawn Upper Button" type="Panel" parent="Slides/TextureRect4/Neighborhood 1/Tool Bar"]
+offset_left = 236.0
+offset_top = 418.0
+offset_right = 290.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("20_skjkt")
+
+[node name="Stable Lower Bound" type="RichTextLabel" parent="Slides/TextureRect4/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 316.0
+offset_top = 425.0
+offset_right = 358.0
+offset_bottom = 455.0
+theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("21_ys1x2")
+
+[node name="Stable Lower Button" type="Panel" parent="Slides/TextureRect4/Neighborhood 1/Tool Bar"]
+offset_left = 311.0
+offset_top = 418.0
+offset_right = 363.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("22_bk3v1")
+
+[node name="Stable Upper Bound" type="RichTextLabel" parent="Slides/TextureRect4/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 369.0
+offset_top = 418.0
+offset_right = 411.0
+offset_bottom = 448.0
+theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("23_3mfgr")
+
+[node name="Stable Upper Button" type="Panel" parent="Slides/TextureRect4/Neighborhood 1/Tool Bar"]
+offset_left = 364.0
+offset_top = 418.0
+offset_right = 419.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("24_2o5qy")
+
+[node name="ColorRect" type="ColorRect" parent="Slides/TextureRect4"]
+z_index = 2
+layout_mode = 0
+offset_left = 906.0
+offset_top = 650.0
+offset_right = 946.0
+offset_bottom = 690.0
+scale = Vector2(9.84, 1)
+
+[node name="TextureRect5" type="TextureRect" parent="Slides"]
+visible = false
+texture_filter = 1
+texture_repeat = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("26_nasgh")
+
+[node name="Neighborhood 1" type="Node2D" parent="Slides/TextureRect5"]
+z_index = 1
+position = Vector2(745, 232)
+script = ExtResource("5_po508")
+
+[node name="Grid" type="Panel" parent="Slides/TextureRect5/Neighborhood 1"]
+offset_left = 28.0
+offset_top = 26.0
+offset_right = 420.0
+offset_bottom = 418.0
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o8qvk")
+script = ExtResource("6_xhr83")
+
+[node name="Actual Grid" type="TileMapLayer" parent="Slides/TextureRect5/Neighborhood 1/Grid"]
+z_index = -1
+position = Vector2(182, 184)
+tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAD9/wEAAQAAAAAAAAD9/wAAAQAAAAAAAAD8/wAAAQAAAAAAAAD9/wIAAQAAAAAAAAD8/wIAAQAAAAAAAAD8/wEAAQAAAAAAAAD7/wAAAQAAAAAAAAD6/wAAAQAAAAAAAAD5/wAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAFAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAD//wEAAQAAAAAAAAD//wAAAQAAAAAAAAAAAAEAAQAAAAAAAAABAAEAAQAAAAAAAAABAAAAAQAAAAAAAAAAAP//AQAAAAAAAAD/////AQAAAAAAAAABAP//AQAAAAAAAAD9////AQAAAAAAAAD8////AQAAAAAAAAD7////AQAAAAAAAAD6////AQAAAAAAAAD5////AQAAAAAAAAD5//7/AQAAAAAAAAD6//7/AQAAAAAAAAD7//7/AQAAAAAAAAD8//7/AQAAAAAAAAD9//7/AQAAAAAAAAADAP7/AQAAAAAAAAAEAP7/AQAAAAAAAAAFAP7/AQAAAAAAAAAGAP7/AQAAAAAAAAAHAP7/AQAAAAAAAAAHAP//AQAAAAAAAAAGAP//AQAAAAAAAAAFAP//AQAAAAAAAAAEAP//AQAAAAAAAAADAP//AQAAAAAAAAD5//3/AQAAAAAAAAD6//3/AQAAAAAAAAD7//3/AQAAAAAAAAD8//3/AQAAAAAAAAD9//3/AQAAAAAAAAD+//3/AQAAAAAAAAD///3/AQAAAAAAAAAAAP3/AQAAAAAAAAABAP3/AQAAAAAAAAACAP3/AQAAAAAAAAADAP3/AQAAAAAAAAAEAP3/AQAAAAAAAAAFAP3/AQAAAAAAAAAGAP3/AQAAAAAAAAAHAP3/AQAAAAAAAAAHAPz/AQAAAAAAAAAGAPz/AQAAAAAAAAAFAPz/AQAAAAAAAAAEAPz/AQAAAAAAAAADAPz/AQAAAAAAAAACAPz/AQAAAAAAAAABAPz/AQAAAAAAAAAAAPz/AQAAAAAAAAD///z/AQAAAAAAAAD+//z/AQAAAAAAAAD9//z/AQAAAAAAAAD8//z/AQAAAAAAAAD7//z/AQAAAAAAAAD6//z/AQAAAAAAAAD5//z/AQAAAAAAAAD5//v/AQAAAAAAAAD6//v/AQAAAAAAAAD7//v/AQAAAAAAAAD8//v/AQAAAAAAAAD9//v/AQAAAAAAAAD+//v/AQAAAAAAAAD///v/AQAAAAAAAAAAAPv/AQAAAAAAAAABAPv/AQAAAAAAAAACAPv/AQAAAAAAAAADAPv/AQAAAAAAAAAEAPv/AQAAAAAAAAAFAPv/AQAAAAAAAAAGAPv/AQAAAAAAAAAHAPv/AQAAAAAAAAAHAPr/AQAAAAAAAAAGAPr/AQAAAAAAAAAFAPr/AQAAAAAAAAAEAPr/AQAAAAAAAAADAPr/AQAAAAAAAAACAPr/AQAAAAAAAAABAPr/AQAAAAAAAAAAAPr/AQAAAAAAAAD///r/AQAAAAAAAAD+//r/AQAAAAAAAAD9//r/AQAAAAAAAAD8//r/AQAAAAAAAAD7//r/AQAAAAAAAAD6//r/AQAAAAAAAAD5//r/AQAAAAAAAAD5//n/AQAAAAAAAAD6//n/AQAAAAAAAAD7//n/AQAAAAAAAAD8//n/AQAAAAAAAAD9//n/AQAAAAAAAAD+//n/AQAAAAAAAAD///n/AQAAAAAAAAAAAPn/AQAAAAAAAAABAPn/AQAAAAAAAAACAPn/AQAAAAAAAAADAPn/AQAAAAAAAAAEAPn/AQAAAAAAAAAFAPn/AQAAAAAAAAAGAPn/AQAAAAAAAAAHAPn/AQAAAAAAAAAHAAEAAQAAAAAAAAAGAAEAAQAAAAAAAAAFAAEAAQAAAAAAAAAEAAEAAQAAAAAAAAADAAEAAQAAAAAAAAD7/wEAAQAAAAAAAAD6/wEAAQAAAAAAAAD5/wEAAQAAAAAAAAD5/wIAAQAAAAAAAAD6/wIAAQAAAAAAAAD7/wIAAQAAAAAAAAADAAIAAQAAAAAAAAAEAAIAAQAAAAAAAAAFAAIAAQAAAAAAAAAGAAIAAQAAAAAAAAAHAAIAAQAAAAAAAAAHAAMAAQAAAAAAAAAGAAMAAQAAAAAAAAAFAAMAAQAAAAAAAAAEAAMAAQAAAAAAAAABAAMAAQAAAAAAAAAAAAMAAQAAAAAAAAD//wMAAQAAAAAAAAD+/wMAAQAAAAAAAAD9/wMAAQAAAAAAAAD8/wMAAQAAAAAAAAD7/wMAAQAAAAAAAAD6/wMAAQAAAAAAAAD5/wMAAQAAAAAAAAD5/wQAAQAAAAAAAAD6/wQAAQAAAAAAAAD7/wQAAQAAAAAAAAD8/wQAAQAAAAAAAAD9/wQAAQAAAAAAAAD+/wQAAQAAAAAAAAD//wQAAQAAAAAAAAAAAAQAAQAAAAAAAAABAAQAAQAAAAAAAAACAAQAAQAAAAAAAAAEAAQAAQAAAAAAAAAFAAQAAQAAAAAAAAAGAAQAAQAAAAAAAAAHAAQAAQAAAAAAAAAHAAUAAQAAAAAAAAAGAAUAAQAAAAAAAAAFAAUAAQAAAAAAAAAEAAUAAQAAAAAAAAADAAUAAQAAAAAAAAACAAUAAQAAAAAAAAABAAUAAQAAAAAAAAAAAAUAAQAAAAAAAAD//wUAAQAAAAAAAAD+/wUAAQAAAAAAAAD9/wUAAQAAAAAAAAD8/wUAAQAAAAAAAAD7/wUAAQAAAAAAAAD6/wUAAQAAAAAAAAD5/wUAAQAAAAAAAAD5/wYAAQAAAAAAAAD6/wYAAQAAAAAAAAD7/wYAAQAAAAAAAAD8/wYAAQAAAAAAAAD9/wYAAQAAAAAAAAD+/wYAAQAAAAAAAAD//wYAAQAAAAAAAAAAAAYAAQAAAAAAAAABAAYAAQAAAAAAAAACAAYAAQAAAAAAAAADAAYAAQAAAAAAAAAEAAYAAQAAAAAAAAAFAAYAAQAAAAAAAAAGAAYAAQAAAAAAAAAHAAYAAQAAAAAAAAAHAAcAAQAAAAAAAAAGAAcAAQAAAAAAAAAFAAcAAQAAAAAAAAAEAAcAAQAAAAAAAAADAAcAAQAAAAAAAAACAAcAAQAAAAAAAAABAAcAAQAAAAAAAAAAAAcAAQAAAAAAAAD//wcAAQAAAAAAAAD+/wcAAQAAAAAAAAD9/wcAAQAAAAAAAAD8/wcAAQAAAAAAAAD7/wcAAQAAAAAAAAD6/wcAAQAAAAAAAAD5/wcAAQAAAAAAAAADAAQAAQAAAAAAAAADAAMAAQAAAAAAAAACAAMAAQAAAAAAAAACAAIAAQAAAAAAAAACAAEAAQAAAAAAAAACAAAAAQAAAAAAAAACAP7/AQAAAAAAAAACAP//AQAAAAAAAAABAP7/AQAAAAAAAAAAAP7/AQAAAAAAAAD///7/AQAAAAAAAAD+//7/AQAAAAAAAAD+////AQAAAAAAAAD+/wAAAQAAAAAAAAD+/wEAAQAAAAAAAAD+/wIAAQAAAAAAAAD//wIAAQAAAAAAAAAAAAIAAQAAAAAAAAABAAIAAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_akkqo")
+
+[node name="Cursor Grid" type="TileMapLayer" parent="Slides/TextureRect5/Neighborhood 1/Grid"]
+modulate = Color(0.196078, 0.196078, 0.196078, 0.262745)
+z_index = -1
+position = Vector2(182, 184)
+tile_set = SubResource("TileSet_akkqo")
+
+[node name="Guides Grid" type="TileMapLayer" parent="Slides/TextureRect5/Neighborhood 1/Grid"]
+modulate = Color(1, 1, 1, 0.0627451)
+z_index = -1
+position = Vector2(182, 184)
+tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAA=")
+tile_set = SubResource("TileSet_akkqo")
+
+[node name="Grid Overlay" type="Sprite2D" parent="Slides/TextureRect5/Neighborhood 1/Grid"]
+self_modulate = Color(0.125911, 0.125911, 0.125911, 1)
+z_index = -1
+texture_filter = 1
+position = Vector2(196, 216)
+texture = ExtResource("8_ssaki")
+
+[node name="Tool Bar" type="Node2D" parent="Slides/TextureRect5/Neighborhood 1"]
+
+[node name="Power Button" type="Panel" parent="Slides/TextureRect5/Neighborhood 1/Tool Bar"]
+offset_left = 29.0
+offset_top = 418.0
+offset_right = 57.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("9_64lsc")
+
+[node name="Clear Button" type="Panel" parent="Slides/TextureRect5/Neighborhood 1/Tool Bar"]
+offset_left = 57.0
+offset_top = 418.0
+offset_right = 82.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("10_n1iyd")
+
+[node name="Keyb Button" type="Panel" parent="Slides/TextureRect5/Neighborhood 1/Tool Bar"]
+offset_left = 82.0
+offset_top = 418.0
+offset_right = 108.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("11_nk6qg")
+
+[node name="Circle Button" type="Panel" parent="Slides/TextureRect5/Neighborhood 1/Tool Bar"]
+offset_left = 108.0
+offset_top = 418.0
+offset_right = 134.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("12_lh552")
+base_radius = 0.25
+radius_increment = 0.1
+
+[node name="Randomize Button" type="Panel" parent="Slides/TextureRect5/Neighborhood 1/Tool Bar"]
+offset_left = 134.0
+offset_top = 418.0
+offset_right = 160.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_ndqen")
+
+[node name="Tool Bar Sprite" type="Sprite2D" parent="Slides/TextureRect5/Neighborhood 1/Tool Bar"]
+z_index = -1
+texture_filter = 1
+position = Vector2(95.5, 437)
+texture = ExtResource("14_p07xe")
+
+[node name="Spawn Frame" type="Sprite2D" parent="Slides/TextureRect5/Neighborhood 1/Tool Bar"]
+z_index = -1
+texture_filter = 1
+position = Vector2(226, 437)
+texture = ExtResource("15_kq3su")
+
+[node name="Stable Frame" type="Sprite2D" parent="Slides/TextureRect5/Neighborhood 1/Tool Bar"]
+modulate = Color(0.769432, 0.769432, 0.769432, 1)
+z_index = -1
+texture_filter = 1
+position = Vector2(354.5, 437)
+texture = ExtResource("16_54pdg")
+
+[node name="Spawn Lower Bound" type="RichTextLabel" parent="Slides/TextureRect5/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 188.0
+offset_top = 425.0
+offset_right = 230.0
+offset_bottom = 455.0
+theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("17_qexsy")
+
+[node name="Spawn Lower Button" type="Panel" parent="Slides/TextureRect5/Neighborhood 1/Tool Bar"]
+offset_left = 183.0
+offset_top = 418.0
+offset_right = 235.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("18_2y5xa")
+
+[node name="Spawn Upper Bound" type="RichTextLabel" parent="Slides/TextureRect5/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 241.0
+offset_top = 418.0
+offset_right = 283.0
+offset_bottom = 448.0
+theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("19_p4lsv")
+
+[node name="Spawn Upper Button" type="Panel" parent="Slides/TextureRect5/Neighborhood 1/Tool Bar"]
+offset_left = 236.0
+offset_top = 418.0
+offset_right = 290.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("20_skjkt")
+
+[node name="Stable Lower Bound" type="RichTextLabel" parent="Slides/TextureRect5/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 316.0
+offset_top = 425.0
+offset_right = 358.0
+offset_bottom = 455.0
+theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("21_ys1x2")
+
+[node name="Stable Lower Button" type="Panel" parent="Slides/TextureRect5/Neighborhood 1/Tool Bar"]
+offset_left = 311.0
+offset_top = 418.0
+offset_right = 363.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("22_bk3v1")
+
+[node name="Stable Upper Bound" type="RichTextLabel" parent="Slides/TextureRect5/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 369.0
+offset_top = 418.0
+offset_right = 411.0
+offset_bottom = 448.0
+theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("23_3mfgr")
+
+[node name="Stable Upper Button" type="Panel" parent="Slides/TextureRect5/Neighborhood 1/Tool Bar"]
+offset_left = 364.0
+offset_top = 418.0
+offset_right = 419.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("24_2o5qy")
+
+[node name="TextureRect6" type="TextureRect" parent="Slides"]
+visible = false
+texture_filter = 1
+texture_repeat = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("27_ehy4s")
+
+[node name="TextureRect7" type="TextureRect" parent="Slides"]
+visible = false
+texture_filter = 1
+texture_repeat = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("28_a21j5")
+
+[node name="Neighborhood 1" type="Node2D" parent="Slides/TextureRect7"]
+z_index = 1
+position = Vector2(651, 232)
+script = ExtResource("5_po508")
+
+[node name="Grid" type="Panel" parent="Slides/TextureRect7/Neighborhood 1"]
+offset_left = 28.0
+offset_top = 26.0
+offset_right = 420.0
+offset_bottom = 418.0
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o8qvk")
+script = ExtResource("6_xhr83")
+
+[node name="Actual Grid" type="TileMapLayer" parent="Slides/TextureRect7/Neighborhood 1/Grid"]
+z_index = -1
+position = Vector2(182, 184)
+tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAD9/wEAAQAAAAAAAAD9/wAAAQAAAAAAAAD8/wAAAQAAAAAAAAD9/wIAAQAAAAAAAAD8/wIAAQAAAAAAAAD8/wEAAQAAAAAAAAD7/wAAAQAAAAAAAAD6/wAAAQAAAAAAAAD5/wAAAQAAAAAAAAADAAAAAQAAAAAAAAAEAAAAAQAAAAAAAAAFAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAD//wEAAQAAAAAAAAD//wAAAQAAAAAAAAAAAAEAAQAAAAAAAAABAAEAAQAAAAAAAAABAAAAAQAAAAAAAAAAAP//AQAAAAAAAAD/////AQAAAAAAAAABAP//AQAAAAAAAAD9////AQAAAAAAAAD8////AQAAAAAAAAD7////AQAAAAAAAAD6////AQAAAAAAAAD5////AQAAAAAAAAD5//7/AQAAAAAAAAD6//7/AQAAAAAAAAD7//7/AQAAAAAAAAD8//7/AQAAAAAAAAD9//7/AQAAAAAAAAADAP7/AQAAAAAAAAAEAP7/AQAAAAAAAAAFAP7/AQAAAAAAAAAGAP7/AQAAAAAAAAAHAP7/AQAAAAAAAAAHAP//AQAAAAAAAAAGAP//AQAAAAAAAAAFAP//AQAAAAAAAAAEAP//AQAAAAAAAAADAP//AQAAAAAAAAD5//3/AQAAAAAAAAD6//3/AQAAAAAAAAD7//3/AQAAAAAAAAD8//3/AQAAAAAAAAD9//3/AQAAAAAAAAD+//3/AQAAAAAAAAD///3/AQAAAAAAAAAAAP3/AQAAAAAAAAABAP3/AQAAAAAAAAACAP3/AQAAAAAAAAADAP3/AQAAAAAAAAAEAP3/AQAAAAAAAAAFAP3/AQAAAAAAAAAGAP3/AQAAAAAAAAAHAP3/AQAAAAAAAAAHAPz/AQAAAAAAAAAGAPz/AQAAAAAAAAAFAPz/AQAAAAAAAAAEAPz/AQAAAAAAAAADAPz/AQAAAAAAAAACAPz/AQAAAAAAAAABAPz/AQAAAAAAAAAAAPz/AQAAAAAAAAD///z/AQAAAAAAAAD+//z/AQAAAAAAAAD9//z/AQAAAAAAAAD8//z/AQAAAAAAAAD7//z/AQAAAAAAAAD6//z/AQAAAAAAAAD5//z/AQAAAAAAAAD5//v/AQAAAAAAAAD6//v/AQAAAAAAAAD7//v/AQAAAAAAAAD8//v/AQAAAAAAAAD9//v/AQAAAAAAAAD+//v/AQAAAAAAAAD///v/AQAAAAAAAAAAAPv/AQAAAAAAAAABAPv/AQAAAAAAAAACAPv/AQAAAAAAAAADAPv/AQAAAAAAAAAEAPv/AQAAAAAAAAAFAPv/AQAAAAAAAAAGAPv/AQAAAAAAAAAHAPv/AQAAAAAAAAAHAPr/AQAAAAAAAAAGAPr/AQAAAAAAAAAFAPr/AQAAAAAAAAAEAPr/AQAAAAAAAAADAPr/AQAAAAAAAAACAPr/AQAAAAAAAAABAPr/AQAAAAAAAAAAAPr/AQAAAAAAAAD///r/AQAAAAAAAAD+//r/AQAAAAAAAAD9//r/AQAAAAAAAAD8//r/AQAAAAAAAAD7//r/AQAAAAAAAAD6//r/AQAAAAAAAAD5//r/AQAAAAAAAAD5//n/AQAAAAAAAAD6//n/AQAAAAAAAAD7//n/AQAAAAAAAAD8//n/AQAAAAAAAAD9//n/AQAAAAAAAAD+//n/AQAAAAAAAAD///n/AQAAAAAAAAAAAPn/AQAAAAAAAAABAPn/AQAAAAAAAAACAPn/AQAAAAAAAAADAPn/AQAAAAAAAAAEAPn/AQAAAAAAAAAFAPn/AQAAAAAAAAAGAPn/AQAAAAAAAAAHAPn/AQAAAAAAAAAHAAEAAQAAAAAAAAAGAAEAAQAAAAAAAAAFAAEAAQAAAAAAAAAEAAEAAQAAAAAAAAADAAEAAQAAAAAAAAD7/wEAAQAAAAAAAAD6/wEAAQAAAAAAAAD5/wEAAQAAAAAAAAD5/wIAAQAAAAAAAAD6/wIAAQAAAAAAAAD7/wIAAQAAAAAAAAADAAIAAQAAAAAAAAAEAAIAAQAAAAAAAAAFAAIAAQAAAAAAAAAGAAIAAQAAAAAAAAAHAAIAAQAAAAAAAAAHAAMAAQAAAAAAAAAGAAMAAQAAAAAAAAAFAAMAAQAAAAAAAAAEAAMAAQAAAAAAAAABAAMAAQAAAAAAAAAAAAMAAQAAAAAAAAD//wMAAQAAAAAAAAD+/wMAAQAAAAAAAAD9/wMAAQAAAAAAAAD8/wMAAQAAAAAAAAD7/wMAAQAAAAAAAAD6/wMAAQAAAAAAAAD5/wMAAQAAAAAAAAD5/wQAAQAAAAAAAAD6/wQAAQAAAAAAAAD7/wQAAQAAAAAAAAD8/wQAAQAAAAAAAAD9/wQAAQAAAAAAAAD+/wQAAQAAAAAAAAD//wQAAQAAAAAAAAAAAAQAAQAAAAAAAAABAAQAAQAAAAAAAAACAAQAAQAAAAAAAAAEAAQAAQAAAAAAAAAFAAQAAQAAAAAAAAAGAAQAAQAAAAAAAAAHAAQAAQAAAAAAAAAHAAUAAQAAAAAAAAAGAAUAAQAAAAAAAAAFAAUAAQAAAAAAAAAEAAUAAQAAAAAAAAADAAUAAQAAAAAAAAACAAUAAQAAAAAAAAABAAUAAQAAAAAAAAAAAAUAAQAAAAAAAAD//wUAAQAAAAAAAAD+/wUAAQAAAAAAAAD9/wUAAQAAAAAAAAD8/wUAAQAAAAAAAAD7/wUAAQAAAAAAAAD6/wUAAQAAAAAAAAD5/wUAAQAAAAAAAAD5/wYAAQAAAAAAAAD6/wYAAQAAAAAAAAD7/wYAAQAAAAAAAAD8/wYAAQAAAAAAAAD9/wYAAQAAAAAAAAD+/wYAAQAAAAAAAAD//wYAAQAAAAAAAAAAAAYAAQAAAAAAAAABAAYAAQAAAAAAAAACAAYAAQAAAAAAAAADAAYAAQAAAAAAAAAEAAYAAQAAAAAAAAAFAAYAAQAAAAAAAAAGAAYAAQAAAAAAAAAHAAYAAQAAAAAAAAAHAAcAAQAAAAAAAAAGAAcAAQAAAAAAAAAFAAcAAQAAAAAAAAAEAAcAAQAAAAAAAAADAAcAAQAAAAAAAAACAAcAAQAAAAAAAAABAAcAAQAAAAAAAAAAAAcAAQAAAAAAAAD//wcAAQAAAAAAAAD+/wcAAQAAAAAAAAD9/wcAAQAAAAAAAAD8/wcAAQAAAAAAAAD7/wcAAQAAAAAAAAD6/wcAAQAAAAAAAAD5/wcAAQAAAAAAAAADAAQAAQAAAAAAAAADAAMAAQAAAAAAAAACAAMAAQAAAAAAAAACAAIAAQAAAAAAAAACAAEAAQAAAAAAAAACAAAAAQAAAAAAAAACAP7/AQAAAAAAAAACAP//AQAAAAAAAAABAP7/AQAAAAAAAAAAAP7/AQAAAAAAAAD///7/AQAAAAAAAAD+//7/AQAAAAAAAAD+////AQAAAAAAAAD+/wAAAQAAAAAAAAD+/wEAAQAAAAAAAAD+/wIAAQAAAAAAAAD//wIAAQAAAAAAAAAAAAIAAQAAAAAAAAABAAIAAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_akkqo")
+
+[node name="Cursor Grid" type="TileMapLayer" parent="Slides/TextureRect7/Neighborhood 1/Grid"]
+modulate = Color(0.196078, 0.196078, 0.196078, 0.262745)
+z_index = -1
+position = Vector2(182, 184)
+tile_set = SubResource("TileSet_akkqo")
+
+[node name="Guides Grid" type="TileMapLayer" parent="Slides/TextureRect7/Neighborhood 1/Grid"]
+modulate = Color(1, 1, 1, 0.0627451)
+z_index = -1
+position = Vector2(182, 184)
+tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAA=")
+tile_set = SubResource("TileSet_akkqo")
+
+[node name="Grid Overlay" type="Sprite2D" parent="Slides/TextureRect7/Neighborhood 1/Grid"]
+self_modulate = Color(0.125911, 0.125911, 0.125911, 1)
+z_index = -1
+texture_filter = 1
+position = Vector2(196, 216)
+texture = ExtResource("8_ssaki")
+
+[node name="Tool Bar" type="Node2D" parent="Slides/TextureRect7/Neighborhood 1"]
+
+[node name="Power Button" type="Panel" parent="Slides/TextureRect7/Neighborhood 1/Tool Bar"]
+offset_left = 29.0
+offset_top = 418.0
+offset_right = 57.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("9_64lsc")
+
+[node name="Clear Button" type="Panel" parent="Slides/TextureRect7/Neighborhood 1/Tool Bar"]
+offset_left = 57.0
+offset_top = 418.0
+offset_right = 82.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("10_n1iyd")
+
+[node name="Keyb Button" type="Panel" parent="Slides/TextureRect7/Neighborhood 1/Tool Bar"]
+offset_left = 82.0
+offset_top = 418.0
+offset_right = 108.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("11_nk6qg")
+
+[node name="Circle Button" type="Panel" parent="Slides/TextureRect7/Neighborhood 1/Tool Bar"]
+offset_left = 108.0
+offset_top = 418.0
+offset_right = 134.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("12_lh552")
+base_radius = 0.25
+radius_increment = 0.1
+
+[node name="Randomize Button" type="Panel" parent="Slides/TextureRect7/Neighborhood 1/Tool Bar"]
+offset_left = 134.0
+offset_top = 418.0
+offset_right = 160.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("13_ndqen")
+
+[node name="Tool Bar Sprite" type="Sprite2D" parent="Slides/TextureRect7/Neighborhood 1/Tool Bar"]
+z_index = -1
+texture_filter = 1
+position = Vector2(95.5, 437)
+texture = ExtResource("14_p07xe")
+
+[node name="Spawn Frame" type="Sprite2D" parent="Slides/TextureRect7/Neighborhood 1/Tool Bar"]
+z_index = -1
+texture_filter = 1
+position = Vector2(226, 437)
+texture = ExtResource("15_kq3su")
+
+[node name="Stable Frame" type="Sprite2D" parent="Slides/TextureRect7/Neighborhood 1/Tool Bar"]
+modulate = Color(0.769432, 0.769432, 0.769432, 1)
+z_index = -1
+texture_filter = 1
+position = Vector2(354.5, 437)
+texture = ExtResource("16_54pdg")
+
+[node name="Spawn Lower Bound" type="RichTextLabel" parent="Slides/TextureRect7/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 188.0
+offset_top = 425.0
+offset_right = 230.0
+offset_bottom = 455.0
+theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("17_qexsy")
+
+[node name="Spawn Lower Button" type="Panel" parent="Slides/TextureRect7/Neighborhood 1/Tool Bar"]
+offset_left = 183.0
+offset_top = 418.0
+offset_right = 235.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("18_2y5xa")
+
+[node name="Spawn Upper Bound" type="RichTextLabel" parent="Slides/TextureRect7/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 241.0
+offset_top = 418.0
+offset_right = 283.0
+offset_bottom = 448.0
+theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("19_p4lsv")
+
+[node name="Spawn Upper Button" type="Panel" parent="Slides/TextureRect7/Neighborhood 1/Tool Bar"]
+offset_left = 236.0
+offset_top = 418.0
+offset_right = 290.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("20_skjkt")
+
+[node name="Stable Lower Bound" type="RichTextLabel" parent="Slides/TextureRect7/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 316.0
+offset_top = 425.0
+offset_right = 358.0
+offset_bottom = 455.0
+theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("21_ys1x2")
+
+[node name="Stable Lower Button" type="Panel" parent="Slides/TextureRect7/Neighborhood 1/Tool Bar"]
+offset_left = 311.0
+offset_top = 418.0
+offset_right = 363.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("22_bk3v1")
+
+[node name="Stable Upper Bound" type="RichTextLabel" parent="Slides/TextureRect7/Neighborhood 1/Tool Bar"]
+texture_filter = 1
+offset_left = 369.0
+offset_top = 418.0
+offset_right = 411.0
+offset_bottom = 448.0
+theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]000[/center]"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("23_3mfgr")
+
+[node name="Stable Upper Button" type="Panel" parent="Slides/TextureRect7/Neighborhood 1/Tool Bar"]
+offset_left = 364.0
+offset_top = 418.0
+offset_right = 419.0
+offset_bottom = 456.0
+mouse_default_cursor_shape = 2
+script = ExtResource("24_2o5qy")
+
+[node name="TextureRect8" type="TextureRect" parent="Slides"]
+visible = false
+texture_filter = 1
+texture_repeat = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("29_ioof4")
+
+[node name="TextureRect" type="TextureRect" parent="Slides/TextureRect8"]
+layout_mode = 0
+offset_left = 789.0
+offset_top = 647.0
+offset_right = 875.0
+offset_bottom = 687.0
+scale = Vector2(4, 4)
+texture = ExtResource("6_4prdx")
+stretch_mode = 2
+
+[node name="Previous Button" type="Panel" parent="Slides/TextureRect8"]
+z_index = 1
+layout_mode = 0
+offset_left = 799.0
+offset_top = 665.0
+offset_right = 1123.0
+offset_bottom = 775.0
+mouse_default_cursor_shape = 2
+script = ExtResource("2_tlord")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(59, 1029)
+texture = ExtResource("32_xhr83")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Node2D"]
+position = Vector2(1862, 1029)
+texture = ExtResource("32_xhr83")
+flip_h = true
+
+[node name="Previous Button" type="Panel" parent="Node2D"]
+z_index = 1
+offset_left = 1.0
+offset_top = 979.0
+offset_right = 101.0
+offset_bottom = 1079.0
+mouse_default_cursor_shape = 2
+script = ExtResource("34_ssaki")
+
+[node name="Next Button" type="Panel" parent="Node2D"]
+z_index = 1
+offset_left = 1820.0
+offset_top = 979.0
+offset_right = 1920.0
+offset_bottom = 1079.0
+mouse_default_cursor_shape = 2
+script = ExtResource("35_64lsc")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2"]
+material = SubResource("ShaderMaterial_vmfjg")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_vedu2")
+volume_db = -16.562
+autoplay = true
+
+[connection signal="gui_input" from="Slides/TextureRect3/Neighborhood 1/Grid" to="Slides/TextureRect3/Neighborhood 1/Grid" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect3/Neighborhood 1/Grid" to="Slides/TextureRect3/Neighborhood 1/Grid" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect3/Neighborhood 1/Grid" to="Slides/TextureRect3/Neighborhood 1/Grid" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Power Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Power Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Power Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Power Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Power Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Power Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Clear Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Clear Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Clear Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Clear Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Clear Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Clear Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Keyb Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Keyb Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Keyb Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Keyb Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Keyb Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Keyb Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Circle Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Circle Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Circle Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Circle Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Circle Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Circle Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Randomize Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Randomize Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Randomize Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Randomize Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Randomize Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Randomize Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Spawn Lower Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Spawn Lower Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Spawn Lower Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Spawn Upper Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Spawn Upper Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Spawn Upper Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Stable Lower Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Stable Lower Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Stable Lower Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Stable Upper Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Stable Upper Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect3/Neighborhood 1/Tool Bar/Stable Upper Button" to="Slides/TextureRect3/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect4/Neighborhood 1/Grid" to="Slides/TextureRect4/Neighborhood 1/Grid" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect4/Neighborhood 1/Grid" to="Slides/TextureRect4/Neighborhood 1/Grid" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect4/Neighborhood 1/Grid" to="Slides/TextureRect4/Neighborhood 1/Grid" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Power Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Power Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Power Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Power Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Power Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Power Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Clear Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Clear Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Clear Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Clear Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Clear Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Clear Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Keyb Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Keyb Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Keyb Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Keyb Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Keyb Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Keyb Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Circle Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Circle Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Circle Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Circle Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Circle Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Circle Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Randomize Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Randomize Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Randomize Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Randomize Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Randomize Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Randomize Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Spawn Lower Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Spawn Lower Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Spawn Lower Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Spawn Upper Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Spawn Upper Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Spawn Upper Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Stable Lower Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Stable Lower Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Stable Lower Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Stable Upper Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Stable Upper Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect4/Neighborhood 1/Tool Bar/Stable Upper Button" to="Slides/TextureRect4/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect5/Neighborhood 1/Grid" to="Slides/TextureRect5/Neighborhood 1/Grid" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect5/Neighborhood 1/Grid" to="Slides/TextureRect5/Neighborhood 1/Grid" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect5/Neighborhood 1/Grid" to="Slides/TextureRect5/Neighborhood 1/Grid" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Power Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Power Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Power Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Power Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Power Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Power Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Clear Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Clear Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Clear Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Clear Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Clear Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Clear Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Keyb Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Keyb Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Keyb Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Keyb Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Keyb Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Keyb Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Circle Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Circle Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Circle Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Circle Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Circle Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Circle Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Randomize Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Randomize Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Randomize Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Randomize Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Randomize Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Randomize Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Spawn Lower Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Spawn Lower Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Spawn Lower Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Spawn Upper Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Spawn Upper Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Spawn Upper Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Stable Lower Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Stable Lower Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Stable Lower Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Stable Upper Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Stable Upper Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect5/Neighborhood 1/Tool Bar/Stable Upper Button" to="Slides/TextureRect5/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect7/Neighborhood 1/Grid" to="Slides/TextureRect7/Neighborhood 1/Grid" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect7/Neighborhood 1/Grid" to="Slides/TextureRect7/Neighborhood 1/Grid" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect7/Neighborhood 1/Grid" to="Slides/TextureRect7/Neighborhood 1/Grid" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Power Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Power Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Power Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Power Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Power Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Power Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Clear Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Clear Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Clear Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Clear Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Clear Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Clear Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Keyb Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Keyb Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Keyb Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Keyb Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Keyb Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Keyb Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Circle Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Circle Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Circle Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Circle Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Circle Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Circle Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Randomize Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Randomize Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Randomize Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Randomize Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Randomize Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Randomize Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Spawn Lower Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Spawn Lower Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Spawn Lower Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Spawn Lower Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Spawn Upper Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Spawn Upper Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Spawn Upper Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Spawn Upper Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Stable Lower Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Stable Lower Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Stable Lower Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Stable Lower Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Stable Upper Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Stable Upper Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect7/Neighborhood 1/Tool Bar/Stable Upper Button" to="Slides/TextureRect7/Neighborhood 1/Tool Bar/Stable Upper Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Slides/TextureRect8/Previous Button" to="Slides/TextureRect8/Previous Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Slides/TextureRect8/Previous Button" to="Slides/TextureRect8/Previous Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Slides/TextureRect8/Previous Button" to="Slides/TextureRect8/Previous Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Node2D/Previous Button" to="Node2D/Previous Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Node2D/Previous Button" to="Node2D/Previous Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Previous Button" to="Node2D/Previous Button" method="_on_mouse_exited"]
+[connection signal="gui_input" from="Node2D/Next Button" to="Node2D/Next Button" method="_on_gui_input"]
+[connection signal="mouse_entered" from="Node2D/Next Button" to="Node2D/Next Button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Node2D/Next Button" to="Node2D/Next Button" method="_on_mouse_exited"]

@@ -76,6 +76,7 @@ offset_bottom = 581.0
 scale = Vector2(16.869, 6.00736)
 mouse_default_cursor_shape = 2
 script = ExtResource("2_xkmpe")
+metadata/_edit_use_anchors_ = true
 
 [node name="Tutorial Button" type="Panel" parent="UI"]
 z_index = 1
@@ -87,6 +88,7 @@ offset_bottom = 740.0
 scale = Vector2(16.869, 6.00736)
 mouse_default_cursor_shape = 2
 script = ExtResource("2_shbfh")
+metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -101,6 +103,7 @@ offset_bottom = -665.995
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer3" type="CanvasLayer" parent="."]
 layer = -1
@@ -120,6 +123,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(4, 4)
 mouse_filter = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer4" type="CanvasLayer" parent="."]
 layer = -1
@@ -140,6 +144,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(4, 4)
 mouse_filter = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
@@ -151,6 +156,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_6qsvb")

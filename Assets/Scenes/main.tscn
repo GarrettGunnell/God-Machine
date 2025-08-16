@@ -60,8 +60,8 @@ needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("1_vlji8")
 main_menu = false
-update_speed = 0.023
-cook_time = 1
+update_speed = 0.05
+cook_time = 5
 metadata/_custom_type_script = "uid://drfxlavovcgta"
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_h2yge"]
@@ -81,7 +81,7 @@ compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_ig7t
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uop3n"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uq7jr"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g0ep4"]
 texture = ExtResource("6_uop3n")
 margins = Vector2i(4, 2)
 separation = Vector2i(4, 0)
@@ -92,7 +92,7 @@ texture_region_size = Vector2i(26, 26)
 [sub_resource type="TileSet" id="TileSet_ltoj3"]
 tile_size = Vector2i(26, 26)
 uv_clipping = true
-sources/1 = SubResource("TileSetAtlasSource_uq7jr")
+sources/1 = SubResource("TileSetAtlasSource_g0ep4")
 
 [sub_resource type="SystemFont" id="SystemFont_ltoj3"]
 font_names = PackedStringArray("rainyhearts")
