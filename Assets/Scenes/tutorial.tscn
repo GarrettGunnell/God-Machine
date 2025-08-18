@@ -37,7 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://c4xfg8a07ddy4" path="res://Assets/Textures/UI/left slide button.png" id="32_xhr83"]
 [ext_resource type="Script" uid="uid://cglvstu26dupc" path="res://Assets/Scripts/UI/previous_button.gd" id="34_ssaki"]
 [ext_resource type="Script" uid="uid://vqe37s4t7tyf" path="res://Assets/Scripts/UI/next_button.gd" id="35_64lsc"]
-[ext_resource type="AudioStream" uid="uid://cwclwa6iryeqf" path="res://Assets/Audio/bgm3.mp3" id="38_n1iyd"]
+[ext_resource type="AudioStream" uid="uid://cnbqleijqb7hy" path="res://Assets/Audio/bgm5.mp3" id="38_54pdg"]
 [ext_resource type="AudioStream" uid="uid://26ko7au7t7ed" path="res://Assets/Audio/left click 2.mp3" id="39_54pdg"]
 [ext_resource type="Script" uid="uid://c813c5ts2xint" path="res://Assets/Scripts/UI/left_click_audio.gd" id="40_qexsy"]
 [ext_resource type="AudioStream" uid="uid://c7q2np1u2hpgm" path="res://Assets/Audio/right click sound.mp3" id="41_2y5xa"]
@@ -1046,8 +1046,8 @@ mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("38_n1iyd")
-volume_db = -3.0
+stream = ExtResource("38_54pdg")
+volume_db = -8.0
 autoplay = true
 
 [node name="Left Click" type="AudioStreamPlayer" parent="."]

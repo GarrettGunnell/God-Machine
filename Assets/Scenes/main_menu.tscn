@@ -8,7 +8,7 @@
 [ext_resource type="Shader" uid="uid://bmeyydltsvw3p" path="res://Assets/Shaders/color_palette.gdshader" id="4_tanm1"]
 [ext_resource type="Texture2D" uid="uid://htll4mmav1ce" path="res://Assets/Textures/UI/play4.png" id="5_hxcs8"]
 [ext_resource type="Texture2D" uid="uid://ctv7c3mevda8l" path="res://Assets/Textures/UI/tutorial button.png" id="6_xkmpe"]
-[ext_resource type="AudioStream" uid="uid://cwclwa6iryeqf" path="res://Assets/Audio/bgm3.mp3" id="9_xkmpe"]
+[ext_resource type="AudioStream" uid="uid://cnbqleijqb7hy" path="res://Assets/Audio/bgm5.mp3" id="9_0youy"]
 [ext_resource type="AudioStream" uid="uid://26ko7au7t7ed" path="res://Assets/Audio/left click 2.mp3" id="10_0youy"]
 [ext_resource type="Script" uid="uid://c813c5ts2xint" path="res://Assets/Scripts/UI/left_click_audio.gd" id="11_o6fo6"]
 [ext_resource type="AudioStream" uid="uid://c7q2np1u2hpgm" path="res://Assets/Audio/right click sound.mp3" id="12_m3o7a"]
@@ -165,8 +165,8 @@ mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_xkmpe")
-volume_db = -3.0
+stream = ExtResource("9_0youy")
+volume_db = -8.0
 autoplay = true
 
 [node name="Left Click" type="AudioStreamPlayer" parent="."]

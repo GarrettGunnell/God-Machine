@@ -1131,7 +1131,7 @@ mouse_filter = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("48_sitla")
-volume_db = -4.0
+volume_db = -8.0
 autoplay = true
 parameters/looping = true
 
