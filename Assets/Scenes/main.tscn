@@ -47,7 +47,7 @@
 [ext_resource type="Script" uid="uid://bgihnnx0yu44j" path="res://Assets/Scripts/UI/load_button.gd" id="43_3awfk"]
 [ext_resource type="Script" uid="uid://crq07m1x6lflo" path="res://Assets/Scripts/UI/previous_preset_button.gd" id="44_m1eu0"]
 [ext_resource type="Script" uid="uid://8a62se707mjg" path="res://Assets/Scripts/UI/next_preset_button.gd" id="44_vjyh1"]
-[ext_resource type="AudioStream" uid="uid://cwclwa6iryeqf" path="res://Assets/Audio/bgm3.mp3" id="48_g0ep4"]
+[ext_resource type="AudioStream" uid="uid://cnbqleijqb7hy" path="res://Assets/Audio/bgm5.mp3" id="48_sitla"]
 [ext_resource type="AudioStream" uid="uid://26ko7au7t7ed" path="res://Assets/Audio/left click 2.mp3" id="49_csh63"]
 [ext_resource type="Script" uid="uid://c813c5ts2xint" path="res://Assets/Scripts/UI/left_click_audio.gd" id="50_nj45y"]
 [ext_resource type="AudioStream" uid="uid://c7q2np1u2hpgm" path="res://Assets/Audio/right click sound.mp3" id="51_20dqx"]
@@ -66,7 +66,7 @@ needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("1_vlji8")
 main_menu = false
-update_speed = 0.035
+update_speed = 0.013
 cook_time = 10
 metadata/_custom_type_script = "uid://drfxlavovcgta"
 
@@ -1130,8 +1130,8 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("48_g0ep4")
-volume_db = -8.0
+stream = ExtResource("48_sitla")
+volume_db = -4.0
 autoplay = true
 parameters/looping = true
 
@@ -1149,7 +1149,7 @@ script = ExtResource("51_nj45y")
 
 [node name="Hover Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("53_sitla")
-volume_db = -2.0
+volume_db = -8.0
 max_polyphony = 5
 script = ExtResource("54_mje4x")
 

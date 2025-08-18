@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="Automaton" load_steps=7 format=3 uid="uid://wnfjvh6uo0m8"]
+
+[ext_resource type="Script" uid="uid://c8p1lc8r4vtdc" path="res://Assets/Resources/neighborhood.gd" id="1_8gtay"]
+[ext_resource type="Script" uid="uid://bi3ywemdbt6" path="res://Assets/Resources/automaton.gd" id="2_5ab4w"]
+
+[sub_resource type="Resource" id="Resource_4o36l"]
+script = ExtResource("1_8gtay")
+enabled = true
+spawn_range = Vector2i(3, 3)
+stable_range = Vector2i(2, 3)
+quadrant_strings = [["00000010", "00000011", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["01000000", "11000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000011", "00000010"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "11000000", "01000000"]]
+neighborhood_bytes = PackedByteArray(2, 3, 0, 0, 0, 0, 0, 0, 64, 192, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 2, 0, 0, 0, 0, 0, 0, 192, 64)
+
+[sub_resource type="Resource" id="Resource_1f5gh"]
+script = ExtResource("1_8gtay")
+enabled = false
+spawn_range = Vector2i(0, 0)
+stable_range = Vector2i(0, 0)
+quadrant_strings = [["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"]]
+neighborhood_bytes = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="Resource" id="Resource_l5j66"]
+script = ExtResource("1_8gtay")
+enabled = false
+spawn_range = Vector2i(0, 0)
+stable_range = Vector2i(0, 0)
+quadrant_strings = [["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"]]
+neighborhood_bytes = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="Resource" id="Resource_gou8t"]
+script = ExtResource("1_8gtay")
+enabled = false
+spawn_range = Vector2i(0, 0)
+stable_range = Vector2i(0, 0)
+quadrant_strings = [["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"]]
+neighborhood_bytes = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[resource]
+script = ExtResource("2_5ab4w")
+name = "GAME OF LIFE"
+neighborhoods = [SubResource("Resource_4o36l"), SubResource("Resource_1f5gh"), SubResource("Resource_l5j66"), SubResource("Resource_gou8t")]

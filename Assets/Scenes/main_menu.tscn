@@ -183,7 +183,7 @@ script = ExtResource("13_s707j")
 
 [node name="Hover Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_00jt8")
-volume_db = -2.0
+volume_db = -8.0
 max_polyphony = 5
 script = ExtResource("15_wdfnr")
 

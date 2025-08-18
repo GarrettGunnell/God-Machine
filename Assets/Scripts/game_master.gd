@@ -25,6 +25,8 @@ var world_offset : Vector2i = Vector2i.ZERO
 
 # var game_scene = preload("res://Assets/Scenes/main.tscn")
 
+var preset_resources : PackedStringArray
+
 
 func _ready() -> void:
 	current_seed = randi() % 10000
@@ -33,14 +35,23 @@ func _ready() -> void:
 
 	var automaton_cache_path = "user://automaton_cache"
 
+	var automaton_presets = "res://Assets/Automaton Presets"
+
+	preset_resources = ResourceLoader.list_directory(automaton_presets)
+
+	for preset_resource in preset_resources:
+		automaton_cache.append(ResourceLoader.load(automaton_presets + "/" + preset_resource, "Automaton", ResourceLoader.CACHE_MODE_IGNORE) as Automaton)
+	
 	var automaton_dir = DirAccess.open(automaton_cache_path)
+
+	
 
 	if not automaton_dir:
 		print("Creating automaton cache directory")
 		var error = DirAccess.make_dir_absolute(automaton_cache_path)
 		if error != OK: print(error)
 
-		for i in range(100):
+		for i in range(10):
 			var automaton_template = Automaton.new()
 
 			# Game Of Life Template
@@ -62,7 +73,7 @@ func _ready() -> void:
 			if error2 != OK: print(error2)
 
 
-	for i in range(100):
+	for i in range(10):
 		automaton_cache.append(ResourceLoader.load("user://automaton_cache/automaton_" + str(i).pad_zeros(3) + ".tres", "Automaton", ResourceLoader.CACHE_MODE_IGNORE) as Automaton)
 
 	active_automaton.reflect(automaton_cache[automaton_index])
@@ -73,7 +84,6 @@ func _process(delta: float) -> void:
 
 
 func queue_reseed() -> void:
-	increment_input.emit()
 	needs_reseed = true
 
 func get_reseed() -> bool:
@@ -102,8 +112,6 @@ func get_active_automaton() -> Automaton:
 
 
 func pause_automaton() -> void:
-	if not paused: decrement_input.emit()
-	else: increment_input.emit()
 	paused = !paused
 
 func is_paused() -> bool:
@@ -144,6 +152,11 @@ func get_preset_name() -> String:
 
 
 func save_active_automaton_to_preset() -> void:
+	if automaton_index < preset_resources.size():
+		print("Can't save to preset")
+		return
+
+	active_automaton.name = automaton_cache[automaton_index].name
 	var error = ResourceSaver.save(active_automaton.duplicate(true), automaton_cache[automaton_index].resource_path)
 
 	if error != OK: print(error)
@@ -175,7 +188,10 @@ func tutorial_setup() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_SPACE:
+			if not paused: decrement_input.emit()
+			else: increment_input.emit()
 			pause_automaton()
 
 		if event.keycode == KEY_R:
+			increment_input.emit()
 			queue_reseed()

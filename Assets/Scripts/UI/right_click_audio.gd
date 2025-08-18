@@ -6,4 +6,5 @@ func _ready() -> void:
 	
 	
 func play_sound() -> void:
+	pitch_scale = lerp(0.9, 1.1, randf())
 	playing = true
