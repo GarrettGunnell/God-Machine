@@ -5,6 +5,7 @@ signal loaded_preset
 signal increment_input
 signal decrement_input
 signal hover_input
+signal seed_changed
 
 var automaton_cache = Array()
 
@@ -99,6 +100,7 @@ func finish_reseed() -> void:
 
 func set_seed(new_seed : int) -> void:
 	current_seed = new_seed
+	seed_changed.emit()
 
 
 func get_seed() -> int:
