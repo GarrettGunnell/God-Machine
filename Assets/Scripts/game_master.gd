@@ -21,6 +21,10 @@ var paused = false
 var zoom_setting = 0
 var zoom_settings : Array = Array([1, 2, 4, 8])
 
+
+var time_setting = 2
+var time_settings : Array = Array([0.1, 0.05, 0.025, 0.01])
+
 var world_offset : Vector2i = Vector2i.ZERO
 
 # var game_scene = preload("res://Assets/Scenes/main.tscn")
@@ -94,7 +98,6 @@ func finish_reseed() -> void:
 
 
 func set_seed(new_seed : int) -> void:
-	increment_input.emit()
 	current_seed = new_seed
 
 
@@ -121,8 +124,17 @@ func cycle_zoom() -> void:
 	zoom_setting += 1
 	if zoom_setting > zoom_settings.size() - 1: zoom_setting = 0
 
+func zoom_in() -> void:
+	if zoom_setting < zoom_settings.size() - 1: zoom_setting += 1
+
+func zoom_out() -> void:
+	if zoom_setting > 0: zoom_setting -= 1
+
 func get_zoom_setting() -> int:
 	return zoom_settings[zoom_setting]
+
+func get_time_setting() -> float:
+	return time_settings[time_setting]
 
 
 func get_horizontal_offset() -> int:
@@ -133,7 +145,7 @@ func get_vertical_offset() -> int:
 
 
 func move(v : Vector2i) -> void:
-	world_offset += v * 5
+	world_offset += v * 10
 
 func set_automaton_index(i : int) -> void:
 	automaton_index = i
@@ -180,7 +192,7 @@ func start_tutorial() -> void:
 
 
 func tutorial_setup() -> void:
-	current_seed = 213451
+	current_seed = 7566
 
 
 
@@ -195,3 +207,35 @@ func _input(event: InputEvent) -> void:
 		if event.keycode == KEY_R:
 			increment_input.emit()
 			queue_reseed()
+
+		if event.keycode == KEY_Q:
+			increment_input.emit()
+			zoom_in()
+
+		if event.keycode == KEY_E:
+			decrement_input.emit()
+			zoom_out()
+
+		if event.keycode == KEY_W:
+			move(Vector2i(0, 1))
+				
+		if event.keycode == KEY_S:
+			move(Vector2i(0, -1))
+
+		if event.keycode == KEY_A:
+			move(Vector2i(-1, 0))
+			
+		if event.keycode == KEY_D:
+			move(Vector2i(1, 0))
+
+		if event.keycode == KEY_1:
+			time_setting = 0
+
+		if event.keycode == KEY_2:
+			time_setting = 1
+		
+		if event.keycode == KEY_3:
+			time_setting = 2
+		
+		if event.keycode == KEY_4:
+			time_setting = 3

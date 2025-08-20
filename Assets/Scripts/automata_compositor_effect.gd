@@ -115,7 +115,7 @@ func _render_callback(p_effect_callback_type, p_render_data):
 		var input_image = render_scene_buffers.get_color_layer(view)
 		
 		var uniform_array = PackedInt32Array(automaton.get_rule_ranges())
-		uniform_array.append_array([GameMaster.get_seed(), GameMaster.get_zoom_setting() if not main_menu else 4, GameMaster.get_horizontal_offset(), GameMaster.get_vertical_offset()])
+		uniform_array.append_array([GameMaster.get_seed() if not main_menu else 56745, GameMaster.get_zoom_setting() if not main_menu else 4, GameMaster.get_horizontal_offset(), GameMaster.get_vertical_offset()])
 
 		exposure_compute.set_texture(0, world_texture if not main_menu else input_image)
 		exposure_compute.set_texture(2, previous_generation)
@@ -139,7 +139,7 @@ func _render_callback(p_effect_callback_type, p_render_data):
 				exposure_compute.set_texture(3, next_generation)
 
 
-		if (timer > update_speed):
+		if (timer > GameMaster.get_time_setting()):
 			timer = 0.0
 
 			exposure_compute.dispatch(1, 1024 / 8, 1024 / 8, 1)
