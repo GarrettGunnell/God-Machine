@@ -33,7 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://cwchwinllsefv" path="res://Assets/Textures/Tutorial Slides/slide 6.png" id="27_ehy4s"]
 [ext_resource type="Texture2D" uid="uid://dj8gys728ndb3" path="res://Assets/Textures/Tutorial Slides/slide 7.png" id="28_a21j5"]
 [ext_resource type="Texture2D" uid="uid://f144ca7ncoiu" path="res://Assets/Textures/Tutorial Slides/slide 8.png" id="29_ioof4"]
-[ext_resource type="Script" uid="uid://n1c7utg00au7" path="res://Assets/Scripts/UI/reseed_button.gd" id="31_n1iyd"]
+[ext_resource type="Script" uid="uid://btl8fmfx1qtq" path="res://Assets/Scripts/UI/Tool Buttons/tutorial_play_button.gd" id="31_54pdg"]
 [ext_resource type="Texture2D" uid="uid://c4xfg8a07ddy4" path="res://Assets/Textures/UI/left slide button.png" id="32_xhr83"]
 [ext_resource type="Script" uid="uid://cglvstu26dupc" path="res://Assets/Scripts/UI/previous_button.gd" id="34_ssaki"]
 [ext_resource type="Script" uid="uid://vqe37s4t7tyf" path="res://Assets/Scripts/UI/next_button.gd" id="35_64lsc"]
@@ -974,7 +974,7 @@ offset_top = 775.0
 offset_right = 1639.0
 offset_bottom = 837.0
 mouse_default_cursor_shape = 2
-script = ExtResource("31_n1iyd")
+script = ExtResource("31_54pdg")
 
 [node name="TextureRect8" type="TextureRect" parent="Slides"]
 visible = false

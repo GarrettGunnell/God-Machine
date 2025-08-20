@@ -42,3 +42,4 @@ func next_slide() -> void:
 
 	if slide_index == 1: 
 		GameMaster.set_active_automaton(tutorial_automaton)
+		GameMaster.queue_reseed()

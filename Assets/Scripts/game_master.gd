@@ -45,6 +45,7 @@ func _ready() -> void:
 	preset_resources = ResourceLoader.list_directory(automaton_presets)
 
 	for preset_resource in preset_resources:
+		print(preset_resource)
 		automaton_cache.append(ResourceLoader.load(automaton_presets + "/" + preset_resource, "Automaton", ResourceLoader.CACHE_MODE_IGNORE) as Automaton)
 	
 	var automaton_dir = DirAccess.open(automaton_cache_path)
@@ -195,6 +196,8 @@ func start_tutorial() -> void:
 
 func tutorial_setup() -> void:
 	current_seed = 7566
+	automaton_index = 4
+	load_automaton_from_preset()
 
 
 
@@ -241,3 +244,6 @@ func _input(event: InputEvent) -> void:
 		
 		if event.keycode == KEY_4:
 			time_setting = 3
+
+		if event.keycode == KEY_ESCAPE:
+			get_tree().quit()

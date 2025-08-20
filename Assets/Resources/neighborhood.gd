@@ -18,7 +18,7 @@ func _init() -> void:
 	empty_byte_strings.fill(empty_byte_string)
 
 	spawn_range = Vector2(1, 1)
-	stable_range = Vector2(0, 1)
+	stable_range = Vector2(1, 1)
 
 	set_quadrant_strings(Quadrant.UPPER_LEFT, empty_byte_strings)
 	set_quadrant_strings(Quadrant.UPPER_RIGHT, empty_byte_strings)

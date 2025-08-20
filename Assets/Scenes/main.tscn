@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=4 uid="uid://cfsgy7huubpok"]
+[gd_scene load_steps=69 format=4 uid="uid://cfsgy7huubpok"]
 
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_vlji8"]
 [ext_resource type="Script" uid="uid://bjuwof03jt0ds" path="res://Assets/Scripts/draw_world_compositor_effect.gd" id="2_ttgh6"]
@@ -47,6 +47,7 @@
 [ext_resource type="Script" uid="uid://bgihnnx0yu44j" path="res://Assets/Scripts/UI/load_button.gd" id="43_3awfk"]
 [ext_resource type="Script" uid="uid://crq07m1x6lflo" path="res://Assets/Scripts/UI/previous_preset_button.gd" id="44_m1eu0"]
 [ext_resource type="Script" uid="uid://8a62se707mjg" path="res://Assets/Scripts/UI/next_preset_button.gd" id="44_vjyh1"]
+[ext_resource type="Texture2D" uid="uid://dnpaqacivui48" path="res://Assets/Textures/UI/controls.png" id="47_1yq77"]
 [ext_resource type="Script" uid="uid://bnh23rc2uvlr2" path="res://Assets/Scripts/color_palette.gd" id="48_mje4x"]
 [ext_resource type="AudioStream" uid="uid://cnbqleijqb7hy" path="res://Assets/Audio/bgm5.mp3" id="48_sitla"]
 [ext_resource type="AudioStream" uid="uid://26ko7au7t7ed" path="res://Assets/Audio/left click 2.mp3" id="49_csh63"]
@@ -1118,6 +1119,12 @@ offset_right = 213.0
 offset_bottom = 624.0
 mouse_default_cursor_shape = 2
 script = ExtResource("17_tm25p")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI"]
+texture_filter = 1
+position = Vector2(643.75, 540.75)
+scale = Vector2(1.00128, 1.00299)
+texture = ExtResource("47_1yq77")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
