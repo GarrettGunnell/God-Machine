@@ -49,6 +49,11 @@ void Seed() {
 	if (seed < 0.75) seed = 0.0;
 	else seed = 1.0;
 
+	if (_Seed.x == 42069) {
+		if (uv.x == 26 && uv.y == 24) seed = 1;
+		else seed = 0;
+	}
+
 	imageStore(_AutomatonFrom, uv, vec4(seed));
 }
 

@@ -129,6 +129,8 @@ func _render_callback(p_effect_callback_type, p_render_data):
 			needs_seeding = false
 
 			for i in range(0, cook_time - 1):
+				if GameMaster.get_seed() == 42069: break
+
 				exposure_compute.dispatch(1, 1024 / 8, 1024 / 8, 1)
 
 				var temp : RID = previous_generation
@@ -139,7 +141,7 @@ func _render_callback(p_effect_callback_type, p_render_data):
 				exposure_compute.set_texture(3, next_generation)
 
 
-		if (timer > GameMaster.get_time_setting()):
+		if (timer > GameMaster.get_time_setting() or GameMaster.next_generation()):
 			timer = 0.0
 
 			exposure_compute.dispatch(1, 1024 / 8, 1024 / 8, 1)

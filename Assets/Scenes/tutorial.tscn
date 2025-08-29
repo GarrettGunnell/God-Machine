@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://fcc8cpx5ri13"]
+[gd_scene load_steps=54 format=4 uid="uid://fcc8cpx5ri13"]
 
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_4ppop"]
 [ext_resource type="Script" uid="uid://bv7ngik6tjsjc" path="res://Assets/Scripts/slideshow.gd" id="2_1w871"]
@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://dv67v2vdgj0m5" path="res://Assets/Textures/Tutorial Slides/slide 5.png" id="26_nasgh"]
 [ext_resource type="Texture2D" uid="uid://cwchwinllsefv" path="res://Assets/Textures/Tutorial Slides/slide 6.png" id="27_ehy4s"]
 [ext_resource type="Texture2D" uid="uid://dj8gys728ndb3" path="res://Assets/Textures/Tutorial Slides/slide 7.png" id="28_a21j5"]
+[ext_resource type="FontFile" uid="uid://bscbamtqsibht" path="res://Assets/Fonts/rainyhearts.ttf" id="28_qexsy"]
 [ext_resource type="Texture2D" uid="uid://f144ca7ncoiu" path="res://Assets/Textures/Tutorial Slides/slide 8.png" id="29_ioof4"]
 [ext_resource type="Script" uid="uid://btl8fmfx1qtq" path="res://Assets/Scripts/UI/Tool Buttons/tutorial_play_button.gd" id="31_54pdg"]
 [ext_resource type="Texture2D" uid="uid://c4xfg8a07ddy4" path="res://Assets/Textures/UI/left slide button.png" id="32_xhr83"]
@@ -659,7 +660,7 @@ offset_left = 188.0
 offset_top = 425.0
 offset_right = 230.0
 offset_bottom = 455.0
-theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_fonts/normal_font = ExtResource("28_qexsy")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]000[/center]"
@@ -682,7 +683,7 @@ offset_left = 241.0
 offset_top = 418.0
 offset_right = 283.0
 offset_bottom = 448.0
-theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_fonts/normal_font = ExtResource("28_qexsy")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]000[/center]"
@@ -705,7 +706,7 @@ offset_left = 316.0
 offset_top = 425.0
 offset_right = 358.0
 offset_bottom = 455.0
-theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_fonts/normal_font = ExtResource("28_qexsy")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]000[/center]"
@@ -728,7 +729,7 @@ offset_left = 369.0
 offset_top = 418.0
 offset_right = 411.0
 offset_bottom = 448.0
-theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_fonts/normal_font = ExtResource("28_qexsy")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]000[/center]"
@@ -754,7 +755,6 @@ offset_bottom = 40.0
 texture = ExtResource("27_ehy4s")
 
 [node name="TextureRect7" type="TextureRect" parent="Slides"]
-visible = false
 texture_filter = 1
 texture_repeat = 1
 offset_right = 40.0
@@ -870,7 +870,7 @@ offset_left = 188.0
 offset_top = 425.0
 offset_right = 230.0
 offset_bottom = 455.0
-theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_fonts/normal_font = ExtResource("28_qexsy")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]000[/center]"
@@ -893,7 +893,7 @@ offset_left = 241.0
 offset_top = 418.0
 offset_right = 283.0
 offset_bottom = 448.0
-theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_fonts/normal_font = ExtResource("28_qexsy")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]000[/center]"
@@ -916,7 +916,7 @@ offset_left = 316.0
 offset_top = 425.0
 offset_right = 358.0
 offset_bottom = 455.0
-theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_fonts/normal_font = ExtResource("28_qexsy")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]000[/center]"
@@ -939,7 +939,7 @@ offset_left = 369.0
 offset_top = 418.0
 offset_right = 411.0
 offset_bottom = 448.0
-theme_override_fonts/normal_font = SubResource("SystemFont_rhnfa")
+theme_override_fonts/normal_font = ExtResource("28_qexsy")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[center]000[/center]"

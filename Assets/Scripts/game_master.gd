@@ -32,6 +32,8 @@ var world_offset : Vector2i = Vector2i.ZERO
 
 var preset_resources : PackedStringArray
 
+var generation_queued = false
+
 
 func _ready() -> void:
 	current_seed = randi() % 10000
@@ -200,6 +202,16 @@ func tutorial_setup() -> void:
 	load_automaton_from_preset()
 
 
+func toggle_debug_mode() -> void:
+	current_seed = 42069
+	queue_reseed()
+
+
+func next_generation() -> bool:
+	var cached_input = generation_queued
+	generation_queued = false
+
+	return cached_input
 
 
 func _input(event: InputEvent) -> void:
@@ -247,3 +259,9 @@ func _input(event: InputEvent) -> void:
 
 		if event.keycode == KEY_ESCAPE:
 			get_tree().quit()
+
+		if event.keycode == KEY_0:
+			toggle_debug_mode()
+
+		if event.keycode == KEY_T:
+			generation_queued = true
