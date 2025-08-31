@@ -14,6 +14,14 @@ by Acerola
 * Run the godot project
 * Press the play button in the top right once the editor opens
 
+## System Requirements
+
+* Windows
+* 16:9 Resolution (ultra widescreen works)
+* GPU released in the past decade
+
+**DO NOT PLAY IF PHOTOSENSITIVE** it is very easy to produce strobing patterns
+
 ## Examples
 
 ![example 1](./Examples/Example1.png)
