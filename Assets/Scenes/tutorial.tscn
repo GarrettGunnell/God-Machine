@@ -755,6 +755,7 @@ offset_bottom = 40.0
 texture = ExtResource("27_ehy4s")
 
 [node name="TextureRect7" type="TextureRect" parent="Slides"]
+visible = false
 texture_filter = 1
 texture_repeat = 1
 offset_right = 40.0

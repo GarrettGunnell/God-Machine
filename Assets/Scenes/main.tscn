@@ -118,7 +118,7 @@ blend_mode = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_052nx"]
 shader = ExtResource("36_l2vhu")
-shader_parameter/first_color = Color(0.0894384, 0.0620982, 0.0170826, 1)
+shader_parameter/first_color = Color(0, 0, 0, 1)
 shader_parameter/second_color = Color(0.82616, 0.878282, 0.883431, 1)
 
 [node name="Node3D" type="Node3D"]
@@ -1131,6 +1131,7 @@ script = ExtResource("48_mje4x")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("48_sitla")
 volume_db = -8.0
+autoplay = true
 parameters/looping = true
 
 [node name="Left Click" type="AudioStreamPlayer" parent="."]

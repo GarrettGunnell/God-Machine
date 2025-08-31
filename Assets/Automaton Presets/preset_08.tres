@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="Automaton" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://Assets/Resources/neighborhood.gd" id="1_8gtay"]
+[ext_resource type="Script" path="res://Assets/Resources/automaton.gd" id="2_5ab4w"]
+
+[sub_resource type="Resource" id="Resource_8gtay"]
+script = ExtResource("1_8gtay")
+enabled = true
+spawn_range = Vector2i(5, 5)
+stable_range = Vector2i(2, 4)
+quadrant_strings = [["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["01110000", "01110000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "01110000", "01110000"]]
+neighborhood_bytes = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 112, 112, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 112, 112)
+
+[sub_resource type="Resource" id="Resource_5ab4w"]
+script = ExtResource("1_8gtay")
+enabled = true
+spawn_range = Vector2i(5, 5)
+stable_range = Vector2i(2, 4)
+quadrant_strings = [["00001110", "00001110", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00001110", "00001110"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"]]
+neighborhood_bytes = PackedByteArray(14, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 14, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="Resource" id="Resource_4o36l"]
+script = ExtResource("1_8gtay")
+enabled = false
+spawn_range = Vector2i(1, 1)
+stable_range = Vector2i(0, 1)
+quadrant_strings = [["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"]]
+neighborhood_bytes = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="Resource" id="Resource_1f5gh"]
+script = ExtResource("1_8gtay")
+enabled = true
+spawn_range = Vector2i(3, 3)
+stable_range = Vector2i(2, 3)
+quadrant_strings = [["00000010", "00000011", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["01000000", "11000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000000"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "00000011", "00000010"], ["00000000", "00000000", "00000000", "00000000", "00000000", "00000000", "11000000", "01000000"]]
+neighborhood_bytes = PackedByteArray(2, 3, 0, 0, 0, 0, 0, 0, 64, 192, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 2, 0, 0, 0, 0, 0, 0, 192, 64)
+
+[resource]
+script = ExtResource("2_5ab4w")
+name = "SPACESHIPS"
+neighborhoods = [SubResource("Resource_8gtay"), SubResource("Resource_5ab4w"), SubResource("Resource_4o36l"), SubResource("Resource_1f5gh")]

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://drfxlavovcgta" path="res://Assets/Scripts/automata_compositor_effect.gd" id="1_fsbqx"]
 [ext_resource type="Shader" uid="uid://dfjf6tq1tdr61" path="res://Assets/Shaders/main_menu_logo.gdshader" id="2_fsbqx"]
 [ext_resource type="Script" uid="uid://bgndlslbekjfr" path="res://Assets/Scripts/UI/play_game_button.gd" id="2_xkmpe"]
-[ext_resource type="Script" uid="uid://dwvnsvy8v35mq" path="res://Assets/Scenes/start_tutorial_button.gd" id="3_0youy"]
+[ext_resource type="Script" uid="uid://dwvnsvy8v35mq" path="res://Assets/Scripts/UI/Tool Buttons/start_tutorial_button.gd" id="3_0youy"]
 [ext_resource type="Texture2D" uid="uid://ck27dmw6p4pwv" path="res://Assets/Textures/UI/logo 4x.png" id="3_tanm1"]
 [ext_resource type="Shader" uid="uid://bmeyydltsvw3p" path="res://Assets/Shaders/color_palette.gdshader" id="4_tanm1"]
 [ext_resource type="Texture2D" uid="uid://htll4mmav1ce" path="res://Assets/Textures/UI/play4.png" id="5_hxcs8"]
