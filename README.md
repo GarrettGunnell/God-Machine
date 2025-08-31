@@ -11,6 +11,8 @@ by Acerola
 * Open the Godot project manager
 * Click on **Import**
 * Navigate to where you extracted the zip file
+* Create a directory at the root of the project called ``Ignored/`` 
+* Clone [Acerola-Compute](https://github.com/GarrettGunnell/Acerola-Compute) inside the ``Igonred/`` directory that you had just created, the final path should look like this: ``God-Machine/Ignored/Acerola-Compute/...``
 * Run the godot project
 * Press the play button in the top right once the editor opens
 
