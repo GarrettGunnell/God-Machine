@@ -1,0 +1,3 @@
+[submodule "Acerola-Compute"]
+	path = Ignored/Acerola-Compute
+	url = https://github.com/GarrettGunnell/Acerola-Compute/
