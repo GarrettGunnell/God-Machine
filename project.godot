@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-AcerolaShaderCompiler="*res://Ignored/Acerola-Compute/acerola_shader_compiler.gd"
+AcerolaShaderCompiler="*res://Packages/Acerola-Compute/acerola_shader_compiler.gd"
 GameMaster="*res://Assets/Scripts/game_master.gd"
 
 [display]
