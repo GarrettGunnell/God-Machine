@@ -6,13 +6,13 @@ by Acerola
 
 ## How To Play
 
-* Download this repo as a zip
-* Extract the zip
+* Clone this repo with ```git clone --recursive <url>```
 * Open the Godot project manager
 * Click on **Import**
-* Navigate to where you extracted the zip file
-* Run the godot project
-* Press the play button in the top right once the editor opens
+* Navigate to where you cloned the repo
+* Select the godot project
+* Press the **Run** button **inside the project manager** or the play button inside the editor
+![Reference Image](./ReadmeAssets/project-manager-screenshot.png)
 
 ## System Requirements
 
