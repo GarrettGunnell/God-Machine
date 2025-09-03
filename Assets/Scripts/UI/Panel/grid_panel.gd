@@ -42,12 +42,16 @@ func _process(delta: float) -> void:
 			if not holding:
 				new_cell_value = 1 if neighborhood_grid.get_cell_atlas_coords(grid_coords).x == 0 else 0
 			
-			holding = true
+			if neighborhood_grid.get_cell_atlas_coords(grid_coords) == Vector2i(new_cell_value, 0):
+				return
 			
 			if new_cell_value == 1: GameMaster.increment_input.emit()
 			if new_cell_value == 0: GameMaster.decrement_input.emit()
+			
+			holding = true
 			neighborhood_grid.set_cell(grid_coords, 1, Vector2i(new_cell_value, 0), 0)
 		else:
+			# On release after holding
 			holding = false
 
 
