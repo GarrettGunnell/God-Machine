@@ -75,17 +75,6 @@ uint64_t encode_tile_to_uint(ivec2 uv) {
 	return tile_bits;
 }
 
-uint sum_uint_bits(uint64_t i) {
-	uint sum = 0;
-
-	while (i != 0) {
-		sum += uint(i & 1);
-		i >>= 1;
-	}
-
-	return sum;
-}
-
 
 [numthreads(8, 8, 1)]
 void Automaton() {
@@ -134,29 +123,29 @@ void Automaton() {
 	uint64_t lower_left_quadrant_bits = encode_tile_to_uint(uv + ivec2(0, 7));
 	uint64_t lower_right_quadrant_bits = encode_tile_to_uint(uv + ivec2(7, 7));
 
-	uint neighbor_count1 = 0;
-	neighbor_count1 += sum_uint_bits(upper_left_quadrant_bits & upper_left_mask);
-	neighbor_count1 += sum_uint_bits(upper_right_quadrant_bits & upper_right_mask);
-	neighbor_count1 += sum_uint_bits(lower_left_quadrant_bits & lower_left_mask);
-	neighbor_count1 += sum_uint_bits(lower_right_quadrant_bits & lower_right_mask);
+	uint64_t neighbor_count1 = 0;
+	neighbor_count1 += bitCount(upper_left_quadrant_bits & upper_left_mask);
+	neighbor_count1 += bitCount(upper_right_quadrant_bits & upper_right_mask);
+	neighbor_count1 += bitCount(lower_left_quadrant_bits & lower_left_mask);
+	neighbor_count1 += bitCount(lower_right_quadrant_bits & lower_right_mask);
 	
-	uint neighbor_count2 = 0;
-	neighbor_count2 += sum_uint_bits(upper_left_quadrant_bits & upper_left_mask2);
-	neighbor_count2 += sum_uint_bits(upper_right_quadrant_bits & upper_right_mask2);
-	neighbor_count2 += sum_uint_bits(lower_left_quadrant_bits & lower_left_mask2);
-	neighbor_count2 += sum_uint_bits(lower_right_quadrant_bits & lower_right_mask2);
+	uint64_t neighbor_count2 = 0;
+	neighbor_count2 += bitCount(upper_left_quadrant_bits & upper_left_mask2);
+	neighbor_count2 += bitCount(upper_right_quadrant_bits & upper_right_mask2);
+	neighbor_count2 += bitCount(lower_left_quadrant_bits & lower_left_mask2);
+	neighbor_count2 += bitCount(lower_right_quadrant_bits & lower_right_mask2);
 	
-	uint neighbor_count3 = 0;
-	neighbor_count3 += sum_uint_bits(upper_left_quadrant_bits & upper_left_mask3);
-	neighbor_count3 += sum_uint_bits(upper_right_quadrant_bits & upper_right_mask3);
-	neighbor_count3 += sum_uint_bits(lower_left_quadrant_bits & lower_left_mask3);
-	neighbor_count3 += sum_uint_bits(lower_right_quadrant_bits & lower_right_mask3);
+	uint64_t neighbor_count3 = 0;
+	neighbor_count3 += bitCount(upper_left_quadrant_bits & upper_left_mask3);
+	neighbor_count3 += bitCount(upper_right_quadrant_bits & upper_right_mask3);
+	neighbor_count3 += bitCount(lower_left_quadrant_bits & lower_left_mask3);
+	neighbor_count3 += bitCount(lower_right_quadrant_bits & lower_right_mask3);
 
-	uint neighbor_count4 = 0;
-	neighbor_count4 += sum_uint_bits(upper_left_quadrant_bits & upper_left_mask4);
-	neighbor_count4 += sum_uint_bits(upper_right_quadrant_bits & upper_right_mask4);
-	neighbor_count4 += sum_uint_bits(lower_left_quadrant_bits & lower_left_mask4);
-	neighbor_count4 += sum_uint_bits(lower_right_quadrant_bits & lower_right_mask4);
+	int64_t neighbor_count4 = 0;
+	neighbor_count4 += bitCount(upper_left_quadrant_bits & upper_left_mask4);
+	neighbor_count4 += bitCount(upper_right_quadrant_bits & upper_right_mask4);
+	neighbor_count4 += bitCount(lower_left_quadrant_bits & lower_left_mask4);
+	neighbor_count4 += bitCount(lower_right_quadrant_bits & lower_right_mask4);
 
 
 	// for (int x = -1; x <= 1; ++x) {
